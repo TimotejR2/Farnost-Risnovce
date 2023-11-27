@@ -40,31 +40,12 @@ h1{
     margin-left: 50px;
   }
   
-  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-  #main {
-    transition: margin-left .5s;
-    padding: 20px;
-  }
   
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   } 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 body, html {
     height: 100%;
@@ -94,6 +75,51 @@ body, html {
   transform: translate(-50%, -50%);
   color: white;
 }
+.block {
+  width: calc(100% - 20vw); /* This reduces the width by 200px */
+  position: relative;
+  left: 10vw;
+  top: 1vw;
+  background-color: #f3f0f0;
+  border-radius: 15px;
+  padding: 20px;
+ 
+}
+.content {
+  overflow: hidden; 
+}
+.blockspace{
+  padding-bottom: 25px;
+}
+.img{
+  height: 150px;
+   float: right;
+   margin-left: 20px;
+}
+@media (max-width: 700px) {
+.img{
+  width: 70vw;
+  border-radius: 5px;
+}
+}
+
+.inline {
+  display: inline;
+}
+
+.inline span {
+  display: inline-block; /* if not used remove */
+}
+
+
+
+
+.datum {
+  font-style: italic;
+  color: #888;
+  margin-bottom: 10px;
+}
+
 
 
 

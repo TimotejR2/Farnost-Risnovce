@@ -1,12 +1,25 @@
 {% extends 'layout.html' %}
-
+{% block title %} Home {% endblock %}
 {% block main %}
 
-<main class="hero-image">
+<div class="hero-image">
     <div class="hero-text">
       <h1 style="font-weight: bolder; font-size:2rem;">Vitajte na stránke Farnosti Rišňovce</h1>
     </div>
 
-</main> 
+  </div> 
+{% for row in list %}
+<div class="blockspace">
+    <div class="block content">
+        <img src="{{ row[2] }}" alt="{{ row[3] }}" class="img">
+        <h1 style="text-align: left;">{{ row[1] }}</h1>
+        <p class="datum">{{ row[4] }}</p>
+        <p>{{ row[5] }}</p>
+    </div>
+</div>
+{% endfor %}
+  
+
+
 
 {% endblock %}

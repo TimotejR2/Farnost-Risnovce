@@ -12,7 +12,7 @@
     </head>
     <header id="header">
         <div class="container d-flex flex-wrap justify-content-between ">
-            <image src="../static/icon.jpg" width="70" height="70">
+            <img src="../static/icon.jpg" width="70" height="70">
             <h2 class="text-primary">Farnosť Rišňovce</h2>
             <span onclick="openNav()">
                 <img src="../static/menu.png" width="30" height="30">
@@ -59,7 +59,9 @@
         </ul>
     </nav>
 
-    <body id="main">{% block main %}{% endblock %}</body>
+    <body id="main">
+        {% block main %}{% endblock %}
+    </body>
 
     <footer class="container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <span class="mb-3 mb-md-0 text-body-secondary col-md-4 d-flex align-items-center">&copy; 2023 Farnosť Rišňovce</span>
