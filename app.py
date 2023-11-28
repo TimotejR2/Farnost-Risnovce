@@ -1,50 +1,76 @@
 from flask import Flask, render_template, request
 import sqlite3
 app = Flask(__name__)
-wrong = 0
-results = []
+results = [] # List of all news from db + added after
+wrong = 0 # Number of wrong attemps
+new = [] #Dic of every new post added manualy
+@app.route('/export')
+def data():
+    global new
+    return new
+
+@app.route('/import', methods=['GET', 'POST'])
+def add():
+    if request.method == 'GET':
+        return get_html('static/add.html')
+    global results
+    for row in (request.form['data']):
+        print (row)
+        row = [elem.strip(" '") for elem in row[1:-1].split(',')] #FIXME: 
+        results.append(row)
+    return ('Done')
+
+
 @app.route('/update', methods=['GET', 'POST'])
 def update():
-    global wrong, results
+    global wrong, results, new
     if wrong < 5:
         if request.method == 'POST':
-            if login(request.form['username'], request.form['password']):
-                wrong = 0
-                con = sqlite3.connect("data.db")
-                db = con.cursor()
-                db.execute("SELECT * FROM novinky;")
-                results = db.fetchall()
-                print (results)
-                return ("Hotovo")
-            else:
-                wrong += 1
-                return 'Login failed'
+            if login(request.form['password']):
+                if 'read_db' in request.form:
+                    read()
+                output = insert(request.form['nazov'], request.form['image'], request.form['alt'], request.form['date'], request.form['text'])
+                results.append(output)
+                new.append(output)
+                del output
+                return ("Všetko prebehlo úspešne")
+            wrong += 1
+            return 'Prihlásenie zlyhalo'
 
-    if request.method == 'GET':
-            return """
-                <!DOCTYPE html>
-                <html>
-                <body>
-                    <h1>Prihláste sa</h1>
-                    <form method="post" action="/update">
-                        <label for="username">Meno:</label>
-                        <input type="text" id="username" name="username"><br><br>
-                        <label for="password">Heslo:</label>
-                        <input type="password" id="password" name="password"><br><br>
-                        <input type="submit" value="Odoslať">
-                    </form>
-                </body>
-                </html>
-                """
+        if request.method == 'GET':
+            return (get_html('static/update.html'))
+    
+def get_html(path):
+    with open(path, 'r') as file:
+        html = file.read()
+    return html
 
-def login(username, password):
-    if username == 'root' and password == 'root':
+def read():
+    global results
+    con = sqlite3.connect("data.db")
+    db = con.cursor()
+    db.execute("SELECT * FROM novinky;")
+    results = db.fetchall()
+read()
+
+def login(password):
+    if password == 'root':
+        global wrong
+        wrong = 0
         return True
     return False
+
+def insert(nazov, image, alt, date, text):
+    list =  (123, nazov, image, alt, date, text)
+    return list
+
+
+
 
 @app.route('/')
 def index():
     global results
+    print (results)
     return render_template('index.html', list = results)
 
 
