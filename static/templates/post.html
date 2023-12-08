@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block main %}
+
+<style>
+    .photo {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+}
+
+</style>
+<div class="blockspace">
+    <div class="block content">
+        <h1 style="text-align: left;">{{ text[1] }}</h1>
+        <p class="datum">{{ text[4] }}</p>
+        <p>{{ text[5] }}</p>
+        <img src="{{ text[2] }}" alt="{{ text[3] }}" class="photo">
+    </div>
+</div>
+
+{% endblock %}
