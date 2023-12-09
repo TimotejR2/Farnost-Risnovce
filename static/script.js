@@ -7,6 +7,30 @@ window.onload = function(){
       openNav();
     }
 }
+document.addEventListener("DOMContentLoaded", function() {
+  var links = document.querySelectorAll('.nav-link'); // Select all links
+  
+  links.forEach(function(link) {
+      link.addEventListener('click', function(event) {
+          removeActiveClass(); // Remove 'active' class from all links
+          event.target.classList.add('active'); // Add 'active' class to the clicked link
+      });
+      
+      var currentPath = window.location.pathname; // Get current path
+      if (link.getAttribute('href') === currentPath) {
+          link.classList.add('active'); // Add 'active' class to the link with the current path
+      }
+  });
+});
+
+function removeActiveClass() {
+  var links = document.querySelectorAll('.nav-link'); // Select all links
+  
+  links.forEach(function(link) {
+      link.classList.remove('active'); // Remove 'active' class from all links
+  });
+}
+
 
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";

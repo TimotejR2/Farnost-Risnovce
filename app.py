@@ -1,9 +1,24 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, make_response
 import sqlite3
 app = Flask(__name__)
 results = [] # List of all news from db + added after
 wrong = 0 # Number of wrong attemps
 new = [] #Dic of every new post added manualy
+@app.route('/post')
+def post(): 
+    global results
+    event = None
+    id = int(request.args.get('id'))
+    for row in results:
+        if row[0] == id:
+            event = row
+            break
+    if event == None:
+        event = make_response(get_html('static/404.html'), 404)
+        return event
+    return render_template('post.html', text = event)
+
+
 @app.route('/export')
 def data():
     global new
@@ -11,12 +26,13 @@ def data():
 
 @app.route('/import', methods=['GET', 'POST'])
 def add():
+    #FIXME: 
     if request.method == 'GET':
         return get_html('static/add.html')
     global results
     for row in (request.form['data']):
         print (row)
-        row = [elem.strip(" '") for elem in row[1:-1].split(',')] #FIXME: 
+        row = [elem.strip(" '") for elem in row[1:-1].split(',')] 
         results.append(row)
     return ('Done')
 
@@ -73,13 +89,6 @@ def index():
     print (results)
     return render_template('index.html', list = results)
 
-
-
-
-
-
-
-
 @app.route('/foto')
 def foto():
     return render_template('foto.html')
@@ -102,6 +111,7 @@ def oznamy():
 @app.route('/prednasky')
 def prednasky():
     return render_template('prednasky.html')
+
 @app.route('/publikacie')
 def publikacie():
     return render_template('publikacie.html')

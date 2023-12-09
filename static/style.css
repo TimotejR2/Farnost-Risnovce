@@ -10,7 +10,7 @@ h1{
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: #111; /* Black*/
+    background-color: rgb(0, 0, 0); /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
@@ -54,7 +54,7 @@ body, html {
 /* The hero image */
 .hero-image {
   /* "linear-gradient" to add a darken background effect to the image.*/
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://scontent-fra5-2.xx.fbcdn.net/v/t39.30808-6/391749566_122112161396065012_2096658478523043418_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=f3HW2ybxetQAX-oc7QQ&_nc_ht=scontent-fra5-2.xx&oh=00_AfCfAVLd6JYzOonlC5pypZTkjSNdbis6DyCLdHYfy2LJUg&oe=6566735A");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("hero.jpg");
 
   /* Set a specific height */
   height: 40%;

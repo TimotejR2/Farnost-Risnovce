@@ -1,1 +1,0 @@
-# Farnost-Risnovce
