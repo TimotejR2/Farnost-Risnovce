@@ -1,5 +1,68 @@
 {% extends 'layout.html' %}
 
 {% block main %}
-oznamy
+<style>
+  .events-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #000;
+  }
+
+  .date {
+    width: 20%;
+  }
+
+  .popis {
+    width: 50%;
+  }
+
+  .popis-miesto,
+  .popis-cas {
+    width: 15%;
+  }
+
+  h1,
+  h2 {
+    text-align: center;
+  }
+
+  .block {
+    margin: 20px;
+    padding: 10px;
+  }
+
+</style>
+<h1>Oznamy</h1>
+<div class="block">
+  <div>
+    <h2>Oznamy na 10.12.2023</h2>
+    <table class="events-table">
+      <tr>
+        <th class="date">Dátum</th>
+        <th colspan="3">Popis</th>
+        <th>Miesto</th>
+        <th>Čas</th>
+      </tr>
+      {% for day in list %}
+      {% for event in day[:-1] %}
+      <tr>
+        {% if loop.index0 == 0 %}
+        <td class="date" rowspan="{{ day[:-1] | length }}">{{ day[-1] }}</td>
+        {% endif %}
+        <td class="popis" colspan="3">{{ event[0] }}</td>
+        <td class="popis-miesto">{{ event[2] }}</td>
+        <td class="popis-cas">{{ event[1] }}</td>
+      </tr>
+      {% endfor %}
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
 {% endblock %}
