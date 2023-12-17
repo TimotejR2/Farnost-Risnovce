@@ -6,46 +6,58 @@ wrong = 0 # Number of wrong attemps
 new = [] #Dic of every new post added manualy
 results = read() # List of all news from db + added after
 
+log = []
+def error_log(code):
+    global log
+    log.append((error(code))[0])
+    return (error(code))[1]
+
+
 @app.route('/post')
 def post(): 
     global results
-    event = None
     try:
         id = int(request.args.get('id'))
     except ValueError:
         return error(404)
-    for row in results:
-        if row[0] == id:
-            event = row
-            break
-    if event == None:
+    event = next((row for row in results if row[0] == id), None)
+
+    if event is None:
         return error(404)
     return render_template('post.html', text = event)
-
 
 @app.route('/export')
 def data():
     global new
     return new
 
-
 @app.route('/import', methods=['GET', 'POST'])
 def add():
+    global wrong
+    if wrong > 3:
+        return error_log (403)
     if request.method == 'GET':
         return get_html('static/add.html')
-    if login(request.form['password']):
-        global results
 
-        data = request.form['data']
-        parsed_data = strtolist(data)
-        results.extend(parsed_data)
-        return 'Done'
-    return (error(403))
+    if request.method == 'POST':
+        if login(request.form['password']):
+            global results
+            data = request.form['data']
+            try:
+                parsed_data = strtolist(data)
+            except ValueError:
+                return error_log(400)
+            results.extend(parsed_data)
+            return 'Done'
+        wrong += 1
+        return error_log(401)
 
 @app.route('/update', methods=['GET', 'POST'])
 def update():
     global wrong, results, new
     if wrong < 5:
+        if request.method == 'GET':
+            return (get_html('static/update.html'))
         if request.method == 'POST':
             if login(request.form['password']):
                 if 'read_db' in request.form:
@@ -53,13 +65,10 @@ def update():
                 output = insert(request.form['nazov'], request.form['image'], request.form['alt'], request.form['date'], request.form['text'])
                 results.append(output)
                 new.append(output)
-                del output
                 return ("Všetko prebehlo úspešne")
             wrong += 1
-            return 'Prihlásenie zlyhalo'
-
-        if request.method == 'GET':
-            return (get_html('static/update.html'))
+            return error_log(401)
+    return error_log (403)
 
 @app.route('/oznamy')
 def oznamy():
@@ -76,6 +85,10 @@ def index():
     global results
     return render_template('index.html', list = results)
 
+@app.route('/logs')
+def logs(): 
+    global log
+    return (log)
 
 @app.route('/historia')
 def historia():

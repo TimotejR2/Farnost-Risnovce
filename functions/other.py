@@ -7,10 +7,18 @@ def get_html(path):
     return html
 
 def error(code):
+    respond = []
+    from .security import get_data
+    respond.append(get_data(code))
     if code == 404:
-        return make_response(get_html('static/404.html'), 404)
-    if code == 403:
-        return make_response('Prístup odmietnutý, skontrolujte zadané heslo.', 403)
+        respond.append (make_response(get_html('static/404.html'), 404))
+    elif code == 403:
+        respond.append ( make_response('Prístup odmietnutý.', 403))
+    elif code == 401:
+        respond.append  (make_response('Skontrolujte heslo.', 401))
+    elif code == 400:
+        respond.append  (make_response('Error 400. Ak sú údaje správne zadané, kontaktujte správcu emailom na timotej.ruzicka@gmail.com', 400))
+    return respond
 
 
 

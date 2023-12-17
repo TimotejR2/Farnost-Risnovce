@@ -11,3 +11,14 @@ def login(password):
         return True
     return False
 
+def get_data(code):
+    from flask import request
+
+    data = {
+        "User Agent": request.headers.get('User-Agent'),
+        "IP Address": request.remote_addr,
+        "Request Method": request.method,
+        "URL Visited": request.url,
+        "Code": code
+    }
+    return data
