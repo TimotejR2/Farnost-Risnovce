@@ -1,9 +1,12 @@
 from flask import make_response
 import ast
 
-def get_html(path):
+def get_html(path, dynamic_values={}):
     with open(path, 'r') as file:
         html = file.read()
+    for key, value in dynamic_values.items():
+        key = '{{'+key+'}}'
+        html = html.replace (key, value)
     return html
 
 def error(code):

@@ -18,12 +18,16 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-@app.route('/root', methods=['GET', 'POST']) #TODO:
+@app.route('/root', methods=['GET', 'POST'])
 @login_required
 def root():
-    if request.method == 'GET':
-        global wrong
-        return str(wrong)
+    dynamic_values = {
+        'placeholder1': 'Default Value',
+        'placeholder2': 'Value 2',
+    }
+    html = get_html('static/root.html', dynamic_values)
+    return html 
+
 
 
 
@@ -51,7 +55,10 @@ def authenticate():
             session["user_id"] = request.form.get("username")
             return redirect("/")
 
-        #TODO: if password is wrong return error and track logs
+        # If password is wrong return error and track logs
+        global wrong
+        wrong += 1
+        return error_log(401)
     # If method is GET
     else:
         return get_html('static/login.html')
