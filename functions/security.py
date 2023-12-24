@@ -33,3 +33,13 @@ def login_required(f):
             return redirect("/login")
         return f(*args, **kwargs)
     return decorated_function
+
+def root_required(f):
+    from functools import wraps
+    from flask import session, redirect
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get("user_id") != 'root':
+            return redirect("/login")
+        return f(*args, **kwargs)
+    return decorated_function

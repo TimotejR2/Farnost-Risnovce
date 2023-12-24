@@ -1,5 +1,29 @@
 {% extends 'layout.html' %}
 
 {% block main %}
-Homílie
+<style>
+    pre {
+    white-space: pre-wrap;
+}
+</style>
+<div class="blockspace">
+    <div class="block content">
+        <form action="/homilie" method="post">
+            <label for="dateInput">Hľadať podľa dátumu:</label>
+            <input type="date" id="dateInput" name="selectedDate">
+            <input type="submit" value="Hľadať">
+        </form>
+    </div>
+</div>
+{% for row in list %}
+<div class="blockspace">
+    <div class="block content">
+        <h1>{{ row[0] }}</h1>
+        <em>{{ row[1] }}</em>
+        <h4>{{ row[2] }}</h4>
+        <pre>{{ row[3] }}</pre>
+    </div>
+</div>
+{% endfor %}
+
 {% endblock %}
