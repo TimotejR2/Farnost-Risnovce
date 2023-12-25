@@ -1,5 +1,6 @@
 var mainElement;
 var headerElement
+// Open sidenav if screen widtch is more that 700
 window.onload = function(){
   mainElement = document.getElementById('main');
   headerElement = document.getElementById("header");
@@ -7,6 +8,7 @@ window.onload = function(){
       openNav();
     }
 }
+
 document.addEventListener("DOMContentLoaded", function() {
   var links = document.querySelectorAll('.nav-link'); // Select all links
   

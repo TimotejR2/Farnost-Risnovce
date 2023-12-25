@@ -6,7 +6,7 @@ app = Flask(__name__)
 wrong = 0 # Number of wrong attemps
 new = [] #Dic of every new post added manualy
 results = read() # List of all news from db + added after
-
+oznamy_list = [] # 
 log = [] # Track suspicious activity
 def error_log(code):
     global log
@@ -110,22 +110,48 @@ def update():
 
 @app.route('/oznamy')
 def oznamy():
-
-    pondelok = [[ 'Omsa za ...', '18:00', 'Risnovce'], ['Omsa za ...', '19:00', 'Risnovce'], ['Omsa za ...', '20:00', 'Risnovce'], '1.1.2023']
-    utorok = [['Omsa za ...', '10:00', 'Risnovce'], ['Omsa za ...', '11:00', 'Risnovce'], '2.1.2023']
-    streda = [['Omsa za ...', '10:00', 'Risnovce'], ['Omsa za ...', '11:00', 'Risnovce'], '3.1.2023']
-    
-    list = [pondelok, utorok, streda]
-    return render_template('oznamy.html', list = list)
+    a = [[ 'kňazi, naši rodáci', '9:00', 'Kľačany'], ['František a Otília Hudákovci, brat Jozef Ilčík a rodičia Hudákovci a Ilčíkovci', '10:30', 'Rišňovce'], '1. adventná nedeľa 3.12.2023']
+    b = [['+ František, Jolana Mošatovci, syn Ján a zať Jozef', '18:00', 'Sasinkovo'], 'Štvrtok 7.12.2023']
+    c = [['Omsa za ...', '10:00', 'Risnovce'], '3.1.2023']
+    list = [a,b,c]
+    global oznamy_list
+    return render_template('oznamy.html', list = oznamy_list)
 
 @app.route('/oznamy/update', methods=['POST', 'GET'])
 @login_required
 def get_events():
     #TODO:
-    return str(1)
+    if request.method == 'GET':
+        return render_template('oznamy_input.html')
+
+    elif request.method == 'POST':
+        # Get number of days submited
+        days_submited = 7
+        for i in range (days_submited):
+            if request.form[('datum'+str(i))] == "":
+                if i == 0:
+                    return error(422)
+                days_submited = i
+                break
+        global oznamy_list
+        events_in_day = 5
+        for i in range (days_submited):
+            var = [] # All events in day
+            for j in range (events_in_day):
+                if request.form['blok'+str(i)+'-cas'+str(j)] == "":
+                    break
+                
+                text1 = request.form['blok'+str(i)+'-text'+str(j)+'-1']
+                text2 = request.form['blok'+str(i)+'-text'+str(j)+'-2']
+                time = request.form['blok'+str(i)+'-cas'+str(j)]
+                var.append([text1, time, text2])
+            var.append(request.form['datum'+str(i)])
+            oznamy_list.append(var)
+        return str(oznamy_list)
 
 
-@app.route('/')
+
+@app.route('/') 
 def index():
     global results
     return render_template('index.html', list = results)

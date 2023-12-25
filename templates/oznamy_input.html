@@ -1,0 +1,52 @@
+{% extends 'empty.html' %}
+
+{% block main %}
+<style>
+.block {
+  width: calc(100% - 20vw); /* This reduces the width by 200px */
+  position: relative;
+  left: 10vw;
+  top: 1vw;
+  background-color: #f3f0f0;
+  border-radius: 15px;
+  padding: 20px;
+ 
+}
+.content {
+  overflow: hidden; 
+}
+.blockspace{
+  padding-bottom: 25px;
+}
+</style>
+  <form  method="post">
+    {% for i in range(7) %}
+      <label for="datum{{ i }}">Dátum {{ i}}:</label>
+      <input type="date" id="datum{{ i }}" name="datum{{ i }}">
+
+      <div>
+        {% for j in range(5) %}
+        <div class="blockspace">
+          <div class="block content">
+
+            <label for="blok{{ i }}-text{{ j }}-1">Omša za:</label>
+            <input type="text" id="blok{{ i }}-text{{ j }}-1" name="blok{{ i }}-text{{ j }}-1">
+
+            <label for="blok{{ i }}-text{{ j }}-2">Miesto</label>
+            <input type="text" id="blok{{ i }}-text{{ j }}-2" name="blok{{ i }}-text{{ j }}-2">
+  
+            <label for="blok{{ i }}-cas{{ j }}">Čas:</label>
+            <input type="time" id="blok{{ i }}-cas{{ j }}" name="blok{{ i }}-cas{{ j }}">
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    {% endfor %}
+    <label for="notes">Poznámky:</label>
+    <input id="notes" name="notes" style="resize: both;">
+
+    <input type="submit" value="Odoslať">
+  </form>
+
+{% endblock %}
