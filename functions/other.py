@@ -40,4 +40,3 @@ def strtolist(input_string):
         lists.append(row)
     return lists
 
-
