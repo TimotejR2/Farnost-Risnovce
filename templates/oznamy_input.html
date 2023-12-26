@@ -20,6 +20,8 @@
 }
 </style>
   <form  method="post">
+    <label for="datum">Oznamy na:</label>
+    <input type="datum" id="datum" name="datum">
     {% for i in range(7) %}
       <label for="datum{{ i }}">Dátum {{ i}}:</label>
       <input type="date" id="datum{{ i }}" name="datum{{ i }}">

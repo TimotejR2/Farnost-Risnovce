@@ -41,7 +41,7 @@
 <h1>Oznamy</h1>
 <div class="block">
   <div>
-    <h2>Oznamy na 10.12.2023</h2>
+    <h2>Oznamy na {{ list[0] }}</h2>
     <table class="events-table">
       <tr>
         <th class="date">Dátum</th>
@@ -49,7 +49,7 @@
         <th>Miesto</th>
         <th>Čas</th>
       </tr>
-      {% for day in list %}
+      {% for day in list[1:-1] %}
       {% for event in day[:-1] %}
       <tr>
         {% if loop.index0 == 0 %}
@@ -63,6 +63,7 @@
       {% endfor %}
     </table>
   </div>
+  {{ list[-1] }}
 </div>
 
 {% endblock %}

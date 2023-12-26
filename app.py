@@ -110,17 +110,12 @@ def update():
 
 @app.route('/oznamy')
 def oznamy():
-    a = [[ 'kňazi, naši rodáci', '9:00', 'Kľačany'], ['František a Otília Hudákovci, brat Jozef Ilčík a rodičia Hudákovci a Ilčíkovci', '10:30', 'Rišňovce'], '1. adventná nedeľa 3.12.2023']
-    b = [['+ František, Jolana Mošatovci, syn Ján a zať Jozef', '18:00', 'Sasinkovo'], 'Štvrtok 7.12.2023']
-    c = [['Omsa za ...', '10:00', 'Risnovce'], '3.1.2023']
-    list = [a,b,c]
     global oznamy_list
     return render_template('oznamy.html', list = oznamy_list)
 
 @app.route('/oznamy/update', methods=['POST', 'GET'])
 @login_required
 def get_events():
-    #TODO:
     if request.method == 'GET':
         return render_template('oznamy_input.html')
 
@@ -135,6 +130,7 @@ def get_events():
                 break
         global oznamy_list
         events_in_day = 5
+        oznamy_list.append(request.form['datum'])
         for i in range (days_submited):
             var = [] # All events in day
             for j in range (events_in_day):
@@ -147,9 +143,8 @@ def get_events():
                 var.append([text1, time, text2])
             var.append(request.form['datum'+str(i)])
             oznamy_list.append(var)
+        oznamy_list.append(request.form['notes'])
         return str(oznamy_list)
-
-
 
 @app.route('/') 
 def index():
