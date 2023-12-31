@@ -1,7 +1,5 @@
-from flask_session import Session
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, make_response
 from functions import *
-
 app = Flask(__name__)
 wrong = 0 # Number of wrong attemps
 new = [] #Dic of every new post added manualy
@@ -13,14 +11,11 @@ def error_log(code):
     log.append((error(code))[0])
     return (error(code))[1]
 
-# Configure session to use filesystem (instead of signed cookies)
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
-
 @app.route('/root', methods=['GET', 'POST'])
-@root_required
 def root():
+    if not user_logged_in("root"):
+        return redirect("/login")
+
     dynamic_values = {
         'placeholder1': 'Default Value',
         'placeholder2': 'Value 2',
@@ -30,16 +25,14 @@ def root():
 
 @app.route("/logout")
 def logout():
-    # Forget user_id
-    session.clear()
-    return redirect("/")
+    # Forget user
+    resp = make_response(redirect('/'))
+    resp.set_cookie('session', '', expires=0)
+    return resp
 
 
 @app.route("/login", methods=["GET", "POST"])
 def authenticate():
-    # Forget user_id
-    session.clear()
-
     if request.method == "POST":
         # Ensure username and password were submitted
         if not request.form.get("username") or not request.form.get("password"):
@@ -48,14 +41,16 @@ def authenticate():
         # Verify username and password
         if login(request.form.get("password"), request.form.get("username")):
 
-            # Remember which user has logged in
-            session["user_id"] = request.form.get("username")
-            return redirect("/")
+            # Set session
+            resp = redirect("/")
+            resp.set_cookie('session', get_session_from_csv(request.form.get("username")), max_age=15768000)
+            return resp
 
         # If password is wrong return error and track logs
         global wrong
         wrong += 1
         return error_log(401)
+
     # If method is GET
     else:
         return get_html('static/login.html')
@@ -74,14 +69,16 @@ def post():
     return render_template('post.html', text = event)
 
 @app.route('/export')
-@root_required
 def data():
+    if not user_logged_in("root"):
+        return redirect("/login")
     global new
     return new
 
 @app.route('/import', methods=['GET', 'POST'])
-@root_required
 def add():
+    if not user_logged_in("root"):
+        return redirect("/login")
     if request.method == 'GET':
         return get_html('static/add.html')
 
@@ -96,8 +93,9 @@ def add():
         return 'Done'
 
 @app.route('/update', methods=['GET', 'POST'])
-@login_required
 def update():
+    if not user_logged_in():
+        return redirect("/login")
     if request.method == 'GET':
         return (get_html('static/update.html'))
 
@@ -114,8 +112,9 @@ def oznamy():
     return render_template('oznamy.html', list = oznamy_list)
 
 @app.route('/oznamy/update', methods=['POST', 'GET'])
-@login_required
 def get_events():
+    if not user_logged_in():
+        return redirect("/login")
     if request.method == 'GET':
         return render_template('oznamy_input.html')
 
@@ -152,8 +151,9 @@ def index():
     return render_template('index.html', list = results)
 
 @app.route('/logs')
-@root_required
 def logs(): 
+    if not user_logged_in("root"):
+        return redirect("/login")
     global log
     return (log)
 
