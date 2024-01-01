@@ -1,8 +1,0 @@
-CREATE TABLE novinky(
-    id INTEGER PRIMARY KEY,
-    nazov TEXT,
-    image TEXT,
-    alt TEXT,
-    date DATE,
-    text TEXT
-);

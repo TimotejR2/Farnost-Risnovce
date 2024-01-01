@@ -6,8 +6,11 @@ app = Flask(__name__)
 # Track number of wrong attempts
 wrong_attempts = 0
 
-# List of all news from the database plus added ones
+# List of last 5 news
 news_list = []
+
+# List of all news
+all_news_list = []
 
 # Track suspicious activity
 activity_log = []
@@ -69,12 +72,12 @@ def authenticate():
 
 @app.route('/post')
 def post():
-    global news_list
+    global all_news_list
     try:
         post_id = int(request.args.get('id'))
     except ValueError:
         return error(404)
-    event = next((row for row in news_list if int(row[0]) == post_id), None)
+    event = next((row for row in all_news_list if int(row[0]) == post_id), None)
 
     if event is None:
         print('none')
@@ -85,8 +88,8 @@ def post():
 def data():
     if not user_logged_in("root"):
         return redirect("/login")
-    global news_list
-    return news_list
+    global all_news_list
+    return all_news_list
 
 @app.route('/import', methods=['GET', 'POST'])
 def add():
@@ -97,13 +100,14 @@ def add():
         return get_html('static/add.html')
 
     if request.method == 'POST':
-        global news_list
+        global news_list, all_news_list
         data = request.form['data']
         try:
             parsed_data = strtolist(data)
         except ValueError:
             return error_log(400)
         news_list.extend(parsed_data)
+        all_news_list.append(parsed_data)
         return 'Done'
 
 @app.route('/update', methods=['GET', 'POST'])
@@ -114,9 +118,17 @@ def update():
         return (get_html('static/update.html'))
 
     if request.method == 'POST':
-        global news_list
-        output = insert(request.form['nazov'], request.form['image'], request.form['alt'], request.form['date'], request.form['text'], len(news_list))
-        news_list.append(output)
+        global news_list, all_news_list
+        if len(news_list) == 0:
+            output = insert_to_list(request.form['nazov'], request.form['image'], request.form['alt'], request.form['date'], request.form['text'], 0)
+        else:
+            print(news_list)
+            print(news_list[len(news_list)-1][0]+1)
+            output = insert_to_list(request.form['nazov'], request.form['image'], request.form['alt'], request.form['date'], request.form['text'], news_list[0][0]+1)
+        news_list.insert(0, output)
+        all_news_list.append(output)
+        if len(news_list) > 5:
+            news_list.pop()
         return ("Všetko prebehlo úspešne")
 
 @app.route('/oznamy')
@@ -142,6 +154,7 @@ def get_events():
                 break
             
         global oznamy_list
+        oznamy_list = []
         events_in_day = 5
         oznamy_list.append(request.form['datum'])
         for i in range (days_submited):
@@ -171,8 +184,10 @@ def logs():
     global log
     return (log)
 
-@app.route('/homilie')
+@app.route('/homilie',  methods=["GET", "POST"])
 def homilie():
+    if request.method == 'POST':
+        return 'Na tejto funkcii sa ešte stále pracuje. Ďakujem za porozumenie.'
     global homilie_data
     return render_template('homilie.html', list=homilie_data)
 

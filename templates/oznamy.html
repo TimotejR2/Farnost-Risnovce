@@ -19,12 +19,11 @@
   }
 
   .popis {
-    width: 50%;
+    width: 60%;
   }
 
-  .popis-miesto,
-  .popis-cas {
-    width: 15%;
+  .popis-miestoacas{
+    width: 20%;
   }
 
   h1,
@@ -46,8 +45,7 @@
       <tr>
         <th class="date">Dátum</th>
         <th colspan="3">Popis</th>
-        <th>Miesto</th>
-        <th>Čas</th>
+        <th>Čas a miesto</th>
       </tr>
       {% for day in list[1:-1] %}
       {% for event in day[:-1] %}
@@ -56,14 +54,13 @@
         <td class="date" rowspan="{{ day[:-1] | length }}">{{ day[-1] }}</td>
         {% endif %}
         <td class="popis" colspan="3">{{ event[0] }}</td>
-        <td class="popis-miesto">{{ event[2] }}</td>
-        <td class="popis-cas">{{ event[1] }}</td>
+        <td class="popis-miestoacas">{{ event[1] }} {{ event[2] }}</td>
       </tr>
       {% endfor %}
       {% endfor %}
     </table>
   </div>
-  {{ list[-1] }}
+  <pre>{{ list[-1] }}</pre>
 </div>
 
 {% endblock %}

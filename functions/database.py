@@ -17,7 +17,7 @@ def read(db_path="data.db"):
     con.close()
     return results
 
-def insert(nazov, image, alt, date, text, id):
+def insert_to_list(nazov, image, alt, date, text, id):
     """
     Creates a list with provided data.
 
