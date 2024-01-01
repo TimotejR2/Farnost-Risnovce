@@ -17,7 +17,7 @@ def read(db_path="data.db"):
     con.close()
     return results
 
-def insert(nazov, image, alt, date, text):
+def insert(nazov, image, alt, date, text, id):
     """
     Creates a list with provided data.
 
@@ -27,9 +27,10 @@ def insert(nazov, image, alt, date, text):
     - alt (str): Alternate text for the image.
     - date (str): Date of the news.
     - text (str): Content text of the news.
+    - id (int): ID number of new post.
 
     Returns:
     - list: List containing provided data in a specific order.
     """
-    data_list = (123, nazov, image, alt, date, text)
+    data_list = (id, nazov, image, alt, date, text)
     return data_list

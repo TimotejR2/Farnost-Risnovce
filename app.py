@@ -1,16 +1,29 @@
 from flask import Flask, render_template, request, redirect, make_response
 from functions import *
+
 app = Flask(__name__)
-wrong = 0 # Number of wrong attemps
-new = [] #Dic of every new post added manualy
-results = read() # List of all news from db + added after
-oznamy_list = [] # 
-log = [] # Track suspicious activity
-homilie_data=[] # Všetky homílie vo forme list s viacrými lists
-def error_log(code):
-    global log
-    log.append((error(code))[0])
-    return (error(code))[1]
+
+# Track number of wrong attempts
+wrong_attempts = 0
+
+# List of all news from the database plus added ones
+news_list = []
+
+# Track suspicious activity
+activity_log = []
+
+# All homilies in a multi-dimensional list
+homilie_data = []
+
+# All homilies in a multi-dimensional list
+oznamy_list = [] 
+
+# Helper function for logging errors
+def log_error(code):
+    global activity_log
+    log_entry = error(code)
+    activity_log.append(log_entry[0])
+    return log_entry[1]
 
 @app.route('/root', methods=['GET', 'POST'])
 def root():
@@ -22,15 +35,14 @@ def root():
         'placeholder2': 'Value 2',
     }
     html = get_html('static/root.html', dynamic_values)
-    return html 
+    return html
 
 @app.route("/logout")
 def logout():
-    # Forget user
+    # Forget user by clearing session cookie
     resp = make_response(redirect('/'))
     resp.set_cookie('session', '', expires=0)
     return resp
-
 
 @app.route("/login", methods=["GET", "POST"])
 def authenticate():
@@ -41,56 +53,57 @@ def authenticate():
 
         # Verify username and password
         if login(request.form.get("password"), request.form.get("username")):
-
-            # Set session
+            # Set session cookie
             resp = redirect("/")
             resp.set_cookie('session', get_session_from_csv(request.form.get("username")), max_age=15768000)
             return resp
 
-        # If password is wrong return error and track logs
-        global wrong
-        wrong += 1
-        return error_log(401)
+        # If password is wrong, log error and track logs
+        global wrong_attempts
+        wrong_attempts += 1
+        return log_error(401)
 
     # If method is GET
     else:
         return get_html('static/login.html')
 
 @app.route('/post')
-def post(): 
-    global results
+def post():
+    global news_list
     try:
-        id = int(request.args.get('id'))
+        post_id = int(request.args.get('id'))
     except ValueError:
         return error(404)
-    event = next((row for row in results if row[0] == id), None)
+    event = next((row for row in news_list if int(row[0]) == post_id), None)
 
     if event is None:
+        print('none')
         return error(404)
-    return render_template('post.html', text = event)
+    return render_template('post.html', text=event)
 
 @app.route('/export')
 def data():
     if not user_logged_in("root"):
         return redirect("/login")
-    global new
-    return new
+    global news_list
+    return news_list
 
 @app.route('/import', methods=['GET', 'POST'])
 def add():
     if not user_logged_in("root"):
         return redirect("/login")
+
     if request.method == 'GET':
         return get_html('static/add.html')
 
     if request.method == 'POST':
-        global results
+        global news_list
         data = request.form['data']
         try:
             parsed_data = strtolist(data)
         except ValueError:
             return error_log(400)
-        results.extend(parsed_data)
+        news_list.extend(parsed_data)
         return 'Done'
 
 @app.route('/update', methods=['GET', 'POST'])
@@ -101,10 +114,9 @@ def update():
         return (get_html('static/update.html'))
 
     if request.method == 'POST':
-        global results, new
-        output = insert(request.form['nazov'], request.form['image'], request.form['alt'], request.form['date'], request.form['text'])
-        results.append(output)
-        new.append(output)
+        global news_list
+        output = insert(request.form['nazov'], request.form['image'], request.form['alt'], request.form['date'], request.form['text'], len(news_list))
+        news_list.append(output)
         return ("Všetko prebehlo úspešne")
 
 @app.route('/oznamy')
@@ -128,6 +140,7 @@ def get_events():
                     return error(422)
                 days_submited = i
                 break
+            
         global oznamy_list
         events_in_day = 5
         oznamy_list.append(request.form['datum'])
@@ -148,8 +161,8 @@ def get_events():
 
 @app.route('/') 
 def index():
-    global results
-    return render_template('index.html', list = results)
+    global news_list
+    return render_template('index.html', list = news_list)
 
 @app.route('/logs')
 def logs(): 

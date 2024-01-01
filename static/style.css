@@ -50,39 +50,27 @@ body, html {
     height: 100%;
 }
 
-/* The hero image */
-.hero-image {
-  /* "linear-gradient" to add a darken background effect to the image.*/
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("hero.jpg");
-
-  /* Set a specific height */
-  height: 40%;
-
-  /* Position and center the image to scale nicely on all screens */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-}
-
-/* Place text in the middle of the image */
-.hero-text {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-}
 .block {
-  width: calc(100% - 20vw); /* This reduces the width by 200px */
+  width: calc(100% - 30vw); /* This reduces the width by 200px */
   position: relative;
-  left: 10vw;
+  left: 15vw;
   top: 1vw;
   background-color: #f3f0f0;
   border-radius: 15px;
   padding: 20px;
  
+}
+@media (max-width: 700px) {
+  .block {
+    width: calc(100% - 10vw); /* This reduces the width by 200px */
+    position: relative;
+    left: 5vw;
+    top: 1vw;
+    background-color: #f3f0f0;
+    border-radius: 15px;
+    padding: 20px;
+   
+  }
 }
 .content {
   overflow: hidden; 
@@ -91,13 +79,14 @@ body, html {
   padding-bottom: 25px;
 }
 .img{
-  height: 150px;
+  height: 300px;
    float: right;
    margin-left: 20px;
+   object-fit: cover;
 }
 @media (max-width: 700px) {
 .img{
-  width: 70vw;
+  width: 80vw;
   border-radius: 5px;
 }
 }
@@ -121,5 +110,10 @@ body, html {
 
 
 
+pre {
+  font-family: inherit; /* Inherits font family from parent */
+  font-size: inherit; /* Inherits font size from parent */
+  /* Other relevant font properties like weight, style, etc., if needed */
+}
 
 

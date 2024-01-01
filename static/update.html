@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html>
-<header>
-    <style>
-        .in{
-            width: 60vw;
-            height: 30vh;
-        }
-    </style>
-</header>
+
 <form method="post" action="/update">
     <label for="nazov">Názov:</label>
     <input id="nazov" name="nazov"><br><br>
@@ -16,16 +9,13 @@
     <input id="image" name="image"><br><br>
 
     <label for="alt">Popis obrázku:</label>
-    <input id="alt" name="alt" class="in"><br><br>
+    <textarea id="alt" name="alt"></textarea><br><br>
 
     <label for="date">Dátum:</label>
-    <input id="date" name="date" type="date"><br><br>
+    <input id="date" name="date"><br><br>
 
     <label for="text">Text:</label>
-    <input id="text" name="text" class="in"><br><br>
-
-    <label for="password">Heslo:</label>
-    <input type="password" id="password" name="password"><br><br>
+    <textarea id="text" name="text" class="in"></textarea><br><br>
 
     <input type="submit" value="Odoslať">
 </form>

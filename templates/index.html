@@ -1,7 +1,32 @@
 {% extends 'layout.html' %}
 {% block title %} Home {% endblock %}
 {% block main %}
+<style>
+    /* The hero image */
+.hero-image {
+  /* "linear-gradient" to add a darken background effect to the image.*/
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/hero.jpg");
 
+  /* Set a specific height */
+  height: 40%;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+/* Place text in the middle of the image */
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+</style>
 <div class="hero-image">
     <div class="hero-text">
       <h1 style="font-weight: bolder; font-size:2rem;">Vitajte na stránke Farnosti Rišňovce</h1>
@@ -14,7 +39,7 @@
           <img src="{{ row[2] }}" alt="{{ row[3] }}" class="img">
           <h1 style="text-align: left;">{{ row[1] }}</h1>
           <p class="datum">{{ row[4] }}</p>
-          <p>{{ row[5] }}</p>
+          <pre>{{ row[5] }}</pre>
       </div>
       <form id="postForm_{{ row[0] }}" action="/post" method="GET" style="display: none;">
           <input type="hidden" name="id" value="{{ row[0] }}">
