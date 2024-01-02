@@ -72,13 +72,20 @@ def authenticate():
 
 @app.route('/post')
 def post():
+    print("all_news_list", all_news_list)
     global all_news_list
     try:
         post_id = int(request.args.get('id'))
+        print ("id", post_id)
     except ValueError:
         return error(404)
-    event = next((row for row in all_news_list if int(row[0]) == post_id), None)
-
+    event = None
+    for row in all_news_list:
+        print("row0",row[0])
+        if row[0] == post_id:
+            event = row
+            print("event",event)
+            break
     if event is None:
         print('none')
         return error(404)
