@@ -72,8 +72,9 @@ def authenticate():
 
 @app.route('/post')
 def post():
-    print("all_news_list", all_news_list)
+    
     global all_news_list
+    print("all_news_list", all_news_list)
     try:
         post_id = int(request.args.get('id'))
         print ("id", post_id)
