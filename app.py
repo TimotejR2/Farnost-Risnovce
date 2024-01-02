@@ -126,9 +126,12 @@ def update():
             print(news_list[len(news_list)-1][0]+1)
             output = insert_to_list(request.form['nazov'], request.form['image'], request.form['alt'], request.form['date'], request.form['text'], news_list[0][0]+1)
         news_list.insert(0, output)
+        print("news_list", news_list)
         all_news_list.append(output)
+        print("all_news_list", all_news_list)
         if len(news_list) > 5:
             news_list.pop()
+            print("news_list after pop", news_list)
         return ("Všetko prebehlo úspešne")
 
 @app.route('/oznamy')
