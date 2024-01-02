@@ -21,6 +21,33 @@ homilie_data = []
 # All homilies in a multi-dimensional list
 oznamy_list = [] 
 
+
+import os
+
+def create_text_file():
+    # Create 'tmp' folder in the project directory
+    os.makedirs('tmp', exist_ok=True)
+
+    # Define the file path
+    file_path = 'tmp/sample.txt'
+
+    # Write content to the text document
+    with open(file_path, 'w') as file:
+        file.write('This is a sample text.')
+
+def read_text_file():
+    # Define the file path
+    file_path = 'tmp/sample.txt'
+
+    # Read content from the text document
+    try:
+        with open(file_path, 'r') as file:
+            content = file.read()
+            print(content)
+    except FileNotFoundError:
+        print("File not found.")
+
+create_text_file()
 # Helper function for logging errors
 def log_error(code):
     global activity_log
@@ -38,7 +65,7 @@ def root():
         'placeholder2': 'Value 2',
     }
     html = get_html('static/root.html', dynamic_values)
-    return html
+    return read_text_file()
 
 @app.route("/logout")
 def logout():
