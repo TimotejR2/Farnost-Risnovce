@@ -23,21 +23,25 @@ oznamy_list = []
 
 
 import os
+import tempfile
 
 def create_text_file():
-    # Create 'tmp' folder in the project directory
-    os.makedirs('tmp', exist_ok=True)
+    # Get the system's temporary directory
+    temp_dir = tempfile.gettempdir()
 
-    # Define the file path
-    file_path = 'tmp/sample.txt'
+    # Define the file path in the temporary directory
+    file_path = os.path.join(temp_dir, 'sample.txt')
 
     # Write content to the text document
     with open(file_path, 'w') as file:
         file.write('This is a sample text.')
 
 def read_text_file():
-    # Define the file path
-    file_path = 'tmp/sample.txt'
+    # Get the system's temporary directory
+    temp_dir = tempfile.gettempdir()
+
+    # Define the file path in the temporary directory
+    file_path = os.path.join(temp_dir, 'sample.txt')
 
     # Read content from the text document
     try:
