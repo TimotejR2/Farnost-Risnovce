@@ -3,30 +3,9 @@ from functions import *
 
 app = Flask(__name__)
 
-# Track number of wrong attempts
-wrong_attempts = 0
-
-# List of last 5 news
-news_list = []
-
-# List of all news
-all_news_list = []
-
-# Track suspicious activity
-activity_log = []
-
-# All homilies in a multi-dimensional list
-homilie_data = []
-
-# All homilies in a multi-dimensional list
-oznamy_list = [] 
-
-# Helper function for logging errors
-def log_error(code):
-    global activity_log
-    log_entry = error(code)
-    activity_log.append(log_entry[0])
-    return log_entry[1]
+# Create database for all posts
+Database('/tmp/posts.db').delete()
+Database('/tmp/posts.db').create('config/posts_db_schema.sql')
 
 @app.route('/root', methods=['GET', 'POST'])
 def root():
@@ -114,22 +93,19 @@ def add():
 def update():
     if not user_logged_in():
         return redirect("/login")
+
     if request.method == 'GET':
         return (get_html('static/update.html'))
 
     if request.method == 'POST':
-        global news_list, all_news_list
-        if len(news_list) == 0:
-            output = insert_to_list(request.form['nazov'], request.form['image'], request.form['alt'], request.form['date'], request.form['text'], 0)
-        else:
-            print(news_list)
-            print(news_list[len(news_list)-1][0]+1)
-            output = insert_to_list(request.form['nazov'], request.form['image'], request.form['alt'], request.form['date'], request.form['text'], news_list[0][0]+1)
-        news_list.insert(0, output)
-        all_news_list.append(output)
-        if len(news_list) > 5:
-            news_list.pop()
-        return ("Všetko prebehlo úspešne")
+        db = Database('/tmp/posts.db')
+
+        # Insert
+        db.execute('INSERT INTO posts (nazov, obrazok, alt, datum, text) VALUES (?, ?, ?, ?, ?)',
+           request.form['nazov'], request.form['image'], request.form['alt'],
+           request.form['date'], request.form['text'])
+           
+        return "Všetko prebehlo úspešne"
 
 @app.route('/oznamy')
 def oznamy():
@@ -174,8 +150,9 @@ def get_events():
 
 @app.route('/') 
 def index():
-    global news_list
-    return render_template('index.html', list = news_list)
+    db = Database('/tmp/posts.db')
+    list = db.read_table('posts', limit = 5)
+    return render_template('index.html', list = list)
 
 @app.route('/logs')
 def logs(): 
