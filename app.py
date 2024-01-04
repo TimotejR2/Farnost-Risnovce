@@ -1,11 +1,41 @@
 from flask import Flask, render_template, request, redirect, make_response
 from functions import *
+import os
 
 app = Flask(__name__)
 
-# Create database for all posts
-Database('/tmp/posts.db').delete()
-Database('/tmp/posts.db').create('config/posts_db_schema.sql')
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+
+# Configure the PostgreSQL database URL
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://default:NPV3x8mtnvGw@ep-rough-mode-91105827.us-east-1.postgres.vercel-storage.com:5432/verceldb"
+
+
+# Initialize SQLAlchemy
+db = SQLAlchemy(app)
+
+# Define your database model
+class Post(db.Model):
+    __tablename__ = 'posts'
+    id = db.Column(db.Integer, primary_key=True)
+    nazov = db.Column(db.Text)
+    obrazok = db.Column(db.Text)
+    alt = db.Column(db.Text)
+    datum = db.Column(db.Date)
+    text = db.Column(db.Text)
+    autor = db.Column(db.Text, default='Neznámy')
+
+# Create the table in the database
+db.create_all()
+
+
+# Set routes for databases
+POSTS_DB_PATH = '/tmp/posts.db'
+POSTS_DB = Database(POSTS_DB_PATH)
+
+# Create database for all posts and remove old
+POSTS_DB.create('config/posts_db_schema.sql')
 
 @app.route('/root', methods=['GET', 'POST'])
 def root():
@@ -106,7 +136,8 @@ def update():
         return (get_html('static/update.html'))
 
     if request.method == 'POST':
-        db = Database('/tmp/posts.db')
+        global POSTS_DB
+        db = POSTS_DB
 
         # Insert
         db.execute('INSERT INTO posts (nazov, obrazok, alt, datum, text) VALUES (?, ?, ?, ?, ?)',
