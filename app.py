@@ -1,41 +1,15 @@
 from flask import Flask, render_template, request, redirect, make_response
 from functions import *
 import os
+import psycopg2
 
 app = Flask(__name__)
-
-from flask_sqlalchemy import SQLAlchemy
-
-app = Flask(__name__)
-
-# Configure the PostgreSQL database URL
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://default:NPV3x8mtnvGw@ep-rough-mode-91105827.us-east-1.postgres.vercel-storage.com:5432/verceldb"
-
-
-# Initialize SQLAlchemy
-db = SQLAlchemy(app)
-
-# Define your database model
-class Post(db.Model):
-    __tablename__ = 'posts'
-    id = db.Column(db.Integer, primary_key=True)
-    nazov = db.Column(db.Text)
-    obrazok = db.Column(db.Text)
-    alt = db.Column(db.Text)
-    datum = db.Column(db.Date)
-    text = db.Column(db.Text)
-    autor = db.Column(db.Text, default='Neznámy')
-
-# Create the table in the database
-db.create_all()
-
 
 # Set routes for databases
-POSTS_DB_PATH = '/tmp/posts.db'
-POSTS_DB = Database(POSTS_DB_PATH)
+db = Database()
 
-# Create database for all posts and remove old
-POSTS_DB.create('config/posts_db_schema.sql')
+# Create database for all posts and remove old if needed
+db.create()
 
 @app.route('/root', methods=['GET', 'POST'])
 def root():
@@ -81,23 +55,9 @@ def authenticate():
 
 @app.route('/post')
 def post():
-    
-    global all_news_list
-    print("all_news_list", all_news_list)
-    try:
-        post_id = int(request.args.get('id'))
-        print ("id", post_id)
-    except ValueError:
-        return error(404)
-    event = None
-    for row in all_news_list:
-        print("row0",row[0])
-        if row[0] == post_id:
-            event = row
-            print("event",event)
-            break
-    if event is None:
-        print('none')
+    db=Database()
+    event = db.read_table(table_name='posts', limit=1, id=int(request.args.get('id')))
+    if event == []:
         return error(404)
     return render_template('post.html', text=event)
 
@@ -136,13 +96,11 @@ def update():
         return (get_html('static/update.html'))
 
     if request.method == 'POST':
-        global POSTS_DB
-        db = POSTS_DB
+        db = Database()
 
         # Insert
-        db.execute('INSERT INTO posts (nazov, obrazok, alt, datum, text) VALUES (?, ?, ?, ?, ?)',
-           request.form['nazov'], request.form['image'], request.form['alt'],
-           request.form['date'], request.form['text'])
+        db.execute_file('sql_scripts/insert_posts.sql',
+           (request.form['nazov'], request.form['image'], request.form['alt'],request.form['date'], request.form['text'], 'None'))
            
         return "Všetko prebehlo úspešne"
 
@@ -189,8 +147,9 @@ def get_events():
 
 @app.route('/') 
 def index():
-    db = Database('/tmp/posts.db')
-    list = db.read_table('posts', limit = 5)
+    db = Database()
+    list = db.read_table("posts", limit = 5)
+    print(list)
     return render_template('index.html', list = list)
 
 @app.route('/logs')
