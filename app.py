@@ -1,11 +1,15 @@
 from flask import Flask, render_template, request, redirect, make_response
 from functions import *
+import os
+import psycopg2
 
 app = Flask(__name__)
 
-# Create database for all posts
-Database('/tmp/posts.db').delete()
-Database('/tmp/posts.db').create('config/posts_db_schema.sql')
+# Set routes for databases
+db = Database()
+
+# Create database for all posts and remove old if needed
+db.create()
 
 @app.route('/root', methods=['GET', 'POST'])
 def root():
@@ -17,7 +21,7 @@ def root():
         'placeholder2': 'Value 2',
     }
     html = get_html('static/root.html', dynamic_values)
-    return html
+    return read_text_file()
 
 @app.route("/logout")
 def logout():
@@ -51,15 +55,9 @@ def authenticate():
 
 @app.route('/post')
 def post():
-    global all_news_list
-    try:
-        post_id = int(request.args.get('id'))
-    except ValueError:
-        return error(404)
-    event = next((row for row in all_news_list if int(row[0]) == post_id), None)
-
-    if event is None:
-        print('none')
+    db=Database()
+    event = db.read_table(table_name='posts', limit=1, id=int(request.args.get('id')))
+    if event == []:
         return error(404)
     return render_template('post.html', text=event)
 
@@ -98,12 +96,11 @@ def update():
         return (get_html('static/update.html'))
 
     if request.method == 'POST':
-        db = Database('/tmp/posts.db')
+        db = Database()
 
         # Insert
-        db.execute('INSERT INTO posts (nazov, obrazok, alt, datum, text) VALUES (?, ?, ?, ?, ?)',
-           request.form['nazov'], request.form['image'], request.form['alt'],
-           request.form['date'], request.form['text'])
+        db.execute_file('sql_scripts/insert_posts.sql',
+           (request.form['nazov'], request.form['image'], request.form['alt'],request.form['date'], request.form['text'], 'None'))
            
         return "Všetko prebehlo úspešne"
 
@@ -150,8 +147,9 @@ def get_events():
 
 @app.route('/') 
 def index():
-    db = Database('/tmp/posts.db')
-    list = db.read_table('posts', limit = 5)
+    db = Database()
+    list = db.read_table("posts", limit = 5)
+    print(list)
     return render_template('index.html', list = list)
 
 @app.route('/logs')

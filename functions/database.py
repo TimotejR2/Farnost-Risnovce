@@ -1,77 +1,49 @@
-import sqlite3
+import psycopg2
 import os
-
 from .other import read_file
-""" How to use example
-db = Database("my_database.db")
-schema = "CREATE TABLE example (id INTEGER PRIMARY KEY, name TEXT);"
-db.create(schema)
 
-db.execute("INSERT INTO example (name) VALUES ('John');")
-
-data = db.read_table("example")
-print(data)
-
-schema = db.schema()
-print(schema)
-db.delete()
-"""
-
+POSTGRES = read_file('config/postgres.sql')
+SCHEMA_PATH = 'config/schema.sql'
 
 class Database:
-    def __init__(self, db_name, tmp=True):
-        if db_name is None:
-            raise ValueError('No database name provided')
-        
-        if tmp:
-            self.db_path = os.path.join("/tmp", db_name)
+    def create(self):
+        self.execute_file(SCHEMA_PATH)
+
+    def read_table(self, table_name, limit=None, id=None):
+        if id == None:
+            id = ' <> -1'
         else:
-            self.db_path = db_name
+            id = '= '+ str(id)
+        sql_raw = read_file('sql_scripts/select.sql')
+        sql_query = sql_raw.format(table_name=table_name,id=id)
+         
+        output = self.execute(sql_query, (limit, ))
+        if len(output) <= 1:
+            output = output[0]
+        if not output:
+            output = []
+        return output
 
-    def create(self, config_path):
-        if os.path.exists(self.db_path):
-            print('Database exists')
-            return 'Database exists'
+    def execute_file(self, path, args=None):
+        sql_query = read_file(path)
+        self.execute(sql_query, args)
 
-        # Get schema from config file
-        schema = read_file(config_path)
-
-        conn = sqlite3.connect(self.db_path)
-        cursor = conn.cursor()
-        cursor.executescript(schema)
-        conn.commit()
-        conn.close()
-
-    def read_table(self, table, limit='NULL'):
-        if os.path.exists(self.db_path):
-            conn = sqlite3.connect(self.db_path)
-            cursor = conn.cursor()
-            cursor.execute(f"SELECT * FROM {table} LIMIT {limit};")
-            results = cursor.fetchall()
-            conn.close()
-            return results
-
-        raise FileNotFoundError('Database not found')
-
-    def execute(self, sql_command, *args):
-        conn = sqlite3.connect(self.db_path)
-        cursor = conn.cursor()
-        cursor.execute(sql_command, args)
-        conn.commit()
-        conn.close()
-        return True
-
-    def schema(self):
-        conn = sqlite3.connect(self.db_path)
-        cursor = conn.cursor()
-        cursor.execute("SELECT sql FROM sqlite_master WHERE type='table';")
-        schema = cursor.fetchall()
-        conn.close()
-        return schema
-
-    def delete(self):
+    def execute(self, sql_query, args=None):
+        conn = psycopg2.connect(POSTGRES)
+        cur = conn.cursor()
+        print('args', args)
+        cur.execute(sql_query, args)
         try:
-            os.remove(self.db_path)
-        except (FileNotFoundError, OSError):
-            raise ValueError('File could not be removed')
-
+            output = cur.fetchall()
+            print (output)
+        except psycopg2.ProgrammingError:
+            print('No output')
+            conn.commit()
+            cur.close()
+            conn.close()
+            return 
+            
+        conn.commit()
+        cur.close()
+        conn.close()
+        return output
