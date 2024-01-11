@@ -41,7 +41,7 @@ def authenticate():
         if login(request.form.get("password"), request.form.get("username")):
             # Set session cookie
             resp = redirect("/")
-            resp.set_cookie('session', get_session_from_csv(request.form.get("username")), max_age=15768000)
+            resp.set_cookie('session', generate_session(request.form.get("username")), max_age=15768000)
             return resp
 
         # If password is wrong, log error and track logs

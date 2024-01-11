@@ -31,13 +31,10 @@ class Database:
     def execute(self, sql_query, args=None):
         conn = psycopg2.connect(POSTGRES)
         cur = conn.cursor()
-        print('args', args)
         cur.execute(sql_query, args)
         try:
             output = cur.fetchall()
-            print (output)
         except psycopg2.ProgrammingError:
-            print('No output')
             conn.commit()
             cur.close()
             conn.close()
