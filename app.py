@@ -16,7 +16,7 @@ def log_error(code):
 
 @app.route('/root', methods=['GET', 'POST'])
 def root():
-    if not user_logged_in("root"):
+    if not authorised(0):
         return redirect("/login")
 
     dynamic_values = {
@@ -24,7 +24,7 @@ def root():
         'placeholder2': 'Value 2',
     }
     html = get_html('static/root.html', dynamic_values)
-    return read_text_file()
+    return html
 
 @app.route("/logout")
 def logout():
@@ -65,35 +65,9 @@ def post():
         return error(404)
     return render_template('post.html', text=event)
 
-@app.route('/export')
-def data():
-    if not user_logged_in("root"):
-        return redirect("/login")
-    global all_news_list
-    return all_news_list
-
-@app.route('/import', methods=['GET', 'POST'])
-def add():
-    if not user_logged_in("root"):
-        return redirect("/login")
-
-    if request.method == 'GET':
-        return get_html('static/add.html')
-
-    if request.method == 'POST':
-        global news_list, all_news_list
-        data = request.form['data']
-        try:
-            parsed_data = strtolist(data)
-        except ValueError:
-            return error_log(400)
-        news_list.extend(parsed_data)
-        all_news_list.append(parsed_data)
-        return 'Done'
-
 @app.route('/update', methods=['GET', 'POST'])
 def update():
-    if not user_logged_in():
+    if not authorised(1):
         return redirect("/login")
 
     if request.method == 'GET':
@@ -115,7 +89,7 @@ def oznamy():
 
 @app.route('/oznamy/update', methods=['POST', 'GET'])
 def get_events():
-    if not user_logged_in():
+    if not authorised(1):
         return redirect("/login")
     if request.method == 'GET':
         return render_template('oznamy_input.html')
@@ -155,13 +129,6 @@ def index():
     list = db.read_table("posts", limit = 5)
     return render_template('index.html', list = list)
 
-@app.route('/logs')
-def logs(): 
-    if not user_logged_in("root"):
-        return redirect("/login")
-    global log
-    return (log)
-
 @app.route('/homilie',  methods=["GET", "POST"])
 def homilie():
     if request.method == 'POST':
@@ -171,7 +138,7 @@ def homilie():
 
 @app.route('/homilie/update', methods=["GET", "POST"])
 def homilie_update():
-    if not user_logged_in("root"):
+    if not authorised(1):
         return redirect("/login")
 
     if request.method == 'GET':
