@@ -1,6 +1,6 @@
 import psycopg2
 import os
-from .other import read_file
+from ..utils import read_file
 
 POSTGRES = read_file('config/postgres.sql')
 SCHEMA_PATH = 'config/schema.sql'
@@ -26,7 +26,7 @@ class Database:
 
     def execute_file(self, path, args=None):
         sql_query = read_file(path)
-        self.execute(sql_query, args)
+        return self.execute(sql_query, args)
 
     def execute(self, sql_query, args=None):
         conn = psycopg2.connect(POSTGRES)

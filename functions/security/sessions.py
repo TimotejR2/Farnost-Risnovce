@@ -1,6 +1,6 @@
 import secrets
 from flask import request
-from .database import *
+from ..database import Database
 db = Database()
 
 def generate_session(username):

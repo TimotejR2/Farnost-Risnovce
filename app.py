@@ -11,6 +11,9 @@ db = Database()
 # Create database for all posts and remove old if needed
 db.create()
 
+def log_error(code):
+    return error(code)[1]
+
 @app.route('/root', methods=['GET', 'POST'])
 def root():
     if not user_logged_in("root"):
@@ -45,8 +48,9 @@ def authenticate():
             return resp
 
         # If password is wrong, log error and track logs
-        global wrong_attempts
-        wrong_attempts += 1
+        #TODO:
+        #global wrong_attempts
+        #wrong_attempts += 1
         return log_error(401)
 
     # If method is GET
@@ -149,7 +153,6 @@ def get_events():
 def index():
     db = Database()
     list = db.read_table("posts", limit = 5)
-    print(list)
     return render_template('index.html', list = list)
 
 @app.route('/logs')
