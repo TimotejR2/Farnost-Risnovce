@@ -11,9 +11,6 @@ db = Database()
 # Create database for all posts and remove old if needed
 db.create()
 
-def log_error(code):
-    return error(code)[1]
-
 @app.route("/logout")
 def logout():
     # Forget user by clearing session cookie
@@ -39,7 +36,7 @@ def authenticate():
         #TODO:
         #global wrong_attempts
         #wrong_attempts += 1
-        return log_error(401)
+        return error(401)
 
     # If method is GET
     else:
@@ -48,7 +45,10 @@ def authenticate():
 @app.route('/post')
 def post():
     db=Database()
-    event = db.read_table(table_name='posts', limit=1, id=int(request.args.get('id')))
+    try:
+        event = db.read_table(table_name='posts', limit=1, id=int(request.args.get('id')))
+    except (IndexError, ValueError):
+        return error(404)
     if event == []:
         return error(404)
     return render_template('post.html', text=event)
@@ -121,8 +121,18 @@ def index():
 @app.route('/homilie',  methods=["GET", "POST"])
 def homilie():
     if request.method == 'POST':
+        return request.form['date']
         return 'Na tejto funkcii sa ešte stále pracuje. Ďakujem za porozumenie.'
-    return render_template('homilie.html', list=homilie_data)
+
+    db = Database()
+    try:
+        list = db.read_table("homilie", limit = 3)
+    except IndexError:
+        return error(404)
+    if len(list) == 1:
+        list = [list]
+    print(list)
+    return render_template('homilie.html', list=list)
 
 @app.route('/homilie/update', methods=["GET", "POST"])
 def homilie_update():
