@@ -18,6 +18,7 @@ h1{
   overflow-x: hidden;
   padding-top: 60px;
   transition: 0.5s;
+  background-position: right center;
 }
   
   /* The navigation menu links */

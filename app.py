@@ -14,18 +14,6 @@ db.create()
 def log_error(code):
     return error(code)[1]
 
-@app.route('/root', methods=['GET', 'POST'])
-def root():
-    if not authorised(0):
-        return redirect("/login")
-
-    dynamic_values = {
-        'placeholder1': 'Default Value',
-        'placeholder2': 'Value 2',
-    }
-    html = get_html('static/root.html', dynamic_values)
-    return html
-
 @app.route("/logout")
 def logout():
     # Forget user by clearing session cookie
@@ -84,11 +72,12 @@ def update():
 
 @app.route('/oznamy')
 def oznamy():
-    global oznamy_list
-    return render_template('oznamy.html', list = oznamy_list)
+    return 'Not done'
+    #return render_template('oznamy.html', list = oznamy_list)
 
 @app.route('/oznamy/update', methods=['POST', 'GET'])
 def get_events():
+    return 'Not done'
     if not authorised(1):
         return redirect("/login")
     if request.method == 'GET':
@@ -133,7 +122,6 @@ def index():
 def homilie():
     if request.method == 'POST':
         return 'Na tejto funkcii sa ešte stále pracuje. Ďakujem za porozumenie.'
-    global homilie_data
     return render_template('homilie.html', list=homilie_data)
 
 @app.route('/homilie/update', methods=["GET", "POST"])
@@ -145,13 +133,12 @@ def homilie_update():
         return get_html('static/homilie_input.html')
 
     elif request.method == 'POST':
-        global homilie_data
-        list = []
-        list.append(request.form['datum'])
-        list.append(request.form['citanie'])
-        list.append(request.form['nazov'])
-        list.append(request.form['text'])
-        homilie_data.append(list)
+        db = Database()
+
+        # Insert
+        db.execute_file('sql_scripts/insert_homilie.sql',
+           (request.form['datum'], request.form['citanie'], request.form['nazov'],request.form['text']))
+           
         return "Všetko prebehlo úspešne"
 
 #TODO:
