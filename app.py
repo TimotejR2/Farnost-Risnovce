@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, make_response
 from functions import *
 import os
 import psycopg2
+from datetime import timedelta, datetime
 
 app = Flask(__name__)
 
@@ -72,12 +73,14 @@ def update():
 
 @app.route('/oznamy')
 def oznamy():
-    return 'Not done'
-    #return render_template('oznamy.html', list = oznamy_list)
+    #FIXME:
+    db = Database()
+    oznamy_list = db.execute('SELECT list FROM oznamy ORDER BY oznamy_id DESC LIMIT 1;')
+    oznamy_list = str_to_list(oznamy_list)
+    return render_template('oznamy.html', oznamy_list = oznamy_list)
 
 @app.route('/oznamy/update', methods=['POST', 'GET'])
 def get_events():
-    return 'Not done'
     if not authorised(1):
         return redirect("/login")
     if request.method == 'GET':
@@ -93,7 +96,6 @@ def get_events():
                 days_submited = i
                 break
             
-        global oznamy_list
         oznamy_list = []
         events_in_day = 5
         oznamy_list.append(request.form['datum'])
@@ -107,9 +109,11 @@ def get_events():
                 text2 = request.form['blok'+str(i)+'-text'+str(j)+'-2']
                 time = request.form['blok'+str(i)+'-cas'+str(j)]
                 var.append([text1, time, text2])
-            var.append(request.form['datum'+str(i)])
+            var.append(convert_date(request.form['datum'+str(i)]))
             oznamy_list.append(var)
         oznamy_list.append(request.form['notes'])
+        db = Database()
+        db.execute('INSERT INTO oznamy (list) VALUES (%s);', (str(oznamy_list), ) )
         return str(oznamy_list)
 
 @app.route('/') 
@@ -121,17 +125,19 @@ def index():
 @app.route('/homilie',  methods=["GET", "POST"])
 def homilie():
     if request.method == 'POST':
-        return request.form['date']
-        return 'Na tejto funkcii sa ešte stále pracuje. Ďakujem za porozumenie.'
+        datum = request.form['date']
+        datum = datetime.strptime(datum, '%Y-%m-%d')
+        db = Database
+        datum1 = datum + timedelta(days=3000)
+        datum2 = datum - timedelta(days=3000)
+        list = db.execute('SELECT * FROM homilie WHERE datum < %s::timestamp AND datum > %s::timestamp', (str(datum1), str(datum2)))
+        return render_template('homilie.html', list=list)
 
     db = Database()
     try:
         list = db.read_table("homilie", limit = 3)
     except IndexError:
         return error(404)
-    if len(list) == 1:
-        list = [list]
-    print(list)
     return render_template('homilie.html', list=list)
 
 @app.route('/homilie/update', methods=["GET", "POST"])

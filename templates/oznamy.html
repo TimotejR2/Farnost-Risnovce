@@ -37,7 +37,8 @@
   }
 
 </style>
-<h1>Oznamy</h1>
+<h1>Oznamy</h1>\
+{% for list in oznamy_list %}
 <div class="block">
   <div>
     <h2>Oznamy na {{ list[0] }}</h2>
@@ -62,5 +63,6 @@
   </div>
   <pre>{{ list[-1] }}</pre>
 </div>
+{% endfor %}
 
 {% endblock %}

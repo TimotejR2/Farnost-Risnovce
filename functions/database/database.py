@@ -29,9 +29,15 @@ class Database:
         return self.execute(sql_query, args)
 
     def execute(self, sql_query, args=None):
+        print('args', args, 'sql_query', sql_query)
         conn = psycopg2.connect(POSTGRES)
         cur = conn.cursor()
-        cur.execute(sql_query, args)
+        
+        if args is not None:
+            cur.execute(sql_query, args)
+        else:
+            cur.execute(sql_query)
+
         try:
             output = cur.fetchall()
         except psycopg2.ProgrammingError:
@@ -39,7 +45,7 @@ class Database:
             cur.close()
             conn.close()
             return 
-            
+
         conn.commit()
         cur.close()
         conn.close()

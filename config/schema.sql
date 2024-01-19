@@ -30,3 +30,8 @@ CREATE TABLE IF NOT EXISTS homilie (
     nazov TEXT,
     text TEXT
 ); 
+
+CREATE TABLE IF NOT EXISTS oznamy (
+    oznamy_id SERIAL PRIMARY KEY,
+    list TEXT
+);

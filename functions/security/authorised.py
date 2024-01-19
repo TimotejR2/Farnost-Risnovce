@@ -28,7 +28,7 @@ def session_valid():
     session = request.cookies.get("session")
     if not session:
         return False
-    id_and_ip = db.execute_file('sql_scripts/get_id_and_ip_from_session.sql', (session, datetime.now()))[0]
+    id_and_ip = db.execute_file('sql_scripts/get_id_and_ip_from_session.sql', (session, datetime.now()))
     if id_and_ip == []:
         return False
-    return id_and_ip
+    return id_and_ip[0]

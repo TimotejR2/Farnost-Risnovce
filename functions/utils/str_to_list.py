@@ -1,21 +1,16 @@
 from ast import literal_eval
 
-from ..security import get_data
+def str_to_list(string):
+    result_list = []
 
-def strtolist(input_string):
-    """
-    Converts a string representation of nested lists to a list of lists.
+    for data_tuple in string:
+        # Extract the string from the tuple
+        string_representation = data_tuple[0]
 
-    Args:
-    - input_string (str): String representation of nested lists.
+        # Convert the string representation to a list
+        converted_list = literal_eval(string_representation)
 
-    Returns:
-    - list of lists: Converted nested lists.
-    """
-    list_strings = input_string.strip('[ ]').split('],[')
-    lists = []
-    for row_str in list_strings:
-        row = literal_eval('[' + row_str + ']')
-        row = [str(elem).strip(" '") for elem in row]
-        lists.append(row)
-    return lists
+        # Append the converted list to the result list
+        result_list.append(converted_list)
+
+    return(result_list)
