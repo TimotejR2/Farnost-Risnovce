@@ -125,6 +125,7 @@ def index():
 @app.route('/homilie',  methods=["GET", "POST"])
 def homilie():
     if request.method == 'POST':
+        # FIXME:
         datum = request.form['date']
         datum = datetime.strptime(datum, '%Y-%m-%d')
         db = Database
