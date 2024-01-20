@@ -29,7 +29,6 @@ class Database:
         return self.execute(sql_query, args)
 
     def execute(self, sql_query, args=None):
-        print('args', args, 'sql_query', sql_query)
         conn = psycopg2.connect(POSTGRES)
         cur = conn.cursor()
         
