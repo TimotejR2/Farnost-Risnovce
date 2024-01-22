@@ -35,3 +35,8 @@ CREATE TABLE IF NOT EXISTS oznamy (
     oznamy_id SERIAL PRIMARY KEY,
     list TEXT
 );
+
+CREATE TABLE IF NOT EXISTS wrong (
+    id SERIAL PRIMARY KEY,
+    cas TIMESTAMP
+);

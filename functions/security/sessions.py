@@ -7,7 +7,7 @@ def generate_session(username):
     session = secrets.token_hex(16)
     valid = session_valid_date()
     ip_address = request.remote_addr
-    db.execute_file('sql_scripts/insert_session.sql', (username, session, valid, ip_address))
+    db.execute_file('sql_scripts/security/insert_session.sql', (username, session, valid, ip_address))
     return session
 
 from datetime import datetime, timedelta

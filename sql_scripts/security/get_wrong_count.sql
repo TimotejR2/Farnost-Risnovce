@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM wrong WHERE cas > %s;

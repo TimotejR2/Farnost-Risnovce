@@ -12,20 +12,16 @@ def error(code):
     Returns:
     - make_response or list: Response(s) corresponding to the given HTTP status code.
     """
-    if code == 404:
-        return make_response(get_html.get_html('static/404.html'), code)
-    elif code == 422:
-        return make_response('Požiadavka nemohla byť spracovaná. Obsahuje neplatné alebo chýbajúce informácie, ktoré server nedokázal spracovať.', code)
-    elif code in [400, 401, 403]:
-        # TODO: Pridanie systemu na sledovanie neuspesnych pokusov
 
-        error_messages = {
-            400: 'Error 400. Ak sú údaje správne zadané, kontaktujte správcu emailom na timotej.ruzicka@gmail.com',
-            401: 'Skontrolujte heslo.',
-            403: 'Prístup odmietnutý.'
-        }
+    error_messages = {
+        400: 'Chybná žiadosť.',
+        401: 'Neoprávnený prístup. Skontrolujte svoje heslo.',
+        403: 'Zakázaný prístup. Prístup zamietnutý.',
+        404: 'Stránka nenájdená.',
+        422: 'Žiadosť nemohla byť spracovaná. Obsahuje neplatné alebo chýbajúce informácie, ktoré server nedokázal spracovať.',
+        429: 'Príliš veľa pokusov o prihlásenie. Skúste to znovu neskôr.'
+    }
 
-        responses = (make_response(error_messages[code], code))
-        return responses
+    default_message = 'Došlo k chybe.'
 
-    return []
+    return make_response(get_html.get_html(f'static/{code}.html') if code == 404 else error_messages.get(code, default_message), code)

@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect, make_response
-from functions import *
 import os
-import psycopg2
 from datetime import timedelta, datetime
+
+from functions import *
+from config.config import HOMILIE_LIMIT, POSTS_LIMIT, OZNAMY_LIMIT, DELAY_BETWEEN_WRONG_LOGINS, SESSION_AGE_LIMIT, HOMILIE_SEARCH_DAYS
+
 
 app = Flask(__name__)
 
@@ -21,6 +23,11 @@ def logout():
 
 @app.route("/login", methods=["GET", "POST"])
 def authenticate():
+    # Check if there were not too many login attemps in past 3 days
+    wrong = db.execute_file('sql_scripts/security/get_wrong_count.sql', (datetime.now() - timedelta(days=DELAY_BETWEEN_WRONG_LOGINS),))[0][0]
+    if wrong > 2:
+        return error(429)
+    
     if request.method == "POST":
         # Ensure username and password were submitted
         if not request.form.get("username") or not request.form.get("password"):
@@ -30,13 +37,11 @@ def authenticate():
         if login(request.form.get("password"), request.form.get("username")):
             # Set session cookie
             resp = redirect("/")
-            resp.set_cookie('session', generate_session(request.form.get("username")), max_age=15768000)
+            resp.set_cookie('session', generate_session(request.form.get("username")), max_age=SESSION_AGE_LIMIT)
             return resp
 
-        # If password is wrong, log error and track logs
-        #TODO:
-        #global wrong_attempts
-        #wrong_attempts += 1
+        # If password is wrong, save it in db
+        db.execute('INSERT INTO wrong (cas) VALUES (%s)', (datetime.now(), ))
         return error(401)
 
     # If method is GET
@@ -45,7 +50,6 @@ def authenticate():
 
 @app.route('/post')
 def post():
-    db=Database()
     try:
         event = db.read_table(table_name='posts', limit=1, id=int(request.args.get('id')))
     except (IndexError, ValueError):
@@ -63,19 +67,15 @@ def update():
         return (get_html('static/update.html'))
 
     if request.method == 'POST':
-        db = Database()
-
         # Insert
-        db.execute_file('sql_scripts/insert_posts.sql',
+        db.execute_file('sql_scripts/user_insert/insert_posts.sql',
            (request.form['nazov'], request.form['image'], request.form['alt'],request.form['date'], request.form['text'], 'None'))
            
         return "Všetko prebehlo úspešne"
 
 @app.route('/oznamy')
 def oznamy():
-    #FIXME:
-    db = Database()
-    oznamy_list = db.execute('SELECT list FROM oznamy ORDER BY oznamy_id DESC LIMIT 1;')
+    oznamy_list = db.execute_file('sql_scripts/select/oznamy.sql', (OZNAMY_LIMIT, ))
     oznamy_list = str_to_list(oznamy_list)
     return render_template('oznamy.html', oznamy_list = oznamy_list)
 
@@ -83,6 +83,7 @@ def oznamy():
 def get_events():
     if not authorised(1):
         return redirect("/login")
+
     if request.method == 'GET':
         return render_template('oznamy_input.html')
 
@@ -96,49 +97,30 @@ def get_events():
                 days_submited = i
                 break
             
-        oznamy_list = []
-        events_in_day = 5
-        oznamy_list.append(request.form['datum'])
-        for i in range (days_submited):
-            var = [] # All events in day
-            for j in range (events_in_day):
-                if request.form['blok'+str(i)+'-cas'+str(j)] == "":
-                    break
-                
-                text1 = request.form['blok'+str(i)+'-text'+str(j)+'-1']
-                text2 = request.form['blok'+str(i)+'-text'+str(j)+'-2']
-                time = request.form['blok'+str(i)+'-cas'+str(j)]
-                var.append([text1, time, text2])
-            var.append(convert_date(request.form['datum'+str(i)]))
-            oznamy_list.append(var)
-        oznamy_list.append(request.form['notes'])
-        db = Database()
+        oznamy_list = make_oznamy_list()
         db.execute('INSERT INTO oznamy (list) VALUES (%s);', (str(oznamy_list), ) )
         return str(oznamy_list)
 
 @app.route('/') 
 def index():
-    db = Database()
-    list = db.read_table("posts", limit = 5)
+    list = db.read_table("posts", limit = POSTS_LIMIT)
     return render_template('index.html', list = list)
 
 @app.route('/homilie',  methods=["GET", "POST"])
 def homilie():
     if request.method == 'POST':
-        # FIXME:
         datum = request.form['date']
+        if datum == '':
+            return error(422)
         datum = datetime.strptime(datum, '%Y-%m-%d')
-        db = Database
-        datum1 = datum + timedelta(days=3000)
-        datum2 = datum - timedelta(days=3000)
+        datum1 = datum + timedelta(days=HOMILIE_SEARCH_DAYS)
+        datum2 = datum - timedelta(days=HOMILIE_SEARCH_DAYS)
         list = db.execute('SELECT * FROM homilie WHERE datum < %s::timestamp AND datum > %s::timestamp', (str(datum1), str(datum2)))
+        if len(list) == 0:
+            return error(404)
         return render_template('homilie.html', list=list)
 
-    db = Database()
-    try:
-        list = db.read_table("homilie", limit = 3)
-    except IndexError:
-        return error(404)
+    list = db.read_table("homilie", limit = HOMILIE_LIMIT)
     return render_template('homilie.html', list=list)
 
 @app.route('/homilie/update', methods=["GET", "POST"])
@@ -150,15 +132,12 @@ def homilie_update():
         return get_html('static/homilie_input.html')
 
     elif request.method == 'POST':
-        db = Database()
-
         # Insert
-        db.execute_file('sql_scripts/insert_homilie.sql',
+        db.execute_file('sql_scripts/user_insert/insert_homilie.sql',
            (request.form['datum'], request.form['citanie'], request.form['nazov'],request.form['text']))
            
         return "Všetko prebehlo úspešne"
 
-#TODO:
 @app.route('/historia')
 def historia():
     return render_template('historia.html')

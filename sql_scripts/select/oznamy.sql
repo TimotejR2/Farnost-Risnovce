@@ -1,0 +1,1 @@
+SELECT list FROM oznamy ORDER BY oznamy_id DESC LIMIT (%s);

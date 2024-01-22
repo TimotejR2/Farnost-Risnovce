@@ -14,7 +14,7 @@ class Database:
             id = ' <> -1'
         else:
             id = '= '+ str(id)
-        sql_raw = read_file('sql_scripts/select.sql')
+        sql_raw = read_file('sql_scripts/select/select.sql')
         sql_query = sql_raw.format(table_name=table_name,id=id)
          
         output = self.execute(sql_query, (limit, ))
