@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS posts (
     alt TEXT,
     datum TEXT,
     text TEXT,
-    autor TEXT DEFAULT 'Neznámy'
+    oblast INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS sessions (

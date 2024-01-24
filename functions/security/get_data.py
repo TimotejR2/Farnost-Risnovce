@@ -1,6 +1,7 @@
 from flask import request
+from typing import Dict, Any
 
-def get_data(code):
+def get_data(code: int) -> Dict[str, Any]:
     """
     Gathers request-related data.
 

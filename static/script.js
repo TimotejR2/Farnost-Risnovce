@@ -48,4 +48,10 @@ function closeNav() {
   document.getElementById("header").style.maxHeight = '120px';
 }
 
+function displayMenu(submenu) {
+  document.getElementById(submenu).style.display = 'block';
+}
+function hideMenu(submenu) {
+  document.getElementById(submenu).style.display = 'none';
+}
 
