@@ -150,6 +150,10 @@ def homilie_update():
 def historia():
     return render_template('historia.html')
 
+@app.route('/monografie')
+def monografie():
+    return render_template('monografie.html')
+
 @app.route('/kontakt')
 def kontakt():
     return render_template('kontakt.html')

@@ -1,39 +1,40 @@
-var mainElement;
+// Initialize main and header elements
+var mainElement
 var headerElement
-// Open sidenav if screen widtch is more that 700
-window.onload = function(){
-  mainElement = document.getElementById('main');
-  headerElement = document.getElementById("header");
-    if (window.screen.availWidth > 700){
-      openNav();
-    }
+
+// Open sidenav if screen width is more than 700, get main and header elements
+window.onload = function() {
+  if (window.screen.availWidth > 700) {
+    mainElement = document.getElementById('main');
+    headerElement = document.getElementById("header");
+    openNav();
+  }
 }
 
+// Highlight active link based on current path
 document.addEventListener("DOMContentLoaded", function() {
   var links = document.querySelectorAll('.nav-link'); // Select all links
-  
+  var currentPath = window.location.pathname; // Get current path
+
   links.forEach(function(link) {
-      link.addEventListener('click', function(event) {
-          removeActiveClass(); // Remove 'active' class from all links
-          event.target.classList.add('active'); // Add 'active' class to the clicked link
-      });
-      
-      var currentPath = window.location.pathname; // Get current path
-      if (link.getAttribute('href') === currentPath) {
-          link.classList.add('active'); // Add 'active' class to the link with the current path
-      }
+    var id = '/' + link.id;
+    console.log(id);
+
+    if (id === currentPath) {
+      link.classList.add('active'); // Add 'active' class to the link with the current path
+    }
   });
 });
 
+// Remove 'active' class from all links
 function removeActiveClass() {
-  var links = document.querySelectorAll('.nav-link'); // Select all links
-  
+  var links = document.querySelectorAll('.nav-link');
   links.forEach(function(link) {
-      link.classList.remove('active'); // Remove 'active' class from all links
+    link.classList.remove('active');
   });
 }
 
-
+// Open sidenav
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
   mainElement.style.marginLeft = '250px';
@@ -41,6 +42,7 @@ function openNav() {
   document.getElementById("header").style.maxHeight = '0';
 }
 
+// Close sidenav
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
   mainElement.style.marginLeft = '0';
@@ -48,10 +50,41 @@ function closeNav() {
   document.getElementById("header").style.maxHeight = '120px';
 }
 
+// Display submenu
 function displayMenu(submenu) {
   document.getElementById(submenu).style.display = 'block';
 }
-function hideMenu(submenu) {
-  document.getElementById(submenu).style.display = 'none';
+
+// Hide submenu based on timeout
+function hideMenu(submenu, menu) {
+  setTimeout(function() {
+    if (!document.querySelector(`#${submenu}:hover`) && !document.querySelector(`#${menu}:hover`)) {
+      document.getElementById(submenu).style.display = 'none';
+    }
+  }, 100);
 }
 
+// Toggle menu visibility based on cursor support
+let isMenuVisible = false;
+
+function toggleMenu(menuId) {
+  if (isCursorSupported()) {
+    // Redirect to /menuId if cursor is supported
+    menuId = menuId.replace('_submenu', '');
+
+    if (menuId === 'domov') {
+      menuId = '';
+    }
+
+    window.location.href = '/' + menuId;
+  } else {
+    // Toggle menu visibility for devices without cursor
+    isMenuVisible ? hideMenu(menuId) : displayMenu(menuId);
+    isMenuVisible = !isMenuVisible;
+  }
+}
+
+// Check if the device supports a cursor (e.g., mouse)
+function isCursorSupported() {
+  return window.matchMedia('(pointer: fine)').matches;
+}
