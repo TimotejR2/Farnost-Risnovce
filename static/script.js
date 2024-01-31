@@ -14,11 +14,13 @@ window.onload = function() {
 // Highlight active link based on current path
 document.addEventListener("DOMContentLoaded", function() {
   var links = document.querySelectorAll('.nav-link'); // Select all links
-  var currentPath = window.location.pathname; // Get current path
+  var currentPath = window.location.pathname; // Get current path\
+
+  currentPath = currentPath.split('/').filter((_, index) => index < 2).join('/');
+  console.log(currentPath)
 
   links.forEach(function(link) {
     var id = '/' + link.id;
-    console.log(id);
 
     if (id === currentPath) {
       link.classList.add('active'); // Add 'active' class to the link with the current path

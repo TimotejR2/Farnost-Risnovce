@@ -156,7 +156,7 @@ def monografie():
 
 @app.route('/publikacie/ucebnematerialy')
 def ucebm():
-    return error(404)
+    return render_template('ucebne_materialy.html')
 
 @app.route('/kontakt')
 def kontakt():
