@@ -77,8 +77,17 @@ def update():
 
     if request.method == 'POST':
         # Insert submited data to database
+        if not request.form['oblast']:
+            return error(422)
+        
+        # If image is not url, search for it in images folder
+        if not '/' in request.form['image']:
+            image = '/static/images/' + request.form['image']
+        else:
+            image = request.form['image']
+        
         db.execute_file('sql_scripts/user_insert/insert_posts.sql',
-           (request.form['nazov'], request.form['image'], request.form['alt'],request.form['date'], request.form['text'], request.form['oblast']))
+           (request.form['nazov'], image, request.form['alt'],request.form['date'], request.form['text'], request.form['oblast']))
            
         return "Všetko prebehlo úspešne"
 
