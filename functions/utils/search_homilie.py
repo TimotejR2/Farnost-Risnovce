@@ -2,7 +2,7 @@ from flask import request, render_template
 from datetime import datetime, timedelta
 from config.config import HOMILIE_SEARCH_DAYS
 from .error import error
-from ..database.database import Database  # Import Database class locally
+
 
 def search_homilie():
     """
@@ -15,6 +15,7 @@ def search_homilie():
     error(422): If no date is provided in the form.
     error(404): If no homilies are found within the specified date range.
     """
+    from ..database.database import Database
     db = Database()
 
     # Get the date from the form
