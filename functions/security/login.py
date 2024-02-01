@@ -15,5 +15,5 @@ def login(password: str, user: str) -> bool:
     - bool: True if login is successful, False otherwise.
     """
     hashed_password = hash_password.hash_password(password)
-    login_successful = bool(db.execute_file('sql_scripts/security/compare_hash.sql', (user, hashed_password)))
+    login_successful = db.execute_file('sql_scripts/security/compare_hash.sql', (user, hashed_password))[0][0]
     return login_successful
