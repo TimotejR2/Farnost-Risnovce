@@ -3,7 +3,6 @@ from flask import request
 from ..database import Database
 from datetime import datetime, timedelta
 from config.config import SESSION_AGE_LIMIT
-#FIXME: use config session valid date
 db = Database()
 
 def generate_session(username: str) -> str:

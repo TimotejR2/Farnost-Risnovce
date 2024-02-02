@@ -1,5 +1,4 @@
 from flask import make_response
-from ..security import get_data
 from . import get_html
 
 def error(code):
