@@ -1,0 +1,545 @@
+{ "events":[
+    {
+      "start_date": {
+        "year": 1332
+      },
+      "end_date": {
+        "year": 1337
+      },
+      "text": {
+        "headline": "Mikuláš, plebánus de Richen",
+        "text": ""
+      }
+    },
+    {
+      "start_date": {
+        "year": 1699,
+        "month": 8,
+        "day": 18
+      },
+      "end_date": {
+        "year": 1703,
+        "month": 4
+      },
+      "text": {
+        "headline": "Juraj Mráz",
+        "text": "Ako chovanec seminára sv. Štefana sa v r. 1695 stal bakalárom, v r. 1696 magistrom filozofie. Teológiu ukončil v r. 1698 po treťom ročníku. 21. septembra toho roka bol vysvätený za kňaza, 18. augusta 1699 bol ustanovený za farára v Rišňovciach, kde 14. septembra 1700 vykonal Pavol Ziči vizitáciu. 28. marca 1703 bol ustanovený v Krakovanoch, kde zomrel vo veku 34 rokov. "
+      }
+    },
+    {
+      "start_date": {
+        "year": 1703,
+        "month": 4,
+        "day": 24
+      },
+      "end_date": {
+        "year": 1709,
+        "month": 3
+      },
+      "text": {
+        "headline": "Ján Mihalovič",
+        "text": "Chynorančan. Ako chovanec seminára sv. Štefana sa stal v r. 1699 bakalárom, v r. 1700 magistrom filozofie. Teológiu absolvoval v tom istom seminári a 18. marca 1703 bol vysvätený za kňaza. 24. apríla toho roka bol ustanovený za farára v Alsó-Récsény, 16. marca 1709 v Bošanoch. Od 11. apríla toho roka bol v Kovarciach, kde pracoval až do r. 1723."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1709,
+        "month": 3,
+        "day": 19
+      },
+      "end_date": {
+        "year": 1710
+      },
+      "text": {
+        "headline": "Juraj Fábry",
+        "text": "Vieme o ňom len toľko, že 19. marca 1709 bol ustanovený za farára v Rišňovciach, odtiaľ prešiel 8. mája 1710 do Starého Tekova, kde v r. 1713 vykonal vizitáciu archidiakon Ján Bublovič, v ktorej o farárovi zaznačil, že má 35 rokov. V duchovnej správe päť rokov. Tam pracoval až do r. 1730."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1710,
+        "month": 5,
+        "day": 8
+      },
+      "end_date": {
+        "year": 1713,
+        "month": 3,
+        "day": 15
+      },
+      "text": {
+        "headline": "Andrej Alojz Štetina",
+        "text": "8. mája 1710 bol ustanovený za farára v Rišňovciach. V r. 1713 vykonal vizitáciu Pavol Ziči, ktorý o farárovi zaznamenal: Melichar a Adam Sándorovci žiadali u generálneho vikára jeho preloženie do do Križovian nad Dudváhom, avšak farníci svedomito priznali, že nevedia o ňom nič zlé, v čase moru ako dobrý pastier nikdy neopustil svoje ovečky, bolo to uzavreté tak, že ho odstránili, pretože chcel mať späť role cirkevné i farské v lese Kulske. 25. marca 1713 bol ustanovený v Križovanoch nad Dudváhom, potom 26. apríla 1715 v Slovenskom Grobe. Od 4. októbra 1719 bol v Šúrovciach. Ako taký sa 26. apríla 1720 podpísal na istý list, opatrený pečaťou konzistória a dožadoval sa podpory. V tom istom roku sa zriekol farnosti a býval v kňazskom domove v Trnave, kde aj zomrel."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1713,
+        "month": 7,
+        "day": 31
+      },
+      "end_date": {
+        "year": 1715,
+        "month": 11
+      },
+      "text": {
+        "headline": "Juraj Muzny",
+        "text": " Pochádzal z Moravy. Bol prijatý do Ostrihomskej arcidiecézy. 31. júla 1713 bol ustanovený za farára v Rišňovciach, kde 14. novembra 1715 dostal nástupcu."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1715,
+        "month": 11,
+        "day": 14
+      },
+      "end_date": {
+        "year": 1723,
+        "month": 2
+      },
+      "text": {
+        "headline": "Ján Gunda",
+        "text": " Študoval na viedenskom Pázmáneu. 29. apríla 1700 bol ustanovený za farára v Rimóci. 8. júna 1705 bol ustanovený v Biskupiciach a filiálkach, čím bol dočasne aj vo Fiľakove, ktorému chýbal chrám. 14. apríla 1706 bol znova ustanovený v Rimóci, kde sa v r. 1708 postaral o opravu kostola, ako to hlása nápis na stene. Od 29. mája 1713 pôsobil v Jelšovciach a Výčapoch-Opatovciach. V tom roku vykonal vizitáciu Pavol Ziči. V tom istom roku šiel do Vadkertu, kde začal písať matriky. 14. novembra 1715 bol ustanovený do Rišňoviec, aj tu začal písať matriky. Od 23. januára 1717 pôsobil vo Veľkom Záluží v Nitrianskej župe, potom od 19. mája 1719 v Cséve v Ostrihomskej župe, kde pracoval až do júla toho roka."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1723,
+        "month": 2,
+        "day": 9
+      },
+      "end_date": {
+        "year": 1724,
+        "month": 5
+      },
+      "text": {
+        "headline": "Peter Struharovics",
+        "text": " 24. decembra 1716 bol ustanovený za farára v Suchej nad Parnou, kde začal písať matriky do rubrík a písal ich až do 23. novembra 1722. Nato bol 9. februára 1723 bol ustanovený v Rišňovciach, kde bol činný až do mája 1724."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1724,
+        "month": 3,
+        "day": 24
+      },
+      "end_date": {
+        "year": 1724,
+        "month": 3
+      },
+      "text": {
+        "headline": "Juraj Chynoriansky",
+        "text": " Teológiu študoval v seminári sv. Štefana kráľa, 18. marca 1666 bol vysvätený za kňaza. 16. júla 1675 bol ustanovený za farára v Križovanoch nad Dudváhom, kde pracoval až do r. 1693. 8. februára 1719 bol ustanovený za farára mestečka Turany v martinskom okrese, odtiaľ prešiel 24. marca 1724 do Rišňoviec v nitrianskom okrese, kde potom zomrel."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1724,
+        "month": 5,
+        "day": 6
+      },
+      "end_date": {
+        "year": 1740,
+        "month": 6
+      },
+      "text": {
+        "headline": "Matej Radiczky",
+        "text": " Teológiu ukončil ročníkom morálnej teológie. Ako trnavský diakon u Františka Raithina bol vysvätený za kňaza vysvätený vo Viedni. Z dôvodu prevládajúcich nepokojov v Uhorsku pôsobil ako kaplán v Hradišti na Morave. Nato sa stal tri roky farárom v Turanoch. 22. februára 1713 bol ustanovený za farára v Sedliackej Dubovej. V r. 1721 za Imricha Zičiho sa konalo vyšetrovanie proti nekatolíkom. Od 6. mája 1724 bol v Rišňovciach, kde v r. 1731 vykonal vizitáciu František Ziči."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1740,
+        "month": 3,
+        "day": 11
+      },
+      "end_date": {
+        "year": 1746,
+        "month": 6
+      },
+      "text": {
+        "headline": "Emericus Daniel Alexius Visnyovszky",
+        "text": "Životopis ešte nieje preložený. Zobraziť originál na https://www.knihydominikani.sk/hlavna_nemethy_26?pcmeno=visnyovszkyemericus1728"
+      }
+    },
+    {
+      "start_date": {
+        "year": 1746,
+        "month": 6,
+        "day": 27
+      },
+      "end_date": {
+        "year": 1755,
+        "month": 7
+      },
+      "text": {
+        "headline": "Štefan Kačkovič",
+        "text": " Teológiu absolvoval po treťom ročníku v seminári Panny Márie v r. 1727. Už 21. decembra 1726 bol vysvätený za kňaza. 22. januára 1729 bol ustanovený za farára v Doľanoch. Tam v r. 1731 vykonal vizitáciu Ján Jelenfy, ktorý o farárovi zaznamenal: „29 ročný, v duchovnej správe 6 rokov. Nemohol byť v nijakých ťažkostiach obžalovaný, pretože do protokolárnej správy vizitátor uviedol, že po danom otcovskom napomenutí nevidel nič na nápravu.“ V r. 1735 dostal nástupcu. 21. mája 1744 bol ustanovený v Ružindole. Nato 27. júna 1746 v Rišňovciach. V r. 1752 žalovali naňho, že si nárokuje veľkú štólu. V r. 1755 odišiel z farnosti, zanechajúc kostol v zúboženom stave. 9. februára 1759 z rozhodnutia vikariátu prijal Semerovo, kde pracoval až do r. 1760. Dostal podagru, vrátil sa do kňazského domova, kde zomrel."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1755,
+        "month": 7,
+        "day": 17
+      },
+      "end_date": {
+        "year": 1757,
+        "month": 11
+      },
+      "text": {
+        "headline": "Ján Janoška",
+        "text": " 28. augusta 1750 bol prijatý do alumnátu budínskeho Széchényiana. 19. mája sa stal kaplánom v Malých Kršteňanoch, odtiaľ 11. júla 1754 v Starej Turej. 17. júla 1755 bol ustanovený za farára v Rišňovciach. Odtiaľ prešiel 2. novembra 1757 do Kovariec, kde aj zomrel."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1757,
+        "month": 11,
+        "day": 18
+      },
+      "end_date": {
+        "year": 1762,
+        "month": 9
+      },
+      "text": {
+        "headline": "František Kramoliš",
+        "text": " Gymnázium navštevoval v Žiline. V r. 1754 bol prijatý do alumnátu budínskeho Széchényiana. 10. februára 1756 bol vysvätený za kňaza. 22. marca 1756 bol poslaný za kaplána do Dvorníkov, 29. apríla 1757 do Čachtíc. 18. novembra 1757 bol ustanovený za farára v Rišňovciach. Nato 20. augusta 1762 v Jacovciach, kde sa 2. júna 1780 konala Baťánova vizitácia, v ktorej sa vravelo o farárovi, že je Moravan. V r. 1783 zvýšil výdavky farnosti na 660 florénov. 8. novembra 1788 vydal oznámenie o vyvýšení kostola. Tam zomrel vo veku 63 rokov."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1762,
+        "month": 9,
+        "day": 1
+      },
+      "end_date": {
+        "year": 1764,
+        "month": 9,
+        "day": 12
+      },
+      "text": {
+        "headline": "Andrej Škultéty",
+        "text": " Teológiu ukončil v generálnom seminári v r. 1757 po druhom ročníku. 24. októbra t. r. bol poslaný za kaplána do Bojníc. 1. septembra 1762 bol ustanovený za farára v Rišňovciach. Vymenil sa s Jozefom Kolbachom a obdržal farnosť Plavecký Peter, kde bol 12. septembra 1764 ustanovený. Od 25. mája 1772 bol v Štefanove, od 21. novembra 1776 v Gbeloch. Odtiaľ prešiel v r. 1780 do Borského Mikuláša, kde sa 29. júla 1788 konala Baťánova vizitácia, v ktorej je o farárovi: 51 ročný. Vysokej postavy. Flegmatik, modestus, sincerus. Horlivý v príhovoroch k ľudu. Voči sirotám a vdovám bol prospešný. Od r. 1787 bol dekanom dištriktu Moravský Svätý Ján."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1764,
+        "month": 9,
+        "day": 20
+      },
+      "end_date": {
+        "year": 1766,
+        "month": 9,
+        "day": 8
+      },
+      "text": {
+        "headline": "Jozef Kolbach",
+        "text": " 23. novembra 1757 bol poslaný za kaplána do Levár. Nato bol 14. februára 1760 ustanovený za farára v Plaveckom Petri, 20. septembra 1764 v Rišňovciach, ktoré obdržal výmenou s Ondrejom Škultétym. 8. septembra 1766 bol ustanovený vo Veľkých Levároch. V r. 1768 tam bol misionár. Za neho sa upravila záležitosť s anabaptistami. Od r. 1780 zastával úrad zastupujúceho dekana v dištrikte Malacky. V r. 1790 dal postavil hlavný oltár. Bol to vzdelaný muž, ktorý obohatil farskú knižnicu mnohými knihami. Tam aj zomrel."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1766,
+        "month": 9,
+        "day": 15
+      },
+      "end_date": {
+        "year": 1772,
+        "month": 12,
+        "day": 24
+      },
+      "text": {
+        "headline": "Ján Klimó",
+        "text": " 27. októbra 1762 bol poslaný za kaplána do Čachtíc. Nato bol 30. mája 1765 ustanovený za farára v Turčianskej Svätej Mare čiže Socovciach. Odtiaľ prešiel 15. septembra 1766 do Rišňoviec. Tam od r. 1770 postavil za 3000 florénov nový kostol s prácou farníkov, ktorý bol dokončený a požehnaný v r. 1775, až po jeho smrti. Nesmrteľný v diele."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1773,
+        "month": 1,
+        "day": 11
+      },
+      "end_date": {
+        "year": 1781
+      },
+      "text": {
+        "headline": "Juraj Chnorecz",
+        "text": "6. marca 1763 bol poslaný za kaplána do Dvorníkov, odtiaľ 17. mája toho roka do Bojníc, 27. októbra 1772 do Balážskych Ďarmôt v Maďarsku. 11. januára 1773 bol ustanovený za farára v Dolných Rišňovciach. Za neho sa v r. 1775 požehnal kostol, ktorý postavil jeho predchodca. Odtiaľ v mesiaci máji 1781 prešiel vo Veľkých Ripnian, kde aj zomrel."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1781
+      },
+      "end_date": {
+        "year": 1791,
+        "month": 1,
+        "day": 30
+      },
+      "text": {
+        "headline": "Pavol Lalkovics",
+        "text": " Teológiu ukončil v generálnom seminári v r. 1772 po treťom ročníku. 26. decembra toho roka bol poslaný za kaplána do Blumentálu v Bratislave. Nato bol 8. apríla 1781 menovaný za farára v Chrašťanoch. 22. júna toho roka prešiel do Rišňoviec, kde aj zomrel."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1791,
+        "month": 2,
+        "day": 17
+      },
+      "end_date": {
+        "year": 1803
+      },
+      "text": {
+        "headline": "Anzelm Časta",
+        "text": " Do arcidiecézy bol prijatý z Rehole sv. Pavla, od r. 1787 do r. 1791 bol administrátorom novozriadenej farnosti Cerová, potom sa stal administrátorom v Rišňovciach, kde pracoval až do r. 1803. Na dôchodok sa vrátil do Skalice, kde zomrel."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1803
+      },
+      "end_date": {
+        "year": 1806,
+        "month": 1,
+        "day": 26
+      },
+      "text": {
+        "headline": "Vojtech Kovecz",
+        "text": " Vieme o ňom len toľko, že teológiu absolvoval v arcibiskupskom seminári v Bratislave v r. 1796 po štvrtom ročníku. Ako kaplán pôsobil v Hlohovci. V r. 1803 obdržal farnosť Rišňovce, kde aj zomrel."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1806
+      },
+      "end_date": {
+        "year": 1818
+      },
+      "text": {
+        "headline": "Jozef Ekler",
+        "text": " Teológiu študoval v bratislavskom arcibiskupskom seminári, ako tretiak bol v r. 1788 vysvätený za kňaza a poslaný za kaplána do Dolného Pialu v levickom okrese. V r. 1801 prešiel do Borského Mikuláša v senickom okrese. Od 1. apríla 1803 bol miestnym kaplánom v Pastuchove v hlohoveckom okrese. 8. apríla 1806 prijal farnosť Rišňovce v nitrianskom okrese. Odtiaľ prešiel v r. 1818 do Veľkých Ripňan, kde zanedlho zomrel."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1818
+      },
+      "end_date": {
+        "year": 1822
+      },
+      "text": {
+        "headline": "Jozef Brhlovič",
+        "text": " Štyri ročníky teológie absolvoval v trnavskom seminári. Z neho vyjdúc stal sa kaplánom v Jacovciach, v r. 1806 prešiel do Banskej Štiavnice, potom v r. 1808 do Nového Mesta nad Váhom, nato sa v r. 1818 sa stal farárom v Dolných Rišňovciach, čoho sa v r. 1822 vzdal a žil na dôchodku v Čachticiach, kde ešte v tom roku zomrel."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1822
+      },
+      "end_date": {
+        "year": 1830,
+        "month": 11
+      },
+      "text": {
+        "headline": "Ján Nepomuk Andria",
+        "text": " Teológiu študoval na viedenskom Pázmáneu. Po skončení r. 1808 sa stal kaplánom v Banskej Štiavnici, potom promoval na profesora dejín. Potom bol študijným prefektom na arcibiskupskom lýceu v trnavskom seminári Marianum. Dosiahol doktorát filozofie. Od r. 1822 prešiel do duchovnej správy a stal sa farárom v Rišňovciach, kde aj zomrel."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1830
+      },
+      "end_date": {
+        "year": 1831,
+        "month": 5,
+        "day": 25
+      },
+      "text": {
+        "headline": "Jozef Skalický",
+        "text": " Teológiu ukončil v seminári Marianum v r. 1815 po štvrtom ročníku. Ako kaplán pôsobil v Skalici, od r. 1816 v Uníne, od r. 1821 v Borskom Mikuláši a od r. 1826 v Šaštíne. V r. 1830 bol konštituovaný za administrátora v Smolinskom. V tom istom roku prijal farnosť Rišňovce. Zomrel v Hlohovci."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1831
+      },
+      "end_date": {
+        "year": 1835
+      },
+      "text": {
+        "headline": "Štefan Pereszlényi",
+        "text": " Filozofiu a teológiu absolvoval v Trnave. 26. marca 1825 bol vysvätený za kňaza. Ako kaplán pôsobil v Šuranoch, v r. 1827 v Hrnčiarovciach a potom v Šoporni. Od r. 1829 bol administrátorom a sekvestračným kurátorom faráran v Majcichove. V r. 1830 prijal farnosť Šurianky. Odtiaľ bol už v r. 1831 preložený do Rišňoviec. 1. októbra 1835 bol menovaný do Veľkých Ripnian. V r. 1844 sa stal dekanom radošinského dištriktu. V januári 1862 bol ozdobený titulom honorárneho pápežského kaplána."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1835
+      },
+      "end_date": {
+        "year": 1844
+      },
+      "text": {
+        "headline": "Anton Vörös",
+        "text": ""
+      }
+    },
+    {
+      "start_date": {
+        "year": 1844
+      },
+      "end_date": {
+        "year": 1865
+      },
+      "text": {
+        "headline": "Karol Hyros",
+        "text": " Teológiu absolvoval v seminári Marianum v r. 1835 a 30. septembra toho roka bol vysvätený za kňaza. Šesť mesiacov bol kaplánom v Jacovciach, potom osem rokov v Majcichove. 10. januára 1844 prišiel do Rišňoviec. Odtiaľ ho 24. augusta 1865 odvolali a 17. septembra bol ustanovený za kňaza v Jaslovských Bohuniciach, kde aj zomrel."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1865,
+        "month": 10,
+        "day": 9
+      },
+      "end_date": {
+        "year": 1886,
+        "month": 3,
+        "day": 28
+      },
+      "text": {
+        "headline": "Ignác Butassovics",
+        "text": " Teologické štúdiá absolvoval v Ostrihome, ukončil ich vo štvrtom ročníku v r. 1850. 16. septembra 1850 bol vysvätený za kňaza. Stal sa kaplánom v Modre v okrese Pezinok, odtiaľ v r. 1852 prešiel do Borského Svätého Jura v senickom okrese a v r. 1857 do Častej v okrese Pezinok, kde sa v októbri 1860 stal administrátorom a v r. 1862 farárom. 9. októbra 1865 odišiel do Rišňoviec v nitrianskom okrese, kde bol 17. októbra ustanovený za farára a kde aj zomrel."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1886
+      },
+      "end_date": {
+        "year": 1900
+      },
+      "text": {
+        "headline": "Pavol Pavlovics",
+        "text": " Bol kňazom Ostrihomskej arcidiecézy, nar. 24. júna 1854. Vysvätený bol 29. júna 1881. Ako kaplán 1882 pôsobil vo Voderadoch, v r. 1884 v Šoporni. Od 29. septembra toho roka bol dočasným správcom v Dlhej až do 1. mája 1885. Potom bol znova kaplánom v Šuranoch. Ale už od septembra toho roka bol v Bábe až do mája 1886. Vtedy sa stal administrátorom v Rišňovciach,1900 priznaný dôchodok. Neskôr pôsobil ako kurát 1903 v Budapešti-Lipótmező. Zomrel v 68.roku života a 41. roku kňazstva."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1901
+      },
+      "end_date": {
+        "year": 1911
+      },
+      "text": {
+        "headline": "Jozef Rákoczy",
+        "text": " Bol kňazom Ostrihomskej arcidiecézy, nar. 13. februára 1870, Trnava. Vysvätený bol 17. februára 1894. Pôsobil ako kaplán v obci Chtelnica, 1896 kaplán v obci Majcichov, 1900 administrátor, 1901 farár v obci Rišňovce, 1911 farár v obci Zbehy, 1918 dekan."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1911
+      },
+      "end_date": {
+        "year": 1912
+      },
+      "text": {
+        "headline": "Štefan Avar",
+        "text": "Bol kňazom Ostrihomskej arcidiecézy, nar. 18. decembra 1875, Nové Zámky, Vysvätený bol 26. júna 1898; inkardinovaný z rehole františkánov 12. Oct. 1903; kap. Jacovce; 1905 kap. Senica, 1910 Starý Tekov; adm. Hontianske Trsťany, Banská Belá, 1911 Stará Turá, Rišňovce, 1912 Košúty, Hrušov; 1913 far. Šuránky. „Vtedy 11. septembra 1913 som v Trnave zložil farskú prísahu do rúk arcibiskupa Pavla Jedličku a za asistencie jeho tajomníka Alojza Zelligera. Ešte v ten istý deň som v sprievode obecného richtára Jozefa Lubkeho, ktorý ma za veľkého dažďa a blata na svojom voze doviezol zo stanice, prišiel do Šuráňky.“ Takto v cirkevnej kronike opisuje svoj príchod do farnosti Štefan Avar. Vtedy ešte netušil, že tam prežije 36 krušných rokov. O necelý rok vypukla prvá svetová vojna. Po vojne sa snažil zlepšiť ťažký život svojich veriacich. Organizoval ovocinárske kurzy, venoval sa včelárstvu a poľovníctvu, dal opraviť kostol i faru. Významným pre Štefana Avara bol rok 1941, keď 22. júna primičnú svätú omšu v Šuriankach slávil Fridrich Ladislav Poláček. V ten istý rok 21. septembra požehnal novú štátnu školu. „Zlatú“ svätú omšu Štefan Avar slávil 26. júna 1948 pri príležitosti svojho 50. výročia kňazstva. Biskup Ambróz Lazík mu udelil titul asesor. Štefan Avar zomrel 16. februára 1949 a pochovaný je na miestnom šurianskom cintoríne."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1912
+      },
+      "end_date": {
+        "year": 1937
+      },
+      "text": {
+        "headline": "Ján Félix Štefanovič",
+        "text": "Narodil sa 9. septembra 1854 v obci Rovensko. Vstúpil do rehole františkánov a 17. marca 1878 bol vysvätený za kňaza. Od januára 1889 pôsobil ako administrátor v Turej Lúke. V r. 1893 vystúpil z rehole a bol inkardinovaný do Ostrihomskej arcidiecézy. V júli 1901 sa stal farárom v Merašiciach a v r. 1912 v Rišňovciach. V r. 1934 bol vymenovaný za assessora a r. 1937 odišiel na odpočinok. Zomrel 12. apríla 1939, v 85. roku života a v 52. roku kňazstva."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1937
+      },
+      "end_date": {
+        "year": 1938
+      },
+      "text": {
+        "headline": "Júlis Holloš",
+        "text": " Bol kňazom Ostrihomskej arcidiecézy, narodený 27. apríla 1888 v Žemliaroch. Vysvätený bol 15. júna 1911; kaplán Topoľčany, 1912 Banská Štiavnica, 1913 Vrbové, 1914 zastupujúci Veľká Maňa; 1916 voj. duchovný ; 1918 kaplán Nemčiňany, 1920 Opatovce nad Žitavou (Žitavany); 1924 administrátor tamtiež; 1927-28 zdravot. Budapešť, Szekszárd(HU), 1929 v nemocnici Bratislava; na dôchodku; 1932 administrátor Veľký Lapáš; na dôchodku; 1935 administrátor Michal nad Žitavou; 1936 farár tamtiež, 1937 Rišňovce, 1938 Čelís (Bernolákovo); administrátor tamtiež, Beša; 1939 farár Dolný Várad (Tekovský Hrádok). Tam zomrel 4. januára 1959."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1938
+      },
+      "end_date": {
+        "year": 1945
+      },
+      "text": {
+        "headline": "Ján Hudec",
+        "text": " Hudec Ján narodený 8. januára 1906 vo Veľkých Kozmálovciach. Vysvätený bol 1. novembra 1928; kapán Bernolákovo; 1933 administrátor tamtiež; 1938 farár tamtiež, Rišňovce; 1943 inšpektor nár. škôl okres Hlohovec; 1945 farár Továrniky v okrese Topoľčany; 1948 zástupca dekana dekanát Topoľčany; a./f. Jacovce; (1971) administrátor Hrnčiarovce n. Parnou; dekan; † 20. apríla 1975."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1945
+      },
+      "end_date": {
+        "year": 1965
+      },
+      "text": {
+        "headline": "Štefan Rácz",
+        "text": " Po skončení teologických štúdií bol ordinovaný 21. septembra 1919. V rokoch 1919-1925 bol kaplánom v maďarskom Drégelypalánku, v rokoch 1925-1927 v Novom Meste nad Váhom, v r. 1927 v Mestečku čiže Leopoldove, a dočasným správcom v Bučanoch v trnavskom okrese. V r. 1928 pôsobil v Opatovciach nad Žitavou, Jakubove a v Malom Bábe, v r. 1929 vo Veľkom Lapáši a stal sa farárom v Naháči v trnavskom okrese, potom vo farnosti Dobrá Voda, v r. 1936 v nemocnici. V rokoch 1937-1944 bol v Grinave, dnešnej mestskej časti Pezinka, v r. 1944 znovu v nemocnici. V r. 1945 zastupoval vo farnosti Výčapy-Opatovce v nitrianskom okrese a potom pôsobil v Rišňovciach v okrese Nitra. Od r. 1965 bol duchovným správcom v Norovciach v okrese Topoľčany až do smrti. Je pochovaný v rodisku."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1965
+      },
+      "end_date": {
+        "year": 1990
+      },
+      "text": {
+        "headline": "Štefan Moravčík",
+        "text": " Ako mladík vstúpil do Rehole menších bratov, po skončení teologických štúdií bol 16. júna 1940 vysvätený za kňaza. Bol kaplánom v Malackách, v rokoch 1952-1955 v Komjaticiach v okrese Nové Zámky. V rokoch 1955-1958 spravoval farnosť Podolie v okrese Nové Mesto nad Váhom, v r. 1958 pôsobil v Hontianskych Nemciach v krupinskom okrese, v rokoch 1959-1965 v Ardanovciach v okrese Topoľčany, neskôr v Maduniciach v okrese Hlohovec. V r. 1971 už pôsobil Rišňovciach v nitrianskom okrese, kde zomrel a kde je aj pochovaný."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1990
+      },
+      "end_date": {
+        "year": 1999
+      },
+      "text": {
+        "headline": "Jozef Loziňák",
+        "text": " Po ukončení štúdia teológie na Cyrilometodskej bohosloveckej fakulte v Bratislave bol ordinovaný 21. júna 1969 za kňaza pre Trnavskú arcidiecézu. Bol kaplánom v Palárikove v okrese Nové Zámky, v rokoch 1970-1975 v farnosti Blumentál Bratislava-Nové mesto. Od r. 1975 bol správcom farnosti Šurianky, pričom sa stal dekanom. V rokoch 1976-1990 pôsobil v Hontianskych Nemciach v krupinskom okrese. Od r. 1990 bol farárom v Rišňovciach v nitrianskom okrese, od 1. júla 1999 pôsobí v Častej v okrese Pezinok. Po reorganizácii slovenskej cirkevnej provincie náleží od 14. februára 2008 Bratislavskej arcidiecéze."
+      }
+    },
+    {
+      "start_date": {
+        "year": 1999
+      },
+      "end_date": {
+        "year": 2010
+      },
+      "text": {
+        "headline": "Marian Ondrejka",
+        "text": ""
+      }
+    },
+    {
+      "start_date": {
+        "year": 2023
+      },
+      "text": {
+        "headline": "Jozef Jurina",
+        "text": ""
+      }
+    }
+  ]}
