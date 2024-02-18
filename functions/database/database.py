@@ -2,7 +2,11 @@ import psycopg2
 import os
 from ..utils import read_file
 
-POSTGRES = read_file('config/postgres.sql')
+POSTGRES = os.environ.get("POSTGRES_URL")
+# If env not exist, read config file
+if not POSTGRES:
+    POSTGRES = read_file('config/postgres.sql')
+
 SCHEMA_PATH = 'config/schema.sql'
 
 class Database:

@@ -1,1 +1,0 @@
-postgres://default:NPV3x8mtnvGw@ep-rough-mode-91105827.us-east-1.postgres.vercel-storage.com:5432/verceldb
