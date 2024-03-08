@@ -1,4 +1,6 @@
 from config.config import EVENTS_IN_DAY_LIMIT
+from flask import request
+from .convert_date import convert_date
 
 def make_oznamy_list():
     """
