@@ -178,3 +178,7 @@ def prednasky():
 @app.route('/publikacie')
 def publikacie():
     return render_template('publikacie.html')
+
+@app.route('/sitemap.xml')
+def sitemap():
+    return get_html('static/sitemap.xml')
