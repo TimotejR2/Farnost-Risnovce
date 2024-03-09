@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+  <loc>https://www.risnovcefara.sk/</loc>
+  <lastmod>2024-03-09</lastmod>
+  <priority>1.00</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.risnovcefara.sk/?oblast=1</loc>
+  <lastmod>2024-03-09</lastmod>
+  <priority>0.30</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.risnovcefara.sk/?oblast=2</loc>
+  <lastmod>2024-03-09</lastmod>
+  <priority>0.20</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.risnovcefara.sk/?oblast=3</loc>
+  <lastmod>2024-03-09</lastmod>
+  <priority>0.20</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.risnovcefara.sk/oznamy</loc>
+  <lastmod>2024-03-09</lastmod>
+  <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.risnovcefara.sk/homilie</loc>
+  <lastmod>2024-03-09</lastmod>
+  <priority>0.70</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.risnovcefara.sk/publikacie</loc>
+  <lastmod>2024-03-09</lastmod>
+  <priority>0.60</priority>
+  <changefreq>yearly</changefreq>
+</url>
+<url>
+  <loc>https://www.risnovcefara.sk/publikacie/monografie</loc>
+  <lastmod>2024-03-09</lastmod>
+  <priority>0.70</priority>
+  <changefreq>yearly</changefreq>
+</url>
+<url>
+  <loc>https://www.risnovcefara.sk/publikacie/ucebnematerialy</loc>
+  <lastmod>2024-03-09</lastmod>
+  <priority>0.30</priority>
+  <changefreq>yearly</changefreq>
+</url>
+<url>
+  <loc>https://www.risnovcefara.sk/historia</loc>
+  <lastmod>2024-03-09</lastmod>
+  <priority>0.60</priority>
+  <changefreq>yearly</changefreq>
+</url>
+<url>
+  <loc>https://www.risnovcefara.sk/kontakt</loc>
+  <lastmod>2024-03-09</lastmod>
+  <priority>0.50</priority>
+  <changefreq>yearly</changefreq>
+</url>
+<url>
+  <loc>https://www.facebook.com/profile.php?id=61551950385267</loc>
+  <lastmod>2024-03-09</lastmod>
+  <priority>0.70</priority>
+  <changefreq>daily</changefreq>
+</url>
+
+
+</urlset>
