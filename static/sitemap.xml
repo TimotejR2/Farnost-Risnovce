@@ -66,12 +66,5 @@
   <priority>0.50</priority>
   <changefreq>yearly</changefreq>
 </url>
-<url>
-  <loc>https://www.facebook.com/profile.php?id=61551950385267</loc>
-  <lastmod>2024-03-09</lastmod>
-  <priority>0.70</priority>
-  <changefreq>daily</changefreq>
-</url>
-
 
 </urlset>
