@@ -1,9 +1,14 @@
 from datetime import timedelta, datetime
-import os
 from flask import Flask, render_template, request, redirect, make_response
 
 from functions import *
-from config.config import HOMILIE_LIMIT, POSTS_LIMIT, OZNAMY_LIMIT, DELAY_BETWEEN_WRONG_LOGINS, SESSION_AGE_LIMIT, HOMILIE_SEARCH_DAYS
+from config.config import (
+    HOMILIE_LIMIT,
+    POSTS_LIMIT,
+    OZNAMY_LIMIT,
+    DELAY_BETWEEN_WRONG_LOGINS,
+    SESSION_AGE_LIMIT,
+)
 
 
 app = Flask(__name__)
@@ -15,10 +20,10 @@ db = Database()
 db.create()
 
 @app.errorhandler(500)
-def internal_server_error(e):
+def internal_server_error():
     error(500)
 
-@app.route("/logout")
+@app.route("/logout", methods=["GET"])
 def logout():
     # Forget user by clearing session cookie
     resp = make_response(redirect('/'))
@@ -27,11 +32,19 @@ def logout():
 
 @app.route("/login", methods=["GET", "POST"])
 def authenticate():
+    """
+    Checks login attempts and verifies username and password.
+    Returns error if too many attempts, sets session cookie and redirects
+    if POST, saves wrong attempt time if password incorrect, returns login page.
+    """
     # Check if there were not too many login attempts in the past
-    wrong = db.execute_file('sql_scripts/security/get_wrong_count.sql', (datetime.now() - timedelta(days=DELAY_BETWEEN_WRONG_LOGINS),))[0][0]
+    delay = timedelta(days=DELAY_BETWEEN_WRONG_LOGINS)
+    now = datetime.now()
+    wrong = db.execute_file('sql_scripts/security/get_wrong_count.sql', (now - delay,))[0][0]
+
     if wrong > 2:
         return error(429)
-    
+
     if request.method == "POST":
         # Ensure username and password were submitted
         if not request.form.get("username") or not request.form.get("password"):
@@ -41,7 +54,11 @@ def authenticate():
         if login(request.form.get("password"), request.form.get("username")):
             # Set session cookie
             resp = redirect("/")
-            resp.set_cookie('session', generate_session(request.form.get("username")), max_age=SESSION_AGE_LIMIT)
+
+            resp.set_cookie('session',
+             generate_session(request.form.get("username")),
+              max_age=SESSION_AGE_LIMIT)
+
             return resp
 
         # If password is wrong, save time of this incident in db
@@ -49,10 +66,9 @@ def authenticate():
         return error(401)
 
     # If method is GET
-    else:
-        return get_html('static/login.html')
+    return get_html('static/login.html')
 
-@app.route('/post')
+@app.route('/post', methods=["GET"])
 def post():
     # Attempt to retrieve a specific post from the database based on the ID in the request
     try:
@@ -77,25 +93,32 @@ def update():
 
     if request.method == 'GET':
         # Render the HTML form for updating
-        return (get_html('static/update.html'))
+        return get_html('static/update.html')
 
     if request.method == 'POST':
         # Insert submited data to database
         if not request.form['oblast']:
             return error(422)
-        
+
         # If image is not url, search for it in images folder
         if not '/' in request.form['image']:
             image = '/static/images/' + request.form['image']
         else:
             image = request.form['image']
-        
-        db.execute_file('sql_scripts/user_insert/insert_posts.sql',
-           (request.form['nazov'], image, request.form['alt'],request.form['date'], request.form['text'], request.form['oblast']))
-           
+
+        db.execute_file(
+            'sql_scripts/user_insert/insert_posts.sql',
+            (request.form['nazov'],
+            image,
+            request.form['alt'],
+            request.form['date'],
+            request.form['text'],
+            request.form['oblast'])
+        )
+
         return "Všetko prebehlo úspešne"
 
-@app.route('/oznamy')
+@app.route('/oznamy', methods=["GET"])
 def oznamy():
     # Get oznamy from database
     oznamy_list = db.execute_file('sql_scripts/select/oznamy.sql', (OZNAMY_LIMIT, ))
@@ -112,27 +135,27 @@ def get_events():
     if request.method == 'GET':
         return render_template('oznamy_input.html')
 
-    elif request.method == 'POST':
-        # Get multi dimentional list of all oznamy and write it to database as string  
+    if request.method == 'POST':
+        # Get multi dimentional list of all oznamy and write it to database as string
         oznamy_list = make_oznamy_list()
         db.execute('INSERT INTO oznamy (list) VALUES (%s);', (str(oznamy_list), ) )
 
-        return ("Všetko prebehlo úspešne")
+        return "Všetko prebehlo úspešne"
 
-@app.route('/') 
+@app.route('/', methods=["GET"])
 def index():
     # Get list of all news and render template with them
     if not request.args.get('oblast'):
-        list = db.execute_file("sql_scripts/select/posts_all.sql", (POSTS_LIMIT, ))
-        return render_template('index.html', list = list)
-    
+        posts_list = db.execute_file("sql_scripts/select/posts_all.sql", (POSTS_LIMIT, ))
+        return render_template('index.html', list = posts_list)
+
     try:
         oblast = int(request.args.get('oblast'))
     except (ValueError, IndexError):
         return error(404)
-    
-    list = db.execute_file("sql_scripts/select/posts.sql", (oblast, POSTS_LIMIT))
-    return render_template('index.html', list = list)
+
+    posts_list = db.execute_file("sql_scripts/select/posts.sql", (oblast, POSTS_LIMIT))
+    return render_template('index.html', list = posts_list)
 
 @app.route('/homilie',  methods=["GET", "POST"])
 def homilie():
@@ -140,8 +163,8 @@ def homilie():
         return search_homilie()
 
     # Get list of all homilie and render template with them
-    list = db.read_table("homilie", limit = HOMILIE_LIMIT)
-    return render_template('homilie.html', list=list)
+    homilie_list = db.read_table("homilie", limit = HOMILIE_LIMIT)
+    return render_template('homilie.html', list=homilie_list)
 
 @app.route('/homilie/update', methods=["GET", "POST"])
 def homilie_update():
@@ -152,34 +175,36 @@ def homilie_update():
     if request.method == 'GET':
         return get_html('static/homilie_input.html')
 
-    elif request.method == 'POST':
-        # Insert inputed data to database
-        db.execute_file('sql_scripts/user_insert/insert_homilie.sql',
-           (request.form['datum'], request.form['citanie'], request.form['nazov'],request.form['text']))
-           
-        return "Všetko prebehlo úspešne"
+    # Insert inputed data to database
+    db.execute_file('sql_scripts/user_insert/insert_homilie.sql',
+        (request.form['datum'],
+            request.form['citanie'],
+            request.form['nazov'],
+            request.form['text']))
 
-@app.route('/historia')
+    return "Všetko prebehlo úspešne"
+
+@app.route('/historia', methods=["GET"])
 def historia():
     return render_template('historia.html')
 
-@app.route('/publikacie/monografie')
+@app.route('/publikacie/monografie', methods=["GET"])
 def monografie():
     return render_template('monografie.html')
 
-@app.route('/publikacie/ucebnematerialy')
+@app.route('/publikacie/ucebnematerialy', methods=["GET"])
 def ucebm():
     return render_template('ucebne_materialy.html')
 
-@app.route('/kontakt')
+@app.route('/kontakt', methods=["GET"])
 def kontakt():
     return render_template('kontakt.html')
 
-@app.route('/prednasky')
+@app.route('/prednasky', methods=["GET"])
 def prednasky():
     return render_template('prednasky.html')
 
-@app.route('/publikacie')
+@app.route('/publikacie', methods=["GET"])
 def publikacie():
     return render_template('publikacie.html')
 
