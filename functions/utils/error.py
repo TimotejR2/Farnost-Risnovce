@@ -16,11 +16,10 @@ def error(code):
         400: 'Chybná žiadosť.',
         401: 'Neoprávnený prístup. Skontrolujte svoje heslo.',
         403: 'Zakázaný prístup. Prístup zamietnutý.',
-        404: 'Stránka nenájdená.',
         422: 'Žiadosť nemohla byť spracovaná. Obsahuje neplatné alebo chýbajúce informácie, ktoré server nedokázal spracovať.',
         429: 'Príliš veľa pokusov o prihlásenie. Skúste to znovu neskôr.'
     }
 
     default_message = 'Došlo k chybe.'
 
-    return make_response(get_html.get_html(f'static/{code}.html') if code == 404 else error_messages.get(code, default_message), code)
+    return make_response(get_html.get_html(f'static/{code}.html') if code == 404 or code == 500 else error_messages.get(code, default_message), code)

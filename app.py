@@ -14,6 +14,10 @@ db = Database()
 # Create database for all posts and remove old if needed
 db.create()
 
+@app.errorhandler(500)
+def internal_server_error(e):
+    error(500)
+
 @app.route("/logout")
 def logout():
     # Forget user by clearing session cookie
