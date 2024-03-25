@@ -19,9 +19,14 @@ db = Database()
 # Create database for all posts and remove old if needed
 db.create()
 
+@app.errorhandler(404)
+def not_found_error(e):
+    return get_html('static/404.html'), 404
+
 @app.errorhandler(500)
-def internal_server_error():
-    error(500)
+def internal_error(e):
+    return get_html('static/500.html'), 500
+
 
 @app.route("/logout", methods=["GET"])
 def logout():
