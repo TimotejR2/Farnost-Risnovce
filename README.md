@@ -1,1 +1,1 @@
-# Farnost-Risnovce
+[English](README_en.md) | [Slovensky](README_sk.md)
