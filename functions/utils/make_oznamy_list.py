@@ -47,7 +47,7 @@ def days_submitted_count():
     Raises:
     ValueError: If no data is submitted for any day.
     """
-    for i in range(7):
+    for i in range(8):
         if request.form[('datum'+str(i))] == "":
             if i == 0:
                 return error(422)
