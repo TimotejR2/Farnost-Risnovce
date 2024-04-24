@@ -40,7 +40,9 @@
   {% for row in list %}
   <div class="blockspace">
       <div class="block content" onclick="submitForm('{{ row[0] }}')">
+        {% if row[2] and row[2] != '/static/images/' %}
         <img src="{{ row[2] }}" alt="{% if row[3] %}{{ row[3] }}{% else %}Fotografia z udalostí vo farnosti{% endif %}" class="img" loading="lazy">
+        {% endif %}
           <h1 style="text-align: left;">{{ row[1] }}</h1>
           <p class="datum">{{ row[4] }}</p>
           <pre>{{ row[5] }}</pre>
