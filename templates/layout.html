@@ -93,9 +93,15 @@
                 <li><a href="/publikacie/ucebnematerialy">Učebné materiály</a></li>
             </ul>
 
-            <li>
+            <li class="nav-item" onmouseover="displayMenu('historia_submenu')" onmouseout="hideMenu('historia_submenu')" onclick="toggleMenu('historia_submenu')">
                 <a href="/historia" class="nav-link link-body-emphasis" aria-current="page" id="historia">História</a>
             </li>
+                <ul class="sub-menu" id="historia_submenu" style="display: none;">
+                    <li><a href="/historia/risnovce">Rišňovce</a></li>
+                    <li><a href="/historia/klacany">Kľačany</a></li>
+                    <li><a href="/historia/sasinkovo">Sasinkovo</a></li>
+                </ul>
+
 
             <!-- Foto ako odkaz na Google Photos-->
             <li>

@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+{% block head %}
+    <meta name="description" content="História Farnosti Rišňovce.">
+    <title>Farnosť Rišňovce - História</title>
+{% endblock %}
+{% block main %}
+
+
+<div class="blockspace">
+    <div class="block content">
+        <h1>História obce</h1>
+        <pre>
+            Najstaršia doteraz známa historická správa o Rišňovciach je v pergamenovej listine z roku 1272. Uhorský kráľ Štefan V. udelil synom Euronga niekoľko usadlostí, medzi nimi aj usadlosť Rechen terram. Spomenutí synovia určite museli byť v kráľovských službách a dostali ich za zásluhy v boji proti českému a rakúskemu panovníkovi Přemyslovi Otakarovi II. Tým, že svojim prívržencom dal určitú pôdu, nielenže ocenil ich zásluhy v boji s nepriateľom, ale v podstate podnietil aj kolonizáciu zničeného územia a tým aj zvýšenie jeho hospodárskeho významu.
+            V roku 1274 sa Rišňovce (Rechen) spomínajú už ako územie dané rišňovským šľachticom, ktorí tu pôsobili až do bitky pri Moháči v roku 1526. V 16. storočí prišli do oblasti noví zemepáni. Vpád Turkov veľmi poznačil život miestneho obyvateľstva. V roku 1576 boli Turkami vypálené Horné Rišňovce a Dolné Rišňovce podľahli Turkom až v roku 1599. Do rokov 1663 - 1664 Turci obsadili podstatnú časť západného Slovenska.
+            Je isté, že zlepšenie situácie priniesla až veľká porážka Turkov v roku 1683 pri Viedni, ktorá znamenala aj koniec ich panstva v prevažnej časti strednej Európy. Do konca 80. rokov 17. storočia bolo Slovensko úplne vyčistené od tureckých nepriateľov a začala obnova zničenej zeme. Ľudia sa mohli vrátiť na svoje majetky postupne začať obrábať opustené polia, lúky a pasienky.
+            Obec Rišňovce bola počas 18. a 19. storočia typickou zemianskou obcou. Polia, lúky, pasienky, lesy vlastnilo niekoľko šľachtických rodín a tí ich spolu so svojimi poddanými využívali na poľnohospodársku výrobu. Asi takáto bola situácia až do roku 1848, kedy bolo zrušené poddanstvo. V tomto roku síce ľudia dostali osobnú voľnosť, základné práva, ale väčšinou im aj naďalej chýbalo to najdôležitejšie, väčší osobný majetok. Takže zostali v závislosti na zemepánoch aj naďalej. Zo zemepánov sa stali statkári, z malých políčok sa vytvoril veľkostatok. Veľké majetky tu patrili aj Kuffnerovi a barónovi Stummerovi, ktorý na svojich poliach pestoval plodiny pre cukrovar v neďalekom Sládkovičove. V rámci spoločenskej situácie ešte treba spomenúť zriadenie školy okolo roku 1870 a výstavbu lokálnej železničnej trate z Lužianok do Hlohovca v roku 1897, na ktorú sa napojili aj Rišňovce. V roku 1925 došlo k oficiálnemu zlúčeniu oboch obcí, čím sa vytvorili dnešné Rišňovce.
+        </pre>
+        
+    </div>
+</div>
+
+<br>
+
+<div class="blockspace">
+    <div class="block content">
+        <h1>Kostol sv. Mikuláša</h1>
+        <pre>
+            Prvým záznamom o existencii farského kostola sv. Mikuláša v Rišňovciach je listina z r.1323. Slúžil až do r.1775, keď bol nahradený neskorobarokovým chrámom zasväteným Najsvätejšej Trojici. K stavbe nového kostola došlo z dvoch dôvodov. Starý gotický kostol bol už staticky veľmi narušený a hrozilo, že sa rozpadne. Jeho priestory už nevyhovovali zvýšenému počtu obyvateľstva Dolných Rišňoviec. Na ktorom mieste kostol sv. Mikuláša stál, sa v žiadnych historických listinných dokumentoch neuvádza. Medzi tunajšími rodákmi sa po mnohé generácie na základe ústneho podania traduje, že kostol stál na starom cintoríne, iní zase tvrdia, že stál na mieste, kde je postavený terajší kostol.
+        </pre>
+    </div>
+</div>
+
+<br>
+
+<div class="blockspace">
+    <div class="block content">
+        <h1>Kostol Najsvätejšej Trojice</h1>
+        <pre>
+            Farský kostol Najsvätejšej Trojice sa začal stavať už od roku 1766. Z príkazu cisárovnej Márie Terézie mu Miestodržiteľský úrad mu pridelil 3000 zlatých. Kostol má kamenné základy a celý je postavený z pálenej tehly. Veža kostola aj s krížom na vrchole je vysoká asi 27 metrov. Chór pre hudobníkov je murovaný na dvoch stĺpoch. Nie je prístupný z kostola, ale zvonku od veže strmými schodmi (torturosos - mučeníckymi).
+            Kostol mal pôvodne dvoje dverí: väčšie na východ a menšie (bočné) na západ oproti sakristii. Prečo a odkedy sú zamurované, nevieme.
+            Kostol požehnal obvodný dekan Gašpar Dávid na Svätodušný pondelok 5.júna 1775. 
+            V roku 1856 strecha zhorela.
+        </pre>
+        
+    </div>
+</div>
+
+<br>
+
+<h2 style="text-align: center;">Naši kňazi</h2>
+<br>
+<link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+<script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+<div id='timeline-embed' style="width: 100%; height: 600px"></div>
+<script type="text/javascript">
+    fetch('static/historia.json')
+        .then(response => response.json())
+        .then(data => {
+            var timeline_json = data;
+            window.timeline = new TL.Timeline('timeline-embed', timeline_json, { start_at_end: true, scale_factor: 4, font: "lustria-lato" });
+        })
+        .catch(error => console.error('Error:', error));
+</script>
+
+<div class="blockspace">
+    <div class="block content">
+        <pre>
+            Zdroje: 
+           Némethy, Ľ., Series parochiarum et parochorum archidioecesis Strigoniensis ab antiquissimis temporibus usque annum 1894, Ostrihom 1894.
+           http://www.mariasoft.sk/knazi/ [10.4.2020] 
+          Viac informácií na: https://www.knihydominikani.sk/hlavna_nemethy_22?fpcmeno=risnovce
+          </pre>
+    </div>
+</div>
+{% endblock %}

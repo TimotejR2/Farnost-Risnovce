@@ -193,6 +193,19 @@ def homilie_update():
 def historia():
     return render_template('historia.html')
 
+@app.route('/historia/risnovce', methods=["GET"])
+def historia_risnovce():
+    return render_template('historia_risnovce.html')
+
+@app.route('/historia/klacany', methods=["GET"])
+def historia_klacany():
+    return render_template('historia_klacany.html')
+
+@app.route('/historia/sasinkovo', methods=["GET"])
+def historia_sasinkovo():
+    return render_template('historia_sasinkovo.html')
+
+
 @app.route('/publikacie/monografie', methods=["GET"])
 def monografie():
     return render_template('monografie.html')
