@@ -191,7 +191,7 @@ def homilie_update():
 
 @app.route('/historia', methods=["GET"])
 def historia():
-    return render_template('historia.html')
+    return redirect('/historia/risnovce')
 
 @app.route('/historia/risnovce', methods=["GET"])
 def historia_risnovce():
