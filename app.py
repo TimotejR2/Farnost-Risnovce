@@ -79,6 +79,10 @@ def post():
     try:
         post_id = int(request.args.get('id'))
         event = db.read_table(table_name='posts', limit=1, id=post_id)
+        event = list(event)
+        event[2] = all_photos(event[2])
+        event = tuple(event)
+        print(event)
     except (ValueError, IndexError):
         # Handle invalid or missing post ID
         return error(404)
@@ -105,12 +109,18 @@ def update():
         if not request.form['oblast']:
             return error(422)
 
-        # If image is not url, search for it in images folder
-        if not '/' in request.form['image']:
-            image = '/static/images/' + request.form['image']
-        else:
-            image = request.form['image']
+        image = request.form['image']
 
+        # If image is not url, search for it in images folder
+        if not '/' in image and image:
+            image = '/static/images/' + image
+
+        # If not image, add image with same id as post    
+        if not image:
+            id = db.execute_file('sql_scripts/select/last_post_id.sql')[0][0] + 1
+            image = '/static/images/' + str(id) + '.jpg'
+
+        # Insert inputed data to database
         db.execute_file(
             'sql_scripts/user_insert/insert_posts.sql',
             (request.form['nazov'],

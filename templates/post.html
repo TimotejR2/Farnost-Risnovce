@@ -21,7 +21,10 @@
         <h1 style="text-align: left;">{{ text[1] }}</h1>
         <p class="datum">{{ text[4] }}</p>
         <pre>{{ text[5] }}</pre>
-        <img src="{{ text[2] }}" alt="{{ text[3] }}" class="photo">
+        {% for image in text[2] %}
+            <img src="{{ image }}" alt="{{ text[3] }}" class="photo">
+        {% endfor %}
+        
     </div>
 </div>
 
