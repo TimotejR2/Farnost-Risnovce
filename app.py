@@ -116,7 +116,7 @@ def update():
             image = '/static/images/' + image
 
         # If not image, add image with same id as post    
-        if not image:
+        if image == "-":
             id = db.execute_file('sql_scripts/select/last_post_id.sql')[0][0] + 1
             image = '/static/images/' + str(id) + '.jpg'
 
