@@ -1,5 +1,5 @@
-from datetime import timedelta, datetime
 from flask import Flask, render_template, request, redirect, make_response
+from datetime import datetime
 
 from functions import *
 from config.config import (
@@ -35,104 +35,72 @@ def logout():
     resp.set_cookie('session', '', expires=0)
     return resp
 
+
 @app.route("/login", methods=["GET", "POST"])
+@security_delay
 def authenticate():
     """
     Checks login attempts and verifies username and password.
     Returns error if too many attempts, sets session cookie and redirects
     if POST, saves wrong attempt time if password incorrect, returns login page.
     """
-    # Check if there were not too many login attempts in the past
-    delay = timedelta(days=DELAY_BETWEEN_WRONG_LOGINS)
-    now = datetime.now()
-    wrong = db.execute_file('sql_scripts/security/get_wrong_count.sql', (now - delay,))[0][0]
+    if request.method == "GET":
+        return get_html('static/login.html')
 
-    if wrong > 2:
-        return error(429)
+    # Ensure username and password were submitted
+    if not request.form.get("username") or not request.form.get("password"):
+        return error(422)
 
-    if request.method == "POST":
-        # Ensure username and password were submitted
-        if not request.form.get("username") or not request.form.get("password"):
-            return error(422)
+    # Verify username and password
+    if login(request.form.get("password"), request.form.get("username")):
+        # Set session cookie
+        resp = redirect("/")
 
-        # Verify username and password
-        if login(request.form.get("password"), request.form.get("username")):
-            # Set session cookie
-            resp = redirect("/")
+        resp.set_cookie('session',
+            generate_session(request.form.get("username")),
+            max_age=SESSION_AGE_LIMIT)
 
-            resp.set_cookie('session',
-             generate_session(request.form.get("username")),
-              max_age=SESSION_AGE_LIMIT)
+        return resp
 
-            return resp
-
-        # If password is wrong, save time of this incident in db
-        db.execute('INSERT INTO wrong (cas) VALUES (%s)', (datetime.now(), ))
-        return error(401)
-
-    # If method is GET
-    return get_html('static/login.html')
+    # If password is wrong, save time of this incident in db
+    db.execute('INSERT INTO wrong (cas) VALUES (%s)', (datetime.now(), ))
+    return error(401)    
 
 @app.route('/post', methods=["GET"])
 def post():
-    # Attempt to retrieve a specific post from the database based on the ID in the request
+    # Get post data from database
     try:
         post_id = int(request.args.get('id'))
         event = db.read_table(table_name='posts', limit=1, id=post_id)
-        event = list(event)
-        event[2] = all_photos(event[2])
-        event = tuple(event)
-        print(event)
+    
+    # Handle invalid or missing post ID   
     except (ValueError, IndexError):
-        # Handle invalid or missing post ID
         return error(404)
 
-    if not event:
-        # Handle case where no post is found for the given ID
-        return error(404)
+    # Add more images if possible
+    event = list(event)
+    event[2] = all_photos(event[2])
+    event = tuple(event)
 
     # Render the post template with the retrieved post data
     return render_template('post.html', text=event)
 
 @app.route('/update', methods=['GET', 'POST'])
+@login_required
 def update():
-    # Check if user is authorized to access (role 1)
-    if not authorised(1):
-        return redirect("/login")
-
     if request.method == 'GET':
         # Render the HTML form for updating
         return get_html('static/update.html')
 
     if request.method == 'POST':
-        # Insert submited data to database
         if not request.form['oblast']:
             return error(422)
 
-        image = request.form['image']
-
-        # If image is not url, search for it in images folder
-        if not '/' in image and image:
-            image = '/static/images/' + image
-
-        # If not image, add image with same id as post    
-        if not image:
-            id = db.execute_file('sql_scripts/select/last_post_id.sql')[0][0] + 1
-            image = '/static/images/' + str(id) + '.jpg'
-        
-        # If image is '-', remove it and leave empty
-        if image == '-':
-            image = None
-
-        # If image is not in any folder, add it to '/static/images/'
-        if not '/' in image and image:
-            image = '/static/images/' + image
-        
         # Insert inputed data to database
         db.execute_file(
             'sql_scripts/user_insert/insert_posts.sql',
             (request.form['nazov'],
-            image,
+            image_formater(request.form['image'], db),
             request.form['alt'],
             request.form['date'],
             request.form['text'],
@@ -145,22 +113,23 @@ def update():
 def oznamy():
     # Get oznamy from database
     oznamy_list = db.execute_file('sql_scripts/select/oznamy.sql', (OZNAMY_LIMIT, ))
+
     # Convert oznamy to list and render template with them
     oznamy_list = str_to_list(oznamy_list)
+
     return render_template('oznamy.html', oznamy_list = oznamy_list)
 
 @app.route('/oznamy/update', methods=['POST', 'GET'])
+@login_required
 def get_events():
-    # Check if user is authorized to access (role 1)
-    if not authorised(1):
-        return redirect("/login")
-
     if request.method == 'GET':
         return render_template('oznamy_input.html')
 
     if request.method == 'POST':
-        # Get multi dimentional list of all oznamy and write it to database as string
+        # Get multi dimentional list of all oznamy
         oznamy_list = make_oznamy_list()
+
+        # Insert inputed data to database
         db.execute('INSERT INTO oznamy (list) VALUES (%s);', (str(oznamy_list), ) )
 
         return "Všetko prebehlo úspešne"
@@ -190,11 +159,8 @@ def homilie():
     return render_template('homilie.html', list=homilie_list)
 
 @app.route('/homilie/update', methods=["GET", "POST"])
+@login_required
 def homilie_update():
-    # Check if user is authorized to access (role 1)
-    if not authorised(1):
-        return redirect("/login")
-
     if request.method == 'GET':
         return get_html('static/homilie_input.html')
 
@@ -207,42 +173,21 @@ def homilie_update():
 
     return "Všetko prebehlo úspešne"
 
-@app.route('/historia', methods=["GET"])
-def historia():
-    return redirect('/historia/risnovce')
+@app.route('/historia/<place>', methods=["GET"])
+def historia(place):
+    return render_template(f'historia_{place}.html')
 
-@app.route('/historia/risnovce', methods=["GET"])
-def historia_risnovce():
-    return render_template('historia_risnovce.html')
+@app.route('/publikacie', methods=["GET"])
+def publikacie_main():
+    return render_template('publikacie.html')
 
-@app.route('/historia/klacany', methods=["GET"])
-def historia_klacany():
-    return render_template('historia_klacany.html')
-
-@app.route('/historia/sasinkovo', methods=["GET"])
-def historia_sasinkovo():
-    return render_template('historia_sasinkovo.html')
-
-
-@app.route('/publikacie/monografie', methods=["GET"])
-def monografie():
-    return render_template('monografie.html')
-
-@app.route('/publikacie/ucebnematerialy', methods=["GET"])
-def ucebm():
-    return render_template('ucebne_materialy.html')
+@app.route('/publikacie/<place>', methods=["GET"])
+def publikacie(place):
+    return render_template(f'{place}.html')
 
 @app.route('/kontakt', methods=["GET"])
 def kontakt():
     return render_template('kontakt.html')
-
-@app.route('/prednasky', methods=["GET"])
-def prednasky():
-    return render_template('prednasky.html')
-
-@app.route('/publikacie', methods=["GET"])
-def publikacie():
-    return render_template('publikacie.html')
 
 @app.route('/sitemap.xml')
 def sitemap():
