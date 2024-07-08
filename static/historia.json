@@ -523,14 +523,49 @@
     },
     {
       "start_date": {
-        "year": 1999
+        "year": 1999,
+        "month": 7,
+        "day": 1
       },
       "end_date": {
-        "year": 2010
+        "year": 2004,
+        "month": 7
+
       },
       "text": {
         "headline": "Marian Ondrejka",
-        "text": ""
+        "text": "nar. 30.8.1965 v Myjave, ord. 18.6.1989; kap. 1989 Senec; far. 1991 Majcichov, 15.8.1995 Kuchyňa, 1.7.1999 Rišňovce; adm. 15.7.2004 Leopoldov; poverený duchovnou službou vo väzení 1.9.2004; šk.dekan 1.8.2005 dekanát Hlohovec; po úprave diecéz 14.2.2008 bol začlenený do Trnavskej arcidiecézy"
+      }
+    },
+
+    {
+      "start_date": {
+        "year": 2004,
+        "month": 7,
+        "day": 15
+      },
+      "end_date": {
+        "year": 2007,
+        "month": 8
+      },
+      "text": {
+        "headline": "Ďuriš Pavol",
+        "text": "nar. 20.10.1973 v Šuranoch, ord. 18.6.2000; kap. 19.6.2000 Hurbanovo, 1.7.2001 Šahy, 1.7.2002 Senica, 1.7.2003 Topoľčianky; adm. 15.7.2004 Rišňovce, 22.7.2007 Petrova Ves; suspendovaný 1.11.2007"
+      }
+    },
+    {
+      "start_date": {
+        "year": 2007,
+        "month": 7,
+        "day": 22
+      },
+      "end_date": {
+        "year": 2010,
+        "month": 9
+      },
+      "text": {
+        "headline": "Krištof Jozef",
+        "text": "nar. 23.10.1970 v Ba, ord. 13.6.1998; kap. 15.6.1998 Piešťany, 1.7.1999 Želiezovce, 1.7.2000 Senica; adm. 1.7.2001 Sklabina, 1.7.2003 Nové Sady, 22.7.2007 Rišňovce; po úprave diecéz 14.2.2008 bol začlenený do Trnavskej arcidiecézy"
       }
     },
     {
