@@ -34,8 +34,14 @@
             <label for="blok{{ i }}-text{{ j }}-1">Omša za:</label>
             <input type="text" id="blok{{ i }}-text{{ j }}-1" name="blok{{ i }}-text{{ j }}-1">
 
+
             <label for="blok{{ i }}-text{{ j }}-2">Miesto</label>
-            <input type="text" id="blok{{ i }}-text{{ j }}-2" name="blok{{ i }}-text{{ j }}-2">
+            <select id="blok{{ i }}-text{{ j }}-2" name="blok{{ i }}-text{{ j }}-2">
+              <option value="">Vyberte miesto</option>
+              <option value="Rišňovce">Rišňovce</option>
+              <option value="Kľačany">Kľačany</option>
+              <option value="Sasinkovo">Sasinkovo</option>
+            </select>
   
             <label for="blok{{ i }}-cas{{ j }}">Čas:</label>
             <input type="time" id="blok{{ i }}-cas{{ j }}" name="blok{{ i }}-cas{{ j }}">
