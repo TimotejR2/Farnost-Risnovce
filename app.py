@@ -175,7 +175,11 @@ def homilie_update():
 
 @app.route('/historia/<place>', methods=["GET"])
 def historia(place):
-    return render_template(f'historia_{place}.html')
+    try:
+        return render_template(f'historia_{place}.html')
+
+    except:
+        return error(404)
 
 @app.route('/publikacie', methods=["GET"])
 def publikacie_main():
@@ -183,7 +187,12 @@ def publikacie_main():
 
 @app.route('/publikacie/<place>', methods=["GET"])
 def publikacie(place):
-    return render_template(f'{place}.html')
+    try:
+        page = render_template(f'{place}.html')
+    except:
+        page = error(404)
+
+    return page
 
 @app.route('/kontakt', methods=["GET"])
 def kontakt():
