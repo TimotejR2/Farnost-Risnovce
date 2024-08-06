@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
   <loc>https://www.risnovcefara.sk</loc>
-  <lastmod>2024-05-28</lastmod>
+  <lastmod>2024-08-06</lastmod>
   <priority>1.00</priority>
   <changefreq>weekly</changefreq>
 </url>
@@ -45,40 +45,40 @@
 <url>
   <loc>https://www.risnovcefara.sk/publikacie</loc>
   <lastmod>2024-03-09</lastmod>
-  <priority>0.60</priority>
+  <priority>0.50</priority>
   <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.risnovcefara.sk/publikacie/monografie</loc>
   <lastmod>2024-03-09</lastmod>
-  <priority>0.50</priority>
+  <priority>0.40</priority>
   <changefreq>yearly</changefreq>
 </url>
 <url>
-  <loc>https://www.risnovcefara.sk/publikacie/ucebnematerialy</loc>
+  <loc>https://www.risnovcefara.sk/publikacie/ucebne_materialy</loc>
   <lastmod>2024-03-09</lastmod>
   <priority>0.30</priority>
   <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.risnovcefara.sk/historia/risnovce</loc>
-  <lastmod>2024-05-28</lastmod>
+  <lastmod>2024-08-06</lastmod>
   <priority>0.60</priority>
-  <changefreq>monthly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 
 <url>
   <loc>https://www.risnovcefara.sk/historia/klacany</loc>
-  <lastmod>2024-05-28</lastmod>
+  <lastmod>2024-08-06</lastmod>
   <priority>0.40</priority>
-  <changefreq>monthly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 
 <url>
   <loc>https://www.risnovcefara.sk/historia/sasinkovo</loc>
-  <lastmod>2024-05-28</lastmod>
+  <lastmod>2024-08-06</lastmod>
   <priority>0.40</priority>
-  <changefreq>monthly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.risnovcefara.sk/kontakt</loc>
