@@ -5,6 +5,7 @@
     <title>Farnosť Rišňovce</title>
 {% endblock %}
 {% block main %}
+<!-- Hero image  CSS-->
 <style>
     /* The hero image */
 .hero-image {
@@ -31,25 +32,30 @@
   color: white;
 }
 </style>
-<div class="hero-image">
-    <div class="hero-text">
-      <h1 style="font-weight: bolder; font-size:2rem;">Vitajte na stránke Farnosti Rišňovce</h1>
-    </div>
 
-  </div> 
-  
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          document.querySelector('.blockspace .block .img').addEventListener('contextmenu', function(event) {
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.blockspace .block .img').forEach(function(image) {
+          image.addEventListener('contextmenu', function(event) {
               event.preventDefault();
-              alert('Plné rozlíšenie fotografíi nájdete po rozkliknutí alebo vo fotogalérii. ');
+              alert('Plné rozlíšenie fotografíi nájdete po rozkliknutí alebo vo fotogalérii.');
           });
       });
+  });
 
-      function submitForm(id) {
-          document.getElementById('postForm_' + id).submit();
-      }
-    </script>
+  function submitForm(id) {
+      document.getElementById('postForm_' + id).submit();
+  }
+</script>
+
+<!-- Hero image -->
+<div class="hero-image">
+  <div class="hero-text">
+    <h1 style="font-weight: bolder; font-size:2rem;">Vitajte na stránke Farnosti Rišňovce</h1>
+  </div>
+</div> 
+  
+  <!-- Post blocks-->
   {% for row in list %}
   <div class="blockspace">
       <div class="block content" onclick="submitForm('{{ row[0] }}')">
@@ -65,14 +71,5 @@
       </form>
   </div>
   {% endfor %}
-  
-  <script>
-      function submitForm(id) {
-          document.getElementById('postForm_' + id).submit();
-      }
-  </script>
-  
-
-
 
 {% endblock %}
