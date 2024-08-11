@@ -5,7 +5,72 @@
 {% endblock %}
 {% block main %}
 
+<!-- Photo gallery CSS-->
+<style>
+    .photo-library {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 15px;
+    }
+    
+    .photo-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 10px;
+    }
+    
+    .photo {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        aspect-ratio: 1/1;
+    }
+    
+    .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; 
+        object-position: center; 
+    }
+    
+    /* Wide aspect ratio */
+    .photo-gallery .photo:nth-child(2),
+    .photo-gallery .photo:nth-child(3),
+    .photo-gallery .photo:nth-child(4),
+    .photo-gallery .photo:nth-child(8),
+    .photo-gallery .photo:nth-child(9) {
+        grid-column: span 2;
+        aspect-ratio: 3/2; 
+    }
+    
+    /* Taller aspect ratio */
+    .photo-gallery .photo:nth-child(1),
+    .photo-gallery .photo:nth-child(5),
+    .photo-gallery .photo:nth-child(6),
+    .photo-gallery .photo:nth-child(7) {
+        grid-row: span 2;
+        aspect-ratio: 2/3; 
+    }
 
+    /* Square aspect ratio */
+    .photo-gallery .photo:nth-child(10) {
+        grid-column: span 2;
+        aspect-ratio: 1/1; 
+    }
+</style>
+
+<!-- Timeline JS-->
+<script type="text/javascript">
+    fetch('/static/historia.json')
+        .then(response => response.json())
+        .then(data => {
+            var timeline_json = data;
+            window.timeline = new TL.Timeline('timeline-embed', timeline_json, { start_at_end: true, scale_factor: 4, font: "lustria-lato" });
+        })
+        .catch(error => console.error('Error:', error));
+</script>
+
+<!-- Historia obce -->
 <div class="blockspace">
     <div class="block content">
         <h1>História obce</h1>
@@ -19,8 +84,7 @@
     </div>
 </div>
 
-<br>
-
+<!-- Kostol Mikuláša -->
 <div class="blockspace">
     <div class="block content">
         <h1>Kostol sv. Mikuláša</h1>
@@ -30,8 +94,7 @@
     </div>
 </div>
 
-<br>
-
+<!-- Kostol Najsvätejšej Trojice -->
 <div class="blockspace">
     <div class="block content">
         <h1>Kostol Najsvätejšej Trojice</h1>
@@ -45,32 +108,68 @@
     </div>
 </div>
 
-<br>
-
-<h2 style="text-align: center;">Naši kňazi</h2>
-<br>
-<link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
-<script src="/static/timeline.js"></script>
-<div id='timeline-embed' style="width: 100%; height: 600px"></div>
-<script type="text/javascript">
-    fetch('/static/historia.json')
-        .then(response => response.json())
-        .then(data => {
-            var timeline_json = data;
-            window.timeline = new TL.Timeline('timeline-embed', timeline_json, { start_at_end: true, scale_factor: 4, font: "lustria-lato" });
-        })
-        .catch(error => console.error('Error:', error));
-</script>
-
+<!-- Fotogaléria-->
 <div class="blockspace">
     <div class="block content">
-        <pre>
-            Zdroje: 
-           Némethy, Ľ., Series parochiarum et parochorum archidioecesis Strigoniensis ab antiquissimis temporibus usque annum 1894, Ostrihom 1894.
-           http://www.mariasoft.sk/knazi/
-          https://www.knihydominikani.sk/hlavna_nemethy_22?fpcmeno=risnovce
-          http://www.mariasoft.sk/knazi/ba-O.htm
-          </pre>
+        <div class="photo-library">
+            <div class="photo-gallery">
+                <figure class="photo">
+                    <img src="../static/kostol_risnovce/01_RIS_low.jpg" alt="Kríž umiestnený na oltári v kostole v Rišňovciach, detailný pohľad" loading="lazy">
+                </figure>
+                <figure class="photo">
+                    <img src="../static/kostol_risnovce/02_RIS_low.jpg" alt="Pohľad z presbytéria na interiér kostola v Rišňovciach" loading="lazy">
+                </figure>
+                <figure class="photo">
+                    <img src="../static/kostol_risnovce/03_RIS_low.jpg" alt="Pohľad na interiér kostola v Rišňovciach zo zadnej časti" loading="lazy">
+                </figure>
+                <figure class="photo">
+                    <img src="../static/kostol_risnovce/04_RIS_low.jpg" alt="Pohľad z výšky, z priestoru orgánu, na interiér kostola v Rišňovciach" loading="lazy">
+                </figure>
+                <figure class="photo">
+                    <img src="../static/kostol_risnovce/05_RIS_low.jpg" alt="Socha Ježiša na kríži v kostole v Rišňovciach, obklopená anjelmi, na pravej prednej strane" loading="lazy">
+                </figure>
+                <figure class="photo">
+                    <img src="../static/kostol_risnovce/06_RIS_low.jpg" alt="Socha Panny Márie s prebodnutým srdcom šiestimi mečmi a korunou na hlave, v kostole v Rišňovciach" loading="lazy">
+                </figure>
+                <figure class="photo">
+                    <img src="../static/kostol_risnovce/07_RIS_low.jpg" alt="Socha Svätej Trojice v kostole v Rišňovciach" loading="lazy">
+                </figure>
+                <figure class="photo">
+                    <img src="../static/kostol_risnovce/08_RIS_low.jpg" alt="Pohľad na kostol v Rišňovciach z ľavej zadnej strany, z perspektívy lavice" loading="lazy">
+                </figure>
+                <figure class="photo">
+                    <img src="../static/kostol_risnovce/09_RIS_low.jpg" alt="Historický orgán v kostole v Rišňovciach, detailný pohľad" loading="lazy">
+                </figure>
+                <figure>
+                    <a href="https://photos.app.goo.gl/1mCccskbhpt6Hgi7A" target="_blank"> 
+                    <img src="../static/more_photos.png" alt="Viac fotografii" loading="lazy">
+                    </a>
+                </figure>
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- Timeline -->
+<div>
+    <h2 style="text-align: center;">Naši kňazi</h2>
+    <br>
+    <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+    <script src="/static/timeline.js"></script>
+    <div id='timeline-embed' style="width: 100%; height: 600px"></div>
+</div>
+
+<!-- Referencie -->
+<div class="blockspace">
+    <div class="block content"  style="width: 100%;">
+        <pre>
+            Zdroje: 
+        Némethy, Ľ., Series parochiarum et parochorum archidioecesis Strigoniensis ab antiquissimis temporibus usque annum 1894, Ostrihom 1894.
+        http://www.mariasoft.sk/knazi/
+        https://www.knihydominikani.sk/hlavna_nemethy_22?fpcmeno=risnovce
+        http://www.mariasoft.sk/knazi/ba-O.htm
+        </pre>
+    </div>
+</div>
+
 {% endblock %}
