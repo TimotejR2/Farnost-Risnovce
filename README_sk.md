@@ -36,16 +36,8 @@ Viac informácií nájdete v [dokumentácii Vercel](https://vercel.com/docs/stor
 
 ## Licencia
 
-Tento projekt je licencovaný pod licenciou GPL-3.0.
+Všetky práva vyhradené
 
 ## Autor
 
 Tento projekt vytvoril [Timotej Ružička](https://github.com/TimotejR2).
-
-## Použitie kódu
-
-Neváhajte a upravte si tento kód podľa svojich potrieb. Ak potrebujete pomoc, neváhajte ma kontaktovať na adrese [timotej.ruzicka@gmail.com](mailto:timotej.ruzicka@gmail.com). Ak sa vám tento projekt zdá užitočný, zvážte, či mu dáte hviezdičku a budete ma sledovať na GitHube.
-
-## Podpora projektu
-
-Tento projekt je stále vo vývoji. Budeme vďační za akúkoľvek pomoc. Ďakujeme!

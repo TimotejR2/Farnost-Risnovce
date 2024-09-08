@@ -1,0 +1,13 @@
+Copyright (C) Timotej Ružička 2024
+
+All rights reserved.
+
+This software and associated documentation files (the "Software") are the exclusive property of Timotej Ružička. Unauthorized copying, distribution, modification, or use of the Software, in whole or in part, is strictly prohibited without prior written permission from the author.
+
+You may not:
+
+    Use, copy, modify, merge, publish, distribute, sublicense, or sell copies of the Software.
+    Reproduce any part of the Software without explicit authorization from [Tvoj Meno].
+    Use the Software for any commercial or non-commercial purposes without written consent.
+
+Permission for use, reproduction, or distribution may be granted upon request at the sole discretion of the author.

@@ -36,16 +36,8 @@ For more information, see the [Vercel documentation](https://vercel.com/docs/sto
 
 ## License
 
-This project is licensed under the GPL-3.0 License.
+All Rights Reserved
 
 ## Author
 
 This project was created by [Timotej Ružička](https://github.com/TimotejR2).
-
-## Using the Code
-
-Feel free to modify this code according to your needs. If you need help, don't hesitate to contact me at [timotej.ruzicka@gmail.com](mailto:timotej.ruzicka@gmail.com). If you find this project useful, please consider giving it a star and following me on GitHub.
-
-## Contributions
-
-This project is still under development. Any contributions to the project would be greatly appreciated. Thank you!
