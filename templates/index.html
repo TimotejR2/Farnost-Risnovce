@@ -64,7 +64,7 @@
         {% endif %}
           <h1 style="text-align: left;">{{ row[1] }}</h1>
           <p class="datum">{{ row[4] }}</p>
-          <pre>{{ row[5] }}</pre>
+          <pre>{{ row[5][0:300] }}{% if row[5] | length > 300 %}.... <strong>Zobraziť viac</strong>{% endif %}</pre>
       </div>
       <form id="postForm_{{ row[0] }}" action="/post" method="GET" style="display: none;">
           <input type="hidden" name="id" value="{{ row[0] }}">
