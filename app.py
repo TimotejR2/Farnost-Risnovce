@@ -201,3 +201,7 @@ def kontakt():
 @app.route('/sitemap.xml')
 def sitemap():
     return get_html('static/sitemap.xml')
+
+@app.route('/krizovacesta', methods=["GET"])
+def krizovacesta():
+    return render_template('krizovacesta.html')
