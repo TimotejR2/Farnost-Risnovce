@@ -87,4 +87,11 @@
   <changefreq>yearly</changefreq>
 </url>
 
+<url>
+  <loc>https://www.risnovcefara.sk/krizovacesta</loc>
+  <lastmod>2024-09-13</lastmod>
+  <priority>0.25</priority>
+  <changefreq>yearly</changefreq>
+</url>
+
 </urlset>
