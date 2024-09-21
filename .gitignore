@@ -2,3 +2,5 @@ config/postgres.sql
 .gitignore
 test2.py
 test.py
+venv
+*.pyc
