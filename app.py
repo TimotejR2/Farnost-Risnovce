@@ -8,6 +8,7 @@ from config.config import (
     OZNAMY_LIMIT,
     DELAY_BETWEEN_WRONG_LOGINS,
     SESSION_AGE_LIMIT,
+    CREATE_NEW_DB
 )
 
 
@@ -17,7 +18,8 @@ app = Flask(__name__)
 db = Database()
 
 # Create database for all posts and remove old if needed
-db.create()
+if CREATE_NEW_DB:
+    db.create()
 
 @app.errorhandler(404)
 def not_found_error(e):
