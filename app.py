@@ -60,7 +60,10 @@ def authenticate():
 
         resp.set_cookie('session',
             generate_session(request.form.get("username")),
-            max_age=SESSION_AGE_LIMIT)
+            max_age=SESSION_AGE_LIMIT,
+            samesite='Lax',
+            secure=True,
+            httponly=True)
 
         return resp
 
