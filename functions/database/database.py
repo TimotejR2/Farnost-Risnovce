@@ -3,6 +3,9 @@ import os
 from ..utils import read_file
 
 POSTGRES = os.environ.get("POSTGRES_URL")
+if not POSTGRES:
+    raise ValueError("POSTGRES_URL environment variable not set")
+
 SCHEMA_PATH = 'config/schema.sql'
 
 class Database:
