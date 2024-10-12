@@ -61,7 +61,7 @@
 
 <!-- Timeline JS-->
 <script type="text/javascript">
-    fetch('/static/historia.json')
+    fetch('/static/data/historia.json')
         .then(response => response.json())
         .then(data => {
             var timeline_json = data;
@@ -155,7 +155,7 @@
     <h2 style="text-align: center;">Naši kňazi</h2>
     <br>
     <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
-    <script src="/static/timeline.js"></script>
+    <script src="/static/js/timeline.js"></script>
     <div id='timeline-embed' style="width: 100%; height: 600px"></div>
 </div>
 

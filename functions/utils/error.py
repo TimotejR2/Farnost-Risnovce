@@ -22,4 +22,4 @@ def error(code):
 
     default_message = 'Došlo k chybe.'
 
-    return make_response(get_html.get_html(f'static/{code}.html') if code == 404 or code == 500 else error_messages.get(code, default_message), code)
+    return make_response(get_html.get_html(f'static/html/{code}.html') if code == 404 or code == 500 else error_messages.get(code, default_message), code)

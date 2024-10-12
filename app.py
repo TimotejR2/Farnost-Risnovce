@@ -23,11 +23,11 @@ if CREATE_NEW_DB:
 
 @app.errorhandler(404)
 def not_found_error(e):
-    return get_html('static/404.html'), 404
+    return get_html('static/html/404.html'), 404
 
 @app.errorhandler(500)
 def internal_error(e):
-    return get_html('static/500.html'), 500
+    return get_html('static/html/500.html'), 500
 
 
 @app.route("/logout", methods=["GET"])
@@ -47,7 +47,7 @@ def authenticate():
     if POST, saves wrong attempt time if password incorrect, returns login page.
     """
     if request.method == "GET":
-        return get_html('static/login.html')
+        return get_html('static/html/login.html')
 
     # Ensure username and password were submitted
     if not request.form.get("username") or not request.form.get("password"):
@@ -95,7 +95,7 @@ def post():
 def update():
     if request.method == 'GET':
         # Render the HTML form for updating
-        return get_html('static/update.html')
+        return get_html('static/html/update.html')
 
     if request.method == 'POST':
         if not request.form['oblast']:
@@ -167,7 +167,7 @@ def homilie():
 @login_required
 def homilie_update():
     if request.method == 'GET':
-        return get_html('static/homilie_input.html')
+        return get_html('static/html/homilie_input.html')
 
     # Insert inputed data to database
     db.execute_file('sql_scripts/user_insert/insert_homilie.sql',
@@ -205,7 +205,7 @@ def kontakt():
 
 @app.route('/sitemap.xml')
 def sitemap():
-    return get_html('static/sitemap.xml')
+    return get_html('static/data/sitemap.xml')
 
 @app.route('/krizovacesta', methods=["GET"])
 def krizovacesta():
