@@ -3,47 +3,9 @@
 {% block head %}
     <title>Farnosť Rišňovce - Oznamy</title>
     <meta name="description" content="Aktuálne oznamy z poslednej nedele pre farnosť Rišňovce a jej filiálky Sasinkovo a Kľačany. Zistite čas a miesto svätých omší, spomienky na zosnulých a dôležité udalosti vo farnosti. Pravidelné aktualizácie na každý týždeň." />
-{% endblock %}
+    <link rel="stylesheet" href="../static/css/oznamy.css">
+    {% endblock %}
 {% block main %}
-<style>
-    pre {
-    font-size: 120%;
-}
-  .events-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  th,
-  td {
-    padding: 8px;
-    text-align: left;
-    border: 1px solid #000;
-  }
-
-  .date {
-    width: 20%;
-  }
-
-  .popis {
-    width: 60%;
-  }
-
-  .popis-miestoacas{
-    width: 20%;
-  }
-
-  h1,
-  h2 {
-    text-align: center;
-  }
-
-  .block {
-    margin: 20px;
-    padding: 10px;
-  }
-
-</style>
 <h1>Oznamy</h1>\
 {% for list in oznamy_list %}
 <div class="block">
@@ -74,7 +36,7 @@
   <div class="block content">
     <strong>Kto by chcel obetovať finančnú čiastku na potreby farnosti:</strong>
     <p>IBAN: SK66 5600 0000 0008 6298 2001</p>
-    <img src="/static/pay_by_square.jpg" loading="lazy" alt="Pay by Square QR kód umožňujúci platbu naskenovaním">
+    <img src="/static/pay_by_square.jpg" loading="lazy" alt="Pay by Square QR kód umožňujúci platbu naskenovaním" class="qr_code">
     <strong>Kto by chcel obetovať finančnú čiastku na opravu kostola v Rišňovciach:</strong>
     <p>IBAN SK 91 5600 0000 0046 2879 8001</p>
   </div>

@@ -1,0 +1,46 @@
+pre {
+    font-size: 120%;
+}
+  .events-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #000;
+  }
+
+  .date {
+    width: 20%;
+  }
+
+  .popis {
+    width: 60%;
+  }
+
+  .popis-miestoacas{
+    width: 20%;
+  }
+
+  h1,
+  h2 {
+    text-align: center;
+  }
+
+  .block {
+    margin: 20px;
+    padding: 10px;
+  }
+
+  .qr_code {
+  display: block;
+  max-width: 220px; /* uprav podľa potreby */
+}
+@media (max-width: 500px) {
+  .qr_code {
+    margin: auto;
+  }
+}
