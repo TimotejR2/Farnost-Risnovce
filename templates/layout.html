@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="../static/css/style.css">
         <script type="text/javascript" src="../static/js/script.js"></script>
         
-        <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+        <link rel="icon" href="{{ file_map.pages.images }}favicon.png">
 
         <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 
@@ -31,10 +31,10 @@
     <!-- Header -->
     <header id="header">
         <div class="container d-flex flex-wrap justify-content-between ">
-            <img src="../static/icon.png" alt="Logo" style="max-width: 7vh">
+            <img src="{{ file_map.pages.images }}icon.png" alt="Logo" style="max-width: 7vh">
             <h2 class="text-primary">Farnosť Rišňovce</h2>
             <span onclick="openNav()">
-                <img src="../static/menu.png" width="30" height="30" alt="menu tlačidlo">
+                <img src="{{ file_map.pages.images }}menu.png" width="30" height="30" alt="menu tlačidlo">
             </span>
         </div>
     </header>
@@ -46,7 +46,7 @@
         <!-- Logo -->
         <a href="/" class="d-flex flex-column align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
             <svg class="bi mb-2" width="100" height="100">
-                <image href="../static/icon.png">
+                <image href="{{ file_map.pages.images }}icon.png">
                 </svg>
             <div class="text-center">
                 <span class="fs-4">Farnosť Rišňovce</span>
@@ -133,7 +133,7 @@
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
             <li class="ms-3">
             <a class="text-body-secondary" href="https://www.facebook.com/profile.php?id=61551950385267">
-                <img src="../static/facebook.png" alt="Facebook" width="24" height="24">
+                <img src="{{ file_map.pages.images }}facebook.png" alt="Facebook" width="24" height="24">
             </a></li>
         </ul>
     </footer>      

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, make_response
 from datetime import datetime
+import json
 
 from functions import *
 from config.config import (
@@ -20,6 +21,11 @@ db = Database()
 # Create database for all posts and remove old if needed
 if CREATE_NEW_DB:
     db.create()
+
+@app.context_processor
+def inject_file_map():
+    file_map = json.load(open('static/data/file_map.json', 'r'))
+    return dict(file_map=file_map)
 
 @app.errorhandler(404)
 def not_found_error(e):

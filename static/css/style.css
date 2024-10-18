@@ -10,7 +10,7 @@ h1{
   z-index: 1;
   top: 0;
   left: 0;
-  background-image: url("/static/navbar.jpeg");
+  background-image: url("/static/img/navbar.jpeg");
   background-size: contain; /* Ensure entire image fits */
   background-position: left center; /* Align to the left */
   background-color: black; /* Add black bar if width is insufficient */

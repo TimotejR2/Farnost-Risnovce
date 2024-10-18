@@ -1,0 +1,8 @@
+{
+    "pages": {
+        "kostol_risnovce": "/static/img/kostol_risnovce/",
+        "images": "/static/img/",
+        "publikacie": "/static/img/publikacie/"
+
+    }
+}
