@@ -1,83 +1,36 @@
 {% extends 'layout.html' %}
 {% block title %} Publikácie {% endblock %}
 {% block head %}
-    <title>Jozef Jurian - Publikácie</title>
-    <meta name="description" content="Prezerajte si všetky publikácie od PhDr. PaeDr. Jozefa Jurinu, PhD. Objavte diela, ktoré sa zaoberá filozofiou, kultúrou a umením. Vrátane učebných materiálov o filozofických témach pre Trnavská Univerzita teologická fakultu a Katolícka univerzita v Ružomberku" />
+    {% if category == "monografie" %}
+        <title>Jozef Jurina - Monografie</title>
+        <meta name="description" content="Publikácie PhDr. PaeDr. Jozefa Jurinu PhD. na témy umenia, kultúry a filozofie. Tituly ako Vnútro otvorené dokorán, Dotyk neba, Kríza postmodernej kultúry a ďalšie prinášajú reflexie o modernom a postmodernom svete." />
+    {% endif %}
+
+    {% if category == "ucebne_materialy" %}
+        <title>Jozef Jurina - Učebné materiály</title>
+        <meta name="description" content="Učebné materiály od autora PhDr. PaeDr. Jozefa Jurinu, PhD. s filozofickými témami pre Trnavská Univerzita teologická fakultu a Katolícka univerzita v Ružomberku.">
+    {% endif %}
+
+    {% if not category %}
+        <title>Jozef Jurian - Publikácie</title>
+        <meta name="description" content="Prezerajte si všetky publikácie od PhDr. PaeDr. Jozefa Jurinu, PhD. Objavte diela, ktoré sa zaoberá filozofiou, kultúrou a umením. Vrátane učebných materiálov o filozofických témach pre Trnavská Univerzita teologická fakultu a Katolícka univerzita v Ružomberku" />
+    {% endif %}
+
     <link rel="stylesheet" href="../static/css/publikacie.css">
 {% endblock %}
 {% block main %}
 
 <div class="publikacie_container">
 
+    {% for book in books %}
+    {% if not category or book.category == category %}
     <div class="publikacie_block">
-        <h2>Vnútro otvorené dokorán</h2>
-        <img src="{{ file_map.pages.publikacie }}vnutro_otvorene_dokoran.jpg" class="publikacie_img" loading="lazy">
+        <h2>{{ book.title }}</h2>
+        <img src="/static/img/publikacie/{{book.image }}" class="publikacie_img" loading="lazy">
     </div>
-    
-    <div class="publikacie_block">
-        <h2>Dotyk neba</h2>
-        <img src="{{ file_map.pages.publikacie }}dotyk_neba.webp" class="publikacie_img" loading="lazy">
-    </div>
-    
-    <div class="publikacie_block">
-            <h2>Keramika Ivett Axamitová </h2>
-            <img src="{{ file_map.pages.publikacie }}keramika.webp" class="publikacie_img" loading="lazy">
-    </div>
+    {% endif %}
+    {% endfor %}
 
-    <div class="publikacie_block">
-        <h2>Filozoficko-estetické reflexie o modernom a postmodernom umení</h2>
-        <img src="{{ file_map.pages.publikacie }}9.png" class="publikacie_img" loading="lazy">
-    </div>
-
-    <div class="publikacie_block">
-        <h2>Kríza postmodernej kultúry</h2>
-        <img src="{{ file_map.pages.publikacie }}8.png" class="publikacie_img" loading="lazy">
-    </div>
-
-    <div class="publikacie_block">
-        <h2>Postmodernizmus a jeho civilizačno-kulturne konzekvencie</h2>
-        <img src="{{ file_map.pages.publikacie }}3.png" class="publikacie_img" loading="lazy">
-    </div>
-
-    <div class="publikacie_block">
-        <h2>Stručný prehľad dejín filozofie Stredovek</h2>
-        <img src="{{ file_map.pages.publikacie }}5.png" class="publikacie_img" loading="lazy">
-    </div>
-
-    <div class="publikacie_block">
-        <h2>Stručný prehľad dejín filozofie - Novovek</h2>
-        <img src="{{ file_map.pages.publikacie }}2.png" class="publikacie_img" loading="lazy">
-    </div>
-
-    <div class="publikacie_block">
-        <h2>Stručný prehľad dejín filozofie Novovek</h2>
-        <img src="{{ file_map.pages.publikacie }}1.png" class="publikacie_img" loading="lazy">
-    </div>
-
-    <div class="publikacie_block">
-        <h2>Stručný prehľad dejín filozofie - Starovek</h2>
-        <img src="{{ file_map.pages.publikacie }}11.png" class="publikacie_img" loading="lazy">
-    </div>
-
-    <div class="publikacie_block">
-        <h2>Základné otázky klasickej aristotelovsko-tomistickej metafyziky</h2>
-        <img src="{{ file_map.pages.publikacie }}4.png" class="publikacie_img" loading="lazy">
-    </div>
-
-    <div class="publikacie_block">
-        <h2>Stručný prehľad dejín filozofie - Stredovek</h2>
-        <img src="{{ file_map.pages.publikacie }}6.png" class="publikacie_img" loading="lazy">
-    </div>
-
-    <div class="publikacie_block">
-        <h2>Živor v postmodernej spoločnosti</h2>
-        <img src="{{ file_map.pages.publikacie }}7.png" class="publikacie_img" loading="lazy">
-    </div>
-
-    <div class="publikacie_block">
-        <h2>Vybrané kapitoly z dejín filozofie</h2>
-        <img src="{{ file_map.pages.publikacie }}10.png" class="publikacie_img" loading="lazy">
-    </div>
 
 </div>
 {% endblock %}

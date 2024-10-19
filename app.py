@@ -12,6 +12,8 @@ from config.config import (
     CREATE_NEW_DB
 )
 
+with open('content/books.json', 'r') as f:
+    books = json.load(f)
 
 app = Flask(__name__)
 
@@ -194,16 +196,14 @@ def historia(place):
 
 @app.route('/publikacie', methods=["GET"])
 def publikacie_main():
-    return render_template('publikacie.html')
+    return render_template('publikacie.html', books = books['publikacie'])
 
 @app.route('/publikacie/<place>', methods=["GET"])
 def publikacie(place):
-    try:
-        page = render_template(f'{place}.html')
-    except:
-        page = error(404)
+    if place not in ['monografie', 'ucebne_materialy']:
+        return abort(404)
 
-    return page
+    return render_template(f'publikacie.html', books = books['publikacie'], category=place)
 
 @app.route('/kontakt', methods=["GET"])
 def kontakt():

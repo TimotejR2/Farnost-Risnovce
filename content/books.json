@@ -1,0 +1,74 @@
+{
+    "publikacie": [
+        {
+            "title": "Vnútro otvorené dokorán",
+            "image": "vnutro_otvorene_dokoran.jpg",
+            "category": "monografie"
+        },
+        {
+            "title": "Dotyk neba",
+            "image": "dotyk_neba.webp",
+            "category": "monografie"
+        },
+        {
+            "title": "Keramika Ivett Axamitová",
+            "image": "keramika.webp",
+            "category": "monografie"
+        },
+        {
+            "title": "Filozoficko-estetické reflexie o modernom a postmodernom umení",
+            "image": "9.png",
+            "category": "monografie"
+        },
+        {
+            "title": "Kríza postmodernej kultúry",
+            "image": "8.png",
+            "category": "monografie"
+        },
+        {
+            "title": "Postmodernizmus a jeho civilizačno-kulturne konzekvencie",
+            "image": "3.png",
+            "category": "monografie"
+        },
+        {
+            "title": "Stručný prehľad dejín filozofie Stredovek",
+            "image": "5.png",
+            "category": "ucebne_materialy"
+        },
+        {
+            "title": "Stručný prehľad dejín filozofie - Novovek",
+            "image": "2.png",
+            "category": "ucebne_materialy"
+        },
+        {
+            "title": "Stručný prehľad dejín filozofie Novovek",
+            "image": "1.png",
+            "category": "ucebne_materialy"
+        },
+        {
+            "title": "Stručný prehľad dejín filozofie - Starovek",
+            "image": "11.png",
+            "category": "ucebne_materialy"
+        },
+        {
+            "title": "Základné otázky klasickej aristotelovsko-tomistickej metafyziky",
+            "image": "4.png",
+            "category": "monografie"
+        },
+        {
+            "title": "Stručný prehľad dejín filozofie - Stredovek",
+            "image": "6.png",
+            "category": "ucebne_materialy"
+        },
+        {
+            "title": "Živor v postmodernej spoločnosti",
+            "image": "7.png",
+            "category": "monografie"
+        },
+        {
+            "title": "Vybrané kapitoly z dejín filozofie",
+            "image": "10.png",
+            "category": "ucebne_materialy"
+        }
+    ]
+}
