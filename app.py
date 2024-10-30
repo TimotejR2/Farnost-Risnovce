@@ -201,7 +201,7 @@ def publikacie_main():
 @app.route('/publikacie/<place>', methods=["GET"])
 def publikacie(place):
     if place not in ['monografie', 'ucebne_materialy']:
-        return abort(404)
+        return error(404)
 
     return render_template(f'publikacie.html', books = books['publikacie'], category=place)
 
@@ -211,7 +211,7 @@ def book(selected_book):
         
         if book['id'] == selected_book:
             return render_template('kniha.html', book = book)
-    return abort(404)
+    return error(404)
 
 
 @app.route('/kontakt', methods=["GET"])

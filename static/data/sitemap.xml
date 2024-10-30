@@ -86,4 +86,88 @@
   <priority>0.50</priority>
   <changefreq>yearly</changefreq>
 </url>
+<url>
+    <loc>https://www.risnovcefara.sk/publikacie/kniha/dotyk_neba</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+</url>
+<url>
+    <loc>https://www.risnovcefara.sk/publikacie/kniha/filozoficko_esteticka_reflexie_o_modernom_a_postmodernom_umeni</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+</url>
+<url>
+    <loc>https://www.risnovcefara.sk/publikacie/kniha/keramika_ivett_axamitova</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+</url>
+<url>
+    <loc>https://www.risnovcefara.sk/publikacie/kniha/kriza_postmodernej_kultury</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+</url>
+<url>
+    <loc>https://www.risnovcefara.sk/publikacie/kniha/postmodernizmus_a_jeho_civilizacne_konzekvencie</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+</url>
+<url>
+    <loc>https://www.risnovcefara.sk/publikacie/kniha/strucny_prehazad_dejin_krestanskej_filozofie_stredovek</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+</url>
+<url>
+    <loc>https://www.risnovcefara.sk/publikacie/kniha/strucny_prehlad_dejin_filozofie_novovek</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+</url>
+<url>
+    <loc>https://www.risnovcefara.sk/publikacie/kniha/strucny_prehlad_dejin_filozofie-novovek</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+</url>
+<url>
+    <loc>https://www.risnovcefara.sk/publikacie/kniha/strucny_prehlad_dejin_filozofie-starovek</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+</url>
+<url>
+    <loc>https://www.risnovcefara.sk/publikacie/kniha/strucny_prehlad_dejin_filozofie-stredovek</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+</url>
+<url>
+    <loc>https://www.risnovcefara.sk/publikacie/kniha/vnutro_otvorene_dokoran</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+</url>
+<url>
+    <loc>https://www.risnovcefara.sk/publikacie/kniha/vybrane_kapitoly_z_dejin_filozofie</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+</url>
+<url>
+    <loc>https://www.risnovcefara.sk/publikacie/kniha/zakladne_otazky_klasickej_aristotelovsko-tomistickej_metafyziky</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+</url>
+<url>
+    <loc>https://www.risnovcefara.sk/publikacie/kniha/zivot_v_postmodernej_spolocnosti</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+</url>
 </urlset>
