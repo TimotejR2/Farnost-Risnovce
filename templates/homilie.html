@@ -2,29 +2,48 @@
 {% block title %} Homílie {% endblock %}
 {% block head %}
     <title>Farnosť Rišňovce - Homílie</title>
+    {% if not data %}
     <meta name="description" content="Archív nedeľných homílií PhDr. PaeDr. Jozefa Jurinu PhD., ktoré prinášajú myšlienky a posolstvá k aktuálnym evanjeliám. Prečítajte si podnetné úvahy na každú nedeľu." />
+    {% endif %}
+    {% if data %}
+    <meta name="description" content="Kázeň z {{ data[1]}} s názvom {{ data[3]}} od autora PhDr. PaeDr. Jozefa Jurinu, PhD. Prečítajte si podnetné úvahy na každú nedeľu." />
+    {% endif %}
     <link rel="stylesheet" href="../static/css/homilie.css">
 {% endblock %}
 {% block main %}
 
-<div class="blockspace">
-    <div class="block content">
-        <form action="/homilie" method="post">
-            <label for="date">Hľadať podľa dátumu:</label>
-            <input type="date" id="date" name="date" required>
-            <input type="submit" value="Hľadať">
-        </form>
+{% if data %}
+    <div class="blockspace">
+        <div class="block content">
+            <h1>{{ data[3] }}</h1>
+            <em>{{ data[1] }}</em>
+            <h4>{{ data[2] }}</h4>
+            <pre>{{ data[4] }}</pre>
+        </div>
     </div>
-</div>
-{% for row in list %}
-<div class="blockspace">
-    <div class="block content">
-        <h1>{{ row[3] }}</h1>
-        <em>{{ row[1] }}</em>
-        <h4>{{ row[2] }}</h4>
-        <pre>{{ row[4] }}</pre>
+{% endif %}
+
+{% if not data %}
+    <div class="blockspace">
+        <div class="block content">
+            <form action="/homilie" method="post">
+                <label for="date">Hľadať podľa dátumu:</label>
+                <input type="date" id="date" name="date" required>
+                <input type="submit" value="Hľadať">
+            </form>
+        </div>
     </div>
-</div>
-{% endfor %}
+
+    {% for row in list %}
+    <div class="blockspace">
+        <a href="homilie//{{ row[1] }}" class="block content">
+            <h1>{{ row[3] }}</h1>
+            <em>{{ row[1] }}</em>
+            <h4>{{ row[2] }}</h4>
+            <pre>{{ row[4] }}</pre>
+        </a>
+    </div>
+    {% endfor %}
+{% endif %}
 
 {% endblock %}

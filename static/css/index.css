@@ -22,11 +22,3 @@
   transform: translate(-50%, -50%);
   color: white;
 }
-a {
-  text-decoration: none;
-  color: inherit;
-}
-a:hover {
-  text-decoration: none;
-  color: inherit;
-}

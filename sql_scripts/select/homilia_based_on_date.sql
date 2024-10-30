@@ -1,0 +1,1 @@
+SELECT * FROM homilie WHERE datum = (%s);

@@ -172,6 +172,16 @@ def homilie():
     homilie_list = db.read_table("homilie", limit = HOMILIE_LIMIT)
     return render_template('homilie.html', list=homilie_list)
 
+@app.route('/homilie/<datum>', methods=["GET"])
+def kazen(datum):
+    try:
+        homilia = db.execute_file('sql_scripts/select/homilia_based_on_date.sql', args=(datum, ))[0]
+
+    except:
+        return error(404)
+        
+    return render_template('homilie.html', data=homilia)
+
 @app.route('/homilie/update', methods=["GET", "POST"])
 @login_required
 def homilie_update():
