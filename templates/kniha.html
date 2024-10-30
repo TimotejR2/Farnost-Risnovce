@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block head %}
+    <title>{{ book.title }}</title>
+    <link rel="stylesheet" href="/static/css/book.css">
+{% endblock %}
+{% block main %}
+<style>
+
+    h2{
+        text-align: center;
+        display: flex;
+        font-size: x-large;
+    }
+    img{
+        display: flex;
+        }
+</style>
+<div class="blockspace">
+    <img src="{{ file_map.pages.publikacie }}{{ book.image }}" alt="Obalka knihy {{ book.title }} od autora {{ book.author }}{% if book.year %} z roku {{ book.year }}{% endif %}.">
+    <div class="block content">
+        <h1>{{ book.title }}</h1>
+        <h2>{{ book.subheading }}</h2>
+        <p class="author">{{ book.author }}</p>
+        <p class="author">{{ book.additional_authors }}</p>
+        <p class="year">{{ book.year }}</p>
+    </div>
+</div>
+
+{% endblock %}

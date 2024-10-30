@@ -205,6 +205,10 @@ def publikacie(place):
 
     return render_template(f'publikacie.html', books = books['publikacie'], category=place)
 
+@app.route('/publikacie/kniha/<book>', methods=["GET"])
+def book(book):
+   return render_template('kniha.html', book = books['publikacie'][0])
+
 @app.route('/kontakt', methods=["GET"])
 def kontakt():
     return render_template('kontakt.html')
