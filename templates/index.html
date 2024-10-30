@@ -28,18 +28,19 @@
   <!-- Post blocks-->
   {% for row in list %}
   <div class="blockspace">
-      <div class="block content" onclick="submitForm('{{ row[0] }}')">
+    <a href="/post?id={{ row[0] }}" class="block content">
         {% if row[2] and row[2] != '/static/images/' %}
         <img src="{{ row[2].replace('.', '_low.')}}" alt="{% if row[3] %}{{ row[3] }}{% else %}Fotografia z udalostí vo farnosti{% endif %}" class="img" loading="lazy">
         {% endif %}
-          <h1 style="text-align: left;">{{ row[1] }}</h1>
-          <p class="datum">{{ row[4] }}</p>
-          <pre>{{ row[5][0:300] }}{% if row[5] | length > 300 %}.... <strong>Zobraziť viac</strong>{% endif %}</pre>
-      </div>
-      <form id="postForm_{{ row[0] }}" action="/post" method="GET" style="display: none;">
-          <input type="hidden" name="id" value="{{ row[0] }}">
-      </form>
-  </div>
+        <h1 style="text-align: left;">{{ row[1] }}</h1>
+        <p class="datum">{{ row[4] }}</p>
+        <pre>{{ row[5][0:300] }}{% if row[5] | length > 300 %}.... <strong>Zobraziť viac</strong>{% endif %}</pre>
+    </a>
+</div>
+
+
+
+
   {% endfor %}
 
 {% endblock %}

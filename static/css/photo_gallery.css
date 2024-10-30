@@ -1,0 +1,50 @@
+.photo-library {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.photo {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    aspect-ratio: 1/1;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    object-position: center; 
+}
+
+/* Wide aspect ratio */
+.photo-gallery .photo:nth-child(2),
+.photo-gallery .photo:nth-child(3),
+.photo-gallery .photo:nth-child(4),
+.photo-gallery .photo:nth-child(8),
+.photo-gallery .photo:nth-child(9) {
+    grid-column: span 2;
+    aspect-ratio: 3/2; 
+}
+
+/* Taller aspect ratio */
+.photo-gallery .photo:nth-child(1),
+.photo-gallery .photo:nth-child(5),
+.photo-gallery .photo:nth-child(6),
+.photo-gallery .photo:nth-child(7) {
+    grid-row: span 2;
+    aspect-ratio: 2/3; 
+}
+
+/* Square aspect ratio */
+.photo-gallery .photo:nth-child(10) {
+    grid-column: span 2;
+    aspect-ratio: 1/1; 
+}
