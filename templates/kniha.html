@@ -2,6 +2,16 @@
 {% block head %}
     <title>{{ book.title }}</title>
     <link rel="stylesheet" href="/static/css/book.css">
+    <meta name="description" content="
+        {% if page.title %} Kniha {{ page.title }}{% endif %}
+        {% if page.author %} od autora {{ page.author }}{% endif %}
+        {% if page.additional_authors %} a spoluautora {{ page.additional_authors }}{% endif %}
+        {% if page.year %}, publikovaná v roku {{ page.year }}{% endif %}
+        {% if page.publishers %} vydavateľstvom {{ page.publishers }}{% endif %}
+        {% if page.physical_description %}. Obsahuje {{ page.physical_description }}{% endif %}
+        {% if page.key_words %}. Kľúčové slová: {{ page.key_words }}{% endif %}
+        {% if page.location %}. Kniha je dostupná v {{ page.location }}{% endif %}
+    ">
 {% endblock %}
 {% block main %}
 
@@ -12,7 +22,7 @@
 
     <div class="book-page">
         <div class="book-image">
-            <img src="{{ file_map.pages.publikacie }}{{ book.image }}" alt="Obalka knihy {{ book.title }} od autora {{ book.author }}{% if book.year %} z roku {{ book.year }}{% endif %}.">
+            <img src="{{ file_map.pages.publikacie }}{{ book.image }}" alt="Obálka knihy {{ book.title }} od autora {{ book.author }}{% if book.year %} z roku {{ book.year }}{% endif %}.">
         </div>
         <div class="book-info">
             
