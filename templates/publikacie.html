@@ -22,9 +22,10 @@
 
 <div class="publikacie_container">
 
+
     {% for book in books %}
     {% if not category or book.category == category %}
-    <div class="publikacie_block">
+    <div class="publikacie_block" onclick="window.location.href='/publikacie/kniha/{{ book.id }}'"> 
         <h2>{{ book.title }}</h2>
         <img src="/static/img/publikacie/{{ book.image }}" class="publikacie_img" loading="lazy" alt="Obálka knihy {{ book.title }} od autora PhDr. PaeDr. Jozefa Jurinu, PhD{% if book.year %} z roku {{ book.year }}{% endif %}.">
     </div>
