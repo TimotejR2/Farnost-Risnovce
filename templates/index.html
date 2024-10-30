@@ -1,52 +1,22 @@
 {% extends 'layout.html' %}
-{% block title %} Farnosť Rišňovce {% endblock %}
 {% block head %}
-    <title>Farnosť Rišňovce</title>
+    {% if miesto %}
+      <title>Udalosti z {{ miesto}}</title>
+    {% endif %}
+    {% if not miesto %}
+      <title> Udalosti z farnosti Rišňovce</title>
+    {% endif %}
+    <link rel="stylesheet" href="/static/css/index.css">
+    <script src="/static/js/image_rightclick.js"></script>
+
+    {% if miesto %}
+      <meta name="description" content="Sledujte najnovšie udalosti a oznamy o podujatiach z {{ miesto}} a mnoho iného." />
+    {% endif %}
+    {% if not miesto %}
     <meta name="description" content="Sledujte najnovšie udalosti a oznamy z farnosti Rišňovce, vrátane filiálok Kľačany a Sasinkovo. Buďte informovaní o dôležitých aktivitách a komunitných podujatiach." />
+    {% endif %}
 {% endblock %}
 {% block main %}
-<!-- Hero image  CSS-->
-<style>
-    /* The hero image */
-.hero-image {
-  /* "linear-gradient" to add a darken background effect to the image.*/
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/img/hero.jpg");
-
-  /* Set a specific height */
-  height: 40%;
-
-  /* Position and center the image to scale nicely on all screens */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-}
-
-/* Place text in the middle of the image */
-.hero-text {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-}
-</style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('.blockspace .block .img').forEach(function(image) {
-          image.addEventListener('contextmenu', function(event) {
-              event.preventDefault();
-              alert('Plné rozlíšenie fotografíi nájdete po rozkliknutí alebo vo fotogalérii.');
-          });
-      });
-  });
-
-  function submitForm(id) {
-      document.getElementById('postForm_' + id).submit();
-  }
-</script>
 
 <!-- Hero image -->
 <div class="hero-image">

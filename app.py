@@ -159,8 +159,9 @@ def index():
     except (ValueError, IndexError):
         return error(404)
 
+    miesto = ['Rišňoviec', 'obce Kľačany', 'Sasinkova', 'Cirkvy'][oblast - 1]
     posts_list = db.execute_file("sql_scripts/select/posts.sql", (oblast, POSTS_LIMIT))
-    return render_template('index.html', list = posts_list)
+    return render_template('index.html', list = posts_list, miesto = miesto)
 
 @app.route('/homilie',  methods=["GET", "POST"])
 def homilie():
