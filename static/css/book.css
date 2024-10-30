@@ -1,0 +1,68 @@
+.book-page {
+    display: flex;
+    flex-wrap: wrap; /* umožní zalomenie textu pod obrázok pri nedostatku miesta */
+    align-items: flex-start;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+@media (max-width: 600px)  {
+    .book-image img  {
+        max-width: 150px;
+    }
+}
+.book-image img {
+    max-width: 5x;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-info {
+    max-width: 80%;
+}
+.book-info {
+    flex: 1; /* Zaberie zvyšok dostupného priestoru vedľa obrázka */
+    min-width: 200px; /* Zaručí, že text sa vedľa obrázka zmestí, ak je dostatok miesta */
+}
+
+.book-title {
+    font-size: 2rem;
+    color: #333;
+    margin: 0 0 10px;
+}
+
+.book-subheading {
+    font-size: 1.5rem;
+    color: #555;
+    margin: 0 0 15px;
+    text-align: center;
+}
+
+.book-author, 
+.book-additional-authors, 
+.book-publisher, 
+.book-year, 
+.book-isbn, 
+.book-document-type, 
+.book-ean, 
+.book-keywords, 
+.book-language,
+.book-category, 
+.book-location, 
+.book-notes,
+.book-physical-description {
+    font-size: 1rem;
+    color: #777;
+    margin: 5px 0;
+}
+
+.book-description {
+    font-size: 1.1rem;
+    color: #444;
+    margin: 15px 0;
+}
+
+.book-info p {
+    line-height: 1.6;
+}

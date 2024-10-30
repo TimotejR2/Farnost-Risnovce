@@ -205,9 +205,14 @@ def publikacie(place):
 
     return render_template(f'publikacie.html', books = books['publikacie'], category=place)
 
-@app.route('/publikacie/kniha/<book>', methods=["GET"])
-def book(book):
-   return render_template('kniha.html', book = books['publikacie'][0])
+@app.route('/publikacie/kniha/<selected_book>', methods=["GET"])
+def book(selected_book):
+    for book in books['publikacie']:
+        
+        if book['id'] == selected_book:
+            return render_template('kniha.html', book = book)
+    return abort(404)
+
 
 @app.route('/kontakt', methods=["GET"])
 def kontakt():

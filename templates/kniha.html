@@ -4,26 +4,61 @@
     <link rel="stylesheet" href="/static/css/book.css">
 {% endblock %}
 {% block main %}
-<style>
 
-    h2{
-        text-align: center;
-        display: flex;
-        font-size: x-large;
-    }
-    img{
-        display: flex;
-        }
-</style>
 <div class="blockspace">
-    <img src="{{ file_map.pages.publikacie }}{{ book.image }}" alt="Obalka knihy {{ book.title }} od autora {{ book.author }}{% if book.year %} z roku {{ book.year }}{% endif %}.">
     <div class="block content">
-        <h1>{{ book.title }}</h1>
-        <h2>{{ book.subheading }}</h2>
-        <p class="author">{{ book.author }}</p>
-        <p class="author">{{ book.additional_authors }}</p>
-        <p class="year">{{ book.year }}</p>
+        <h1 class="book-title">{{ book.title }}</h1>
+        <h2 class="book-subheading">{{ book.subheading }}</h2>
+
+    <div class="book-page">
+        <div class="book-image">
+            <img src="{{ file_map.pages.publikacie }}{{ book.image }}" alt="Obalka knihy {{ book.title }} od autora {{ book.author }}{% if book.year %} z roku {{ book.year }}{% endif %}.">
+        </div>
+        <div class="book-info">
+            
+            <!-- Informácie umiestnené pod obrázkom -->
+            <div class="book-details">
+                <p class="book-author">Autor: {{ book.author }}</p>
+                {% if book.additional_authors %}
+                <p class="book-additional-authors">Spoluautor: {{ book.additional_authors }}</p>
+                {% endif %}
+                {% if book.publishers %}
+                <p class="book-publisher">{{ book.publishers }}</p>
+                {% endif %}
+                {% if book.year %}
+                <p class="book-year">Rok vydania: {{ book.year }}</p>
+                {% endif %}
+                {% if book.ISBN %}
+                <p class="book-isbn">ISBN: {{ book.ISBN }}</p>
+                {% endif %}
+
+                {% if book.document_type %}
+                <p class="book-document-type">Druh: {{ book.document_type }}</p>
+                {% endif %}
+                {% if book.EAN %}
+                <p class="book-ean">EAN: {{ book.EAN }}</p>
+                {% endif %}
+                {% if book.key_words %}
+                <p class="book-keywords">Kľúčové slová: {{ book.key_words }}</p>
+                {% endif %}
+                {% if book.language %}
+                <p class="book-language">Jazyk: {{ book.language }}</p>
+                {% endif %}
+            </div>
+            
+            <p class="book-description">{{ book.description }}</p>
+            {% if book.location %}
+            <p class="book-location">Dostupnosť: {{ book.location }}</p>
+            {% endif %}
+            {% if book.physical_description %}
+            <p class="book-physical-description">{{ book.physical_description }}</p>
+            {% endif %}
+            <p class="book-notes">{{ book.notes }}</p>
+        </div>
     </div>
+
+    </div>
+
 </div>
 
 {% endblock %}
