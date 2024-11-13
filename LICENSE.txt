@@ -1,4 +1,4 @@
-Copyright (C) Timotej Ružička 2024
+Copyright © Timotej Ružička 2024
 
 All rights reserved.
 
@@ -7,7 +7,21 @@ This software and associated documentation files (the "Software") are the exclus
 You may not:
 
     Use, copy, modify, merge, publish, distribute, sublicense, or sell copies of the Software.
-    Reproduce any part of the Software without explicit authorization from [Tvoj Meno].
+    Reproduce any part of the Software without explicit authorization from Timotej Ružička.
     Use the Software for any commercial or non-commercial purposes without written consent.
 
 Permission for use, reproduction, or distribution may be granted upon request at the sole discretion of the author.
+
+Autorské práva © Timotej Ružička 2024
+
+Všetky práva vyhradené.
+
+Tento softvér a súvisiace dokumentačné súbory (ďalej len „softvér“) sú výlučným vlastníctvom Timoteja Ružičku. Neoprávnené kopírovanie, šírenie, modifikácia alebo používanie softvéru, či už vcelku alebo po častiach, je bez predchádzajúceho písomného súhlasu autora prísne zakázané.
+
+Nesmiete:
+
+    Používať, kopírovať, upravovať, publikovať, distribuovať, sublicencovať alebo predávať kópie softvéru.
+    Reprodukovať akúkoľvek časť softvéru bez výslovného povolenia od Timoteja Ružičku.
+    Používať softvér na akékoľvek komerčné alebo nekomerčné účely bez písomného súhlasu.
+
+Povolenie na používanie, reprodukciu alebo distribúciu môže byť udelené na základe žiadosti podľa výhradného uváženia autora.
