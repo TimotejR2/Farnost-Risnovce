@@ -229,9 +229,9 @@ def book(selected_book):
 def kontakt():
     return render_template('kontakt.html')
 
-@app.route('/sitemap.xml')
-def sitemap():
-    return get_html('static/data/sitemap.xml')
+@app.route('/robots.txt', methods=["GET"])
+def robots():
+    return get_html('static/data/robots.txt')
 
 @app.route('/krizovacesta', methods=["GET"])
 def krizovacesta():

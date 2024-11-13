@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /update
+Disallow: /homilie/update
+Disallow: /oznamy/update
+Sitemap: https://www.risnovcefara.sk/static/data/sitemap.xml

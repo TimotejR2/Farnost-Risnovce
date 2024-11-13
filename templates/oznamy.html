@@ -6,11 +6,10 @@
     <link rel="stylesheet" href="../static/css/oznamy.css">
     {% endblock %}
 {% block main %}
-<h1>Oznamy</h1>\
 {% for list in oznamy_list %}
 <div class="block">
   <div>
-    <h2>Oznamy na {{ list[0] }}</h2>
+    <h1>Oznamy na {{ list[0] }}</h1>
     <table class="events-table">
       <tr>
         <th class="date">Dátum</th>

@@ -139,3 +139,16 @@ a:hover {
   text-decoration: none;
   color: inherit;
 }
+@media (min-width: 1200px) {
+  .block-title {
+    font-size: 2.5rem;
+  }
+}
+
+.block-title {
+  font-size: calc(1.8rem + 0.4vw);
+  margin-top: 0;
+  margin-bottom: .5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}

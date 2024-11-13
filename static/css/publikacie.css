@@ -27,4 +27,6 @@ h2{
     font-family:verdana;
     font-weight: bold;
     font-size: 150%;
+    margin-top: 0;
+    margin-bottom: .5rem;
 }
