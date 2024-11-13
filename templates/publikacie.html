@@ -16,13 +16,23 @@
         <meta name="description" content="Prezerajte si všetky publikácie od PhDr. PaeDr. Jozefa Jurinu, PhD. Objavte diela, ktoré sa zaoberá filozofiou, kultúrou a umením. Vrátane učebných materiálov o filozofických témach pre Trnavská Univerzita teologická fakultu a Katolícka univerzita v Ružomberku" />
     {% endif %}
 
-    <link rel="stylesheet" href="../static/css/publikacie.css">
+    <link rel="stylesheet" href="/static/css/publikacie.css">
 {% endblock %}
 {% block main %}
 
+{% if category == "monografie" %}
+    <h1>Jozef Jurina - Monografie</h1>
+{% endif %}
+
+{% if category == "ucebne_materialy" %}
+    <h1>Jozef Jurina - Učebné materiály</h1>
+{% endif %}
+
+{% if not category %}
+    <h1>Jozef Jurian - Publikácie</h1>
+{% endif %}
+
 <div class="publikacie_container">
-
-
     {% for book in books %}
     {% if not category or book.category == category %}
     <div class="publikacie_block" onclick="window.location.href='/publikacie/kniha/{{ book.id }}'"> 

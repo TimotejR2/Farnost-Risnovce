@@ -6,3 +6,7 @@
     object-fit: contain;
     object-position: center;
 }
+
+h1 {
+    text-align: left;
+}

@@ -8,7 +8,7 @@
     {% if data %}
     <meta name="description" content="Kázeň z {{ data[1]}} s názvom {{ data[3]}} od autora PhDr. PaeDr. Jozefa Jurinu, PhD. Prečítajte si podnetné úvahy na každú nedeľu." />
     {% endif %}
-    <link rel="stylesheet" href="../static/css/homilie.css">
+    <link rel="stylesheet" href="/static/css/homilie.css">
 {% endblock %}
 {% block main %}
 
@@ -38,8 +38,8 @@
     <div class="blockspace">
         <a href="homilie//{{ row[1] }}" class="block content">
             <h1>{{ row[3] }}</h1>
-            <em>{{ row[1] }}</em>
-            <h4>{{ row[2] }}</h4>
+            <p class="datum">{{ row[1] }}</p>
+            <strong>{{ row[2] }}</strong>
             <pre>{{ row[4] }}</pre>
         </a>
     </div>

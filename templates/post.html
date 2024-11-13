@@ -2,13 +2,13 @@
 {% block title %} Farnosť Rišňovce {% endblock %}
 {% block head %}
     <title>Farnosť Rišňovce - {{ text[1] }}</title>
-    <link rel="stylesheet" href="../static/css/post.css">
+    <link rel="stylesheet" href="/static/css/post.css">
 {% endblock %}
 {% block main %}
 
 <div class="blockspace">
     <div class="block content">
-        <h1 style="text-align: left;">{{ text[1] }}</h1>
+        <h1>{{ text[1] }}</h1>
         <p class="datum">{{ text[4] }}</p>
         <pre>{{ text[5] }}</pre>
         {% for image in text[2] %}

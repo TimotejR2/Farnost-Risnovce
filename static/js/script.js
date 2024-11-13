@@ -38,7 +38,7 @@ function removeActiveClass() {
 
 // Open sidenav
 function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("sidenav").style.width = "250px";
   mainElement.style.marginLeft = '250px';
   headerElement.style.visibility = "hidden";
   document.getElementById("header").style.maxHeight = '0';
@@ -46,7 +46,7 @@ function openNav() {
 
 // Close sidenav
 function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("sidenav").style.width = "0";
   mainElement.style.marginLeft = '0';
   headerElement.style.visibility = "visible";
   document.getElementById("header").style.maxHeight = '120px';
