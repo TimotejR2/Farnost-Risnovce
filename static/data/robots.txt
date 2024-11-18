@@ -6,4 +6,7 @@ Disallow: /login
 Disallow: /update
 Disallow: /homilie/update
 Disallow: /oznamy/update
+Disallow: /historia$
+Allow: /historia/
+Disallow: /publikacie/ucebnematerialy
 Sitemap: https://www.risnovcefara.sk/static/data/sitemap.xml
