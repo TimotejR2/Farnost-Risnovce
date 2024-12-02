@@ -4,6 +4,7 @@
     <meta name="description" content="História obce Rišňovce a jej kostolov. Prvá zmienka z roku 1272, súvislosť s uhorskou šľachtou a tureckým vpádom. Detaily o Kostole sv. Mikuláša z r. 1323 a neskorobarokovom Kostole Najsvätejšej Trojice, dokončenom v r. 1775. Časová os kňazov od roku 1332 po súčasnosť." />
     <link rel="stylesheet" href="/static/css/photo_gallery.css">
     <link rel="stylesheet" href="/static/css/historia.css">
+    <script src="/static/js/timtline_table.js"></script>
 {% endblock %}
 {% block main %}
 
@@ -96,6 +97,24 @@
     <script src="/static/js/timeline.js"></script>
     <script src="/static/js/tiimeline_run.js"></script>
     <div id='timeline-embed' style="width: 100%; height: 600px"></div>
+</div>
+
+<!-- Timeline table -->
+<center><button onclick="togglePriest_list()" >Zobraziť ako tabuľku</button></center>
+<div class="blockspace" id="priest_list" style="display: none;">
+    <div class="block content">
+            <table id="priest_list-table">
+              <thead>
+                <tr>
+                  <th>Roky</th>
+                  <th>Mená a Životopis</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Dynamicky generované údaje -->
+              </tbody>
+            </table>
+    </div>
 </div>
 
 <!-- Referencie -->
