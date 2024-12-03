@@ -1,0 +1,22 @@
+#sidenav {
+    visibility: hidden;
+    width: 0;
+}
+
+#main {
+    margin-left: 0px;
+}
+
+@media screen and (min-width: 700px) {
+    #sidenav {
+        visibility: visible;
+        width: 250px;
+    }
+    #header{
+        max-height: 0px;
+        visibility: hidden;
+    }
+    #main {
+    margin-left: 250px;
+}
+}
