@@ -1,24 +1,35 @@
 {% extends 'layout.html' %}
 {% block head %}
+    <!-- Title and description -->
     {% if miesto %}
-      <title>Udalosti z {{ miesto}}</title>
+    <title>Udalosti z {{ miesto}}</title>
+    <meta name="description" content="Sledujte najnovšie udalosti a oznamy o podujatiach z {{ miesto}} a mnoho iného." />
     {% endif %}
     {% if not miesto %}
-      <title> Udalosti z farnosti Rišňovce</title>
-    {% endif %}
-    <link rel="stylesheet" href="/static/css/index.css?v=1.2">
-    <script src="/static/js/image_rightclick.js"></script>
-    <link rel="canonical" href="https://www.risnovcefara.sk/">
-
-    {% if miesto %}
-      <meta name="description" content="Sledujte najnovšie udalosti a oznamy o podujatiach z {{ miesto}} a mnoho iného." />
-    {% endif %}
-    {% if not miesto %}
+    <title> Udalosti z farnosti Rišňovce</title>
     <meta name="description" content="Sledujte najnovšie udalosti a oznamy z farnosti Rišňovce, vrátane filiálok Kľačany a Sasinkovo. Buďte informovaní o dôležitých aktivitách a komunitných podujatiach." />
     {% endif %}
+
+    <!-- Canonical link -->
+    {% if page == 1 and not miesto%}
+    <link rel="canonical" href="https://www.risnovcefara.sk/">
+    {% endif %}
+    {% if page == 1 and miesto %}
+    <link rel="canonical" href="https://www.risnovcefara.sk/?oblast={{ oblast }}">
+    {% endif %}
+
+    <!-- Links to previous and next page -->
+    {% if page > 1 %}
+    <link rel="prev" href="/page/{{ page - 1 }}{% if oblast %}?oblast={{ oblast }}{% endif %}" />
+    {% endif %}
+    <link rel="next" href="/page/{{ page + 1 }}{% if oblast %}?oblast={{ oblast }}{% endif %}" />
+
+    <!-- Imports-->
+    <link rel="stylesheet" href="/static/css/index.css?v=1.2">
+    <link rel="stylesheet" href="/static/css/next_button.css">
+    <script src="/static/js/image_rightclick.js"></script>
 {% endblock %}
 {% block main %}
-
 <!-- Hero image -->
 <div class="hero-image">
   <div class="hero-text">
@@ -38,10 +49,17 @@
         <pre>{{ row[5][0:300] }}{% if row[5] | length > 300 %}.... <strong>Zobraziť viac</strong>{% endif %}</pre>
     </a>
 </div>
-
-
-
-
   {% endfor %}
-
+<!-- Button for next and previous page -->
+<div class="pagination-wrapper">
+  <div class="pagination">
+    {% if page > 1 %}
+      <a href="/page/{{ page - 1 }}{% if oblast %}?oblast={{ oblast }}{% endif %}" class="pagination-button prev">Predchádzajúce</a>
+    {% endif %}
+    
+    {% if page %}
+      <a href="/page/{{ page + 1 }}{% if oblast %}?oblast={{ oblast }}{% endif %}" class="pagination-button next">Nasledujúce</a>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}

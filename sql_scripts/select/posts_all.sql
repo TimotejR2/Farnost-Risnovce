@@ -1,1 +1,0 @@
-SELECT * FROM posts ORDER BY id DESC LIMIT %s;

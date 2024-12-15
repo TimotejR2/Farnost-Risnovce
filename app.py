@@ -147,21 +147,27 @@ def get_events():
 
         return "Všetko prebehlo úspešne"
 
+
+
 @app.route('/', methods=["GET"])
 def index():
-    # Get list of all news and render template with them
-    if not request.args.get('oblast'):
-        posts_list = db.execute_file("sql_scripts/select/posts_all.sql", (POSTS_LIMIT, ))
-        return render_template('index.html', list = posts_list)
+    oblast, miesto = get_oblast_and_miesto()
+    posts_list = db.execute_file("sql_scripts/select/posts.sql", (oblast, oblast, POSTS_LIMIT, 0))
+    miesto = None
+    if oblast != None:
+        miesto = ['Rišňoviec', 'obce Kľačany', 'Sasinkova', 'Cirkvy'][oblast - 1]
+    return render_template('index.html', list=posts_list, oblast=request.args.get('oblast'), page=1, miesto=miesto)
 
-    try:
-        oblast = int(request.args.get('oblast'))
-    except (ValueError, IndexError):
-        return error(404)
+@app.route('/page/<page>', methods=["GET"])
+def page(page):
+    oblast, miesto = get_oblast_and_miesto()
+    posts_list = db.execute_file("sql_scripts/select/posts.sql", (oblast, oblast, POSTS_LIMIT, (int(page) - 1) * POSTS_LIMIT))
+    miesto = None
+    if oblast != None:
+        miesto = ['Rišňoviec', 'obce Kľačany', 'Sasinkova', 'Cirkvy'][oblast - 1]
+    return render_template('index.html', list=posts_list, oblast=request.args.get('oblast'), page=int(page), miesto=miesto)
 
-    miesto = ['Rišňoviec', 'obce Kľačany', 'Sasinkova', 'Cirkvy'][oblast - 1]
-    posts_list = db.execute_file("sql_scripts/select/posts.sql", (oblast, POSTS_LIMIT))
-    return render_template('index.html', list = posts_list, miesto = miesto)
+
 
 @app.route('/homilie',  methods=["GET", "POST"])
 def homilie():

@@ -1,1 +1,1 @@
-SELECT * FROM posts WHERE oblast = %s ORDER BY id DESC LIMIT %s;
+SELECT * FROM posts WHERE (%s IS NULL OR oblast = %s) ORDER BY id DESC LIMIT %s OFFSET %s;
