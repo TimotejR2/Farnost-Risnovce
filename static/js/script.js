@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function() {
   var currentPath = window.location.pathname; // Get current path\
 
   currentPath = currentPath.split('/').filter((_, index) => index < 2).join('/');
-  console.log(currentPath)
 
   links.forEach(function(link) {
     var id = '/' + link.id;
