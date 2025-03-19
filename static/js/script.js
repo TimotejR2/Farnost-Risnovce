@@ -2,9 +2,13 @@
 var mainElement
 var headerElement
 
+// Open sidenav if screen width is more than 700, get main and header elements
 window.onload = function() {
-  mainElement = document.getElementById('main');
-  headerElement = document.getElementById("header");
+  if (window.screen.availWidth > 700) {
+    mainElement = document.getElementById('main');
+    headerElement = document.getElementById("header");
+    openNav();
+  }
 }
 
 // Highlight active link based on current path
@@ -57,11 +61,8 @@ function displayMenu(submenu) {
 // Hide submenu based on timeout
 function hideMenu(submenu, menu) {
   setTimeout(function() {
-    var submenuElement = document.getElementById(submenu);
-    var menuElement = document.getElementById(menu);
-    
-    if (!submenuElement.matches(':hover') && !menuElement.matches(':hover')) {
-      submenuElement.style.display = 'none';
+    if (!document.querySelector(`#${submenu}:hover`) && !document.querySelector(`#${menu}:hover`)) {
+      document.getElementById(submenu).style.display = 'none';
     }
   }, 100);
 }
