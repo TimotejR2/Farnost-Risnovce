@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, make_response
 from datetime import datetime
 import json
+from functions import interpretate_oznamy
 
 from functions import *
 from config.config import (
@@ -125,12 +126,10 @@ def update():
 @app.route('/oznamy', methods=["GET"])
 def oznamy():
     # Get oznamy from database
-    oznamy_list = db.execute_file('sql_scripts/select/oznamy.sql', (OZNAMY_LIMIT, ))
+    oznamy_raw = db.execute_file('sql_scripts/select/oznamy.sql')
+    oznamy = [interpretate_oznamy(oznamy_raw).values()]
 
-    # Convert oznamy to list and render template with them
-    oznamy_list = str_to_list(oznamy_list)
-
-    return render_template('oznamy.html', oznamy_list = oznamy_list)
+    return render_template('oznamy.html', oznamy = oznamy, nazov = 'Oznamy asdf', popis = 'Popis asdf')
 
 @app.route('/oznamy/update', methods=['POST', 'GET'])
 @login_required
