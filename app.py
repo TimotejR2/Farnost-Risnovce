@@ -128,8 +128,12 @@ def oznamy():
     # Get oznamy from database
     oznamy_raw = db.execute_file('sql_scripts/select/oznamy.sql')
     oznamy = [interpretate_oznamy(oznamy_raw).values()]
-
-    return render_template('oznamy.html', oznamy = oznamy, nazov = 'Oznamy asdf', popis = 'Popis asdf')
+    val = db.execute('SELECT nadpis, popis FROM oznamy_tyzden order by id DESC LIMIT 1;', fetchone=True)
+    print(val)
+    nazov = val[0]
+    popis = val[1]
+    
+    return render_template('oznamy.html', oznamy = oznamy, nazov = nazov, popis = popis)
 
 @app.route('/oznamy/update', methods=['POST', 'GET'])
 @login_required

@@ -68,7 +68,7 @@ class Database:
         sql_query = read_file(path)
         return self.execute(sql_query, args)
 
-    def execute(self, sql_query, args=None):
+    def execute(self, sql_query, args=None, fetchone=False):
         """
         Execute a SQL query with optional parameters.
 
@@ -86,9 +86,11 @@ class Database:
             cur.execute(sql_query, args)
         else:
             cur.execute(sql_query)
-
         try:
-            output = cur.fetchall()
+            if fetchone:
+                output = cur.fetchone()
+            else:
+                output = cur.fetchall()
         except psycopg2.ProgrammingError:
             conn.commit()
             cur.close()
@@ -99,3 +101,7 @@ class Database:
         cur.close()
         conn.close()
         return output
+
+    def get_conn(self):
+        conn = psycopg2.connect(POSTGRES)
+        return conn
