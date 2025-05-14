@@ -1,0 +1,18 @@
+{1: [datetime.date(2025, 5, 5), 'Pondelok', [(datetime.time(9, 0), 'Rišňovce', 'Rekolekcia Dominik a Vilma Šimorovci')]], 
+
+2: [datetime.date(2025, 5, 6), 'Utorok', [(datetime.time(18, 0), 'Rišňovce', '+ Ján a Mária Podlipovci, syn Ján, vnučka Janka, rodičia z oboch strán')]], 
+
+3: [datetime.date(2025, 5, 7), 'Streda', [(datetime.time(18, 0), 'Kľačany', 'Poďakovanie za 80 rokov života pre Stanislava'), (datetime.time(19, 0), 'Sasinkovo', 'Modlitby za duchovné povolania')]], 
+
+4: [datetime.date(2025, 5, 8), 'Štvrtok', [(datetime.time(9, 0), 'Sasinkovo', 'Poďakovanie za zdravie a Božiu pomoc pre Jána, 60. rokov života')]], 5: [datetime.date(2025, 5, 9), 'Piatok', [(datetime.time(10, 30), 'Rišňovce', '+ Rozália a Jozef Macháčovci')]], 6: [datetime.date(2025, 5, 10), 'Sobota', [(None, None, None)]], 7: [datetime.date(2025, 5, 11), 'Nedeľa', [(None, None, None)]]}
+
+[[['+', '09:00', 'Sasinkovo', 'Vít Skalický a rodičia z oboch strán'], '27.4.2025'],
+[['+', '10:30', 'Rišňovce', 'Marián Kačera a rodičia z oboch strán'], '27.4.2025'],
+[['+', '18:00', 'Rišňovce', 'Jozef, Mária Kováčovci, syn Jozef, Vladimír a vnuk Marián a starí rodičia'], '28.4.2025'],
+[['+', '18:00', 'Sasinkovo', 'pán dekan Loziňák'], '29.4.2025'],
+[['+', '18:00', 'Rišňovce', 'Vincent, Bernardína Miklovičovci a syn Bohumil'], '30.4.2025'],
+[['+', '09:00', 'Kľačany', 'pán dekan Loziňák'], '1.5.2025'],
+[['+', '18:00', 'Rišňovce', 'pán dekan Loziňák'], '2.5.2025'],
+[['+', '18:00', 'Sasinkovo', 'Za živých členov bratstva sv. ruženca'], '3.5.2025'],
+[['+', '09:00', 'Kľačany', 'sv. otec František'],['+', '10:30', 'Rišňovce', 'Pavol Prosnan a rodičia z oboch strán'], '4.5.2025']],
+'1. Dnes je 2. veľkonočná nedeľa – nedeľa Božieho milosrdenstva. Po sv. omši pobožnosť ku cti Božieho milosrdenstva (úplné odpustky). Končí sa veľkonočná oktáva. 2. Liturgický kalendár: utorok – sv. Katarína Sienská, panna a učiteľka Cirkvi; štvrtok – spomienka sv. Jozefa Robotníka; piatok – sv. Atanáz, biskup; sobota – sv. Filip a Jakub, apoštoli. 3. Spovedanie pred prvým piatkom: utorok 17:00 Sasinkovo; štvrtok 9:30 Kľačany; streda a piatok 17:00 Rišňovce. Všade vyložená Sviatosť oltárna. 4. Pondelok o 19:00 stretnutie farskej pastoračnej rady. 5. Brigáda na farskom dvore 1.5. o 13:00 (prinesť náradie na kosenie, hrabanie, pílenie). Večer opekačka. 6. Piatok po sv. omši stretnutie pútnikov z Ríma. 7. Ďakujeme za dary na opravu kostola: Eur. 8. 8. Upratovanie kostola Rišňovce: Alena Hrubešová, Katarína Antalová, Mária Šimorová, Katarína Javorová Rihová. 9. V Kľačanoch upratuje skupina č. 9. 10. Budúca nedeľa je 3. veľkonočná nedeľa.'

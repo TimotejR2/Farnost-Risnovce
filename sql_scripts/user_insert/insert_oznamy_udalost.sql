@@ -1,0 +1,1 @@
+INSERT into oznamy_udalost (datum_id, cas, miesto, popis) VALUES (%s, %s, %s, %s);

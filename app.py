@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, make_response
 from datetime import datetime
 import json
-from functions import interpretate_oznamy
+from functions import add_oznamy
 
 from functions import *
 from config.config import (
@@ -138,11 +138,14 @@ def get_events():
         return render_template('oznamy_input.html')
 
     if request.method == 'POST':
+        
         # Get multi dimentional list of all oznamy
-        oznamy_list = make_oznamy_list()
+        
+        #oznamy_list = make_oznamy_list()
 
+        add_oznamy.add_oznamy()
         # Insert inputed data to database
-        db.execute('INSERT INTO oznamy (list) VALUES (%s);', (str(oznamy_list), ) )
+        #db.execute('INSERT INTO oznamy (list) VALUES (%s);', (str(oznamy_list), ) )
 
         return "Všetko prebehlo úspešne"
 

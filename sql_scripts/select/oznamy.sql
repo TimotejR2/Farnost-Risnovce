@@ -8,5 +8,6 @@ SELECT DISTINCT
 FROM oznamy_datum d
 LEFT JOIN oznamy_udalost u 
     ON d.id = u.datum_id
-WHERE d.tyzden_id = 1
+WHERE d.tyzden_id = (SELECT MAX(tyzden_id) FROM oznamy_datum)
 ORDER BY d.datum, u.cas;
+

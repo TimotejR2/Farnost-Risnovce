@@ -10,4 +10,4 @@ from .image_formater import image_formater
 from .post_page import get_oblast_and_miesto
 from .interpretate_oznamy import interpretate_oznamy
 
-__all__ = ['error', 'get_html', 'read_file', 'str_to_list', 'convert_date', 'make_oznamy_list', 'search_homilie', 'all_photos', 'image_formater', 'get_oblast_and_miesto', 'interpretate_oznamy']
+__all__ = ['error', 'get_html', 'read_file', 'str_to_list', 'convert_date', 'make_oznamy_list', 'search_homilie', 'all_photos', 'image_formater', 'get_oblast_and_miesto', 'add_oznamy', 'interpretate_oznamy']
