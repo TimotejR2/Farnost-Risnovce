@@ -242,3 +242,11 @@ def robots():
 @app.route('/krizovacesta', methods=["GET"])
 def krizovacesta():
     return render_template('krizovacesta.html')
+
+@app.route('/kalendar', methods=["GET"])
+def kalendar():
+    return render_template('kalendar.html')
+
+@app.route('/cal.isc', methods=["GET"])
+def cal_isc():
+    return get_html('static/data/cal.isc')
