@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, make_response
+from flask import Flask, render_template, request, redirect, make_response, send_file
 from datetime import datetime
 import json
 
@@ -249,4 +249,4 @@ def kalendar():
 
 @app.route('/cal.isc', methods=["GET"])
 def cal_isc():
-    return get_html('static/data/cal.isc')
+    return send_file('static/data/cal.isc', as_attachment=True, mimetype='text/calendar')
