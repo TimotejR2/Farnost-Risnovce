@@ -20,23 +20,28 @@
 }
 </style>
   <form  method="post">
-    <label for="datum">Oznamy na:</label>
-    <input type="datum" id="datum" name="datum">
+    <label for="tyzden_nadpis">Oznamy na:</label>
+    <input id="tyzden_nadpis" name="tyzden_nadpis">
+
+    <label for="tyzden_zaciatok">Od:</label>
+    <input type="date" id="tyzden_zaciatok" name="tyzden_zaciatok">
+
     {% for i in range(7) %}
       <label for="datum{{ i }}">Dátum {{ i}}:</label>
       <input type="date" id="datum{{ i }}" name="datum{{ i }}">
 
+      <label for="den_nadpis{{ i }}">Nadpis:</label>
+      <input id="den_nadpis{{ i }}" name="den_nadpis{{ i }}">
       <div>
         {% for j in range(5) %}
         <div class="blockspace">
           <div class="block content">
 
-            <label for="blok{{ i }}-text{{ j }}-1">Omša za:</label>
-            <input type="text" id="blok{{ i }}-text{{ j }}-1" name="blok{{ i }}-text{{ j }}-1">
+            <label for="blok{{ i }}-udalost_popis-{{ j }}">Omša za:</label>
+            <input type="text" id="blok{{ i }}-udalost_popis-{{ j }}" name="blok{{ i }}-udalost_popis-{{ j }}">
 
-
-            <label for="blok{{ i }}-text{{ j }}-2">Miesto</label>
-            <select id="blok{{ i }}-text{{ j }}-2" name="blok{{ i }}-text{{ j }}-2">
+            <label for="blok{{ i }}-udalost_miesto-{{ j }}">Miesto</label>
+            <select id="blok{{ i }}-udalost_miesto-{{ j }}" name="blok{{ i }}-udalost_miesto-{{ j }}">
               <option value="">Vyberte miesto</option>
               <option value="Rišňovce">Rišňovce</option>
               <option value="Kľačany">Kľačany</option>
@@ -52,7 +57,7 @@
       </div>
     {% endfor %}
     <label for="notes">Poznámky:</label>
-    <textarea id="notes" name="notes" style="resize: both;"></textarea>
+    <textarea id="tyzden_popis" name="tyzden_popis" style="resize: both;"></textarea>
 
     <input type="submit" value="Odoslať">
   </form>

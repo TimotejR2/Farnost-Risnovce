@@ -1,0 +1,1 @@
+INSERT into oznamy_tyzden (tyzden_zaciatok, nadpis, popis) VALUES (%s, %s, %s);

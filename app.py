@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, make_response, send_file
 from datetime import datetime
 import json
+from functions import add_oznamy
 
 from functions import *
 from config.config import (
@@ -125,12 +126,14 @@ def update():
 @app.route('/oznamy', methods=["GET"])
 def oznamy():
     # Get oznamy from database
-    oznamy_list = db.execute_file('sql_scripts/select/oznamy.sql', (OZNAMY_LIMIT, ))
-
-    # Convert oznamy to list and render template with them
-    oznamy_list = str_to_list(oznamy_list)
-
-    return render_template('oznamy.html', oznamy_list = oznamy_list)
+    oznamy_raw = db.execute_file('sql_scripts/select/oznamy.sql')
+    oznamy = [interpretate_oznamy(oznamy_raw).values()]
+    val = db.execute('SELECT nadpis, popis FROM oznamy_tyzden order by id DESC LIMIT 1;', fetchone=True)
+    print(val)
+    nazov = val[0]
+    popis = val[1]
+    
+    return render_template('oznamy.html', oznamy = oznamy, nazov = nazov, popis = popis)
 
 @app.route('/oznamy/update', methods=['POST', 'GET'])
 @login_required
@@ -139,11 +142,14 @@ def get_events():
         return render_template('oznamy_input.html')
 
     if request.method == 'POST':
+        
         # Get multi dimentional list of all oznamy
-        oznamy_list = make_oznamy_list()
+        
+        #oznamy_list = make_oznamy_list()
 
+        add_oznamy.add_oznamy()
         # Insert inputed data to database
-        db.execute('INSERT INTO oznamy (list) VALUES (%s);', (str(oznamy_list), ) )
+        #db.execute('INSERT INTO oznamy (list) VALUES (%s);', (str(oznamy_list), ) )
 
         return "Všetko prebehlo úspešne"
 

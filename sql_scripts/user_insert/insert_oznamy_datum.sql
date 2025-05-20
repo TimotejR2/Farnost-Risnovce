@@ -1,0 +1,1 @@
+INSERT into oznamy_datum (tyzden_id, datum, nazov) VALUES (%s, %s, %s);
