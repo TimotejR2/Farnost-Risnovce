@@ -41,19 +41,19 @@ CREATE TABLE IF NOT EXISTS wrong (
     cas TIMESTAMP
 );
 
-CREATE TABLE oznamy_tyzden (
+CREATE TABLE IF NOT EXISTS oznamy_tyzden (
     id SERIAL PRIMARY KEY,
     tyzden_zaciatok DATE NOT NULL,
     nadpis TEXT,                            -- napr. "Oznamy na 3. veľkonočnú nedeľu – 4.5.2025"
     popis TEXT                              -- očíslovaný viacreťazcový text (1.–8.)
 );
-CREATE TABLE oznamy_datum (
+CREATE TABLE IF NOT EXISTS oznamy_datum (
     id SERIAL PRIMARY KEY,
     tyzden_id INTEGER REFERENCES oznamy_tyzden(id) ON DELETE CASCADE,
     datum DATE NOT NULL,
     nazov VARCHAR(50)                       -- napr. "Vianoce", "Štedrý deň", voliteľné
 );
-CREATE TABLE oznamy_udalost (
+CREATE TABLE IF NOT EXISTS oznamy_udalost (
     id SERIAL PRIMARY KEY,
     datum_id INTEGER REFERENCES oznamy_datum(id) ON DELETE CASCADE,
     cas TIME,
