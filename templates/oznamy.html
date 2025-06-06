@@ -20,10 +20,10 @@
       {% for event in day[-1] %}
       <tr>
         {% if loop.index0 == 0 %}
-        <td class="date" rowspan="{{ day[-1] | length }}">{{ day[0] }}{{ day[1]}}</td>
+        <td class="date" rowspan="{{ day[-1] | length }}">{{ day[0] }} {{ day[1]}}</td>
         {% endif %}
         <td class="popis" colspan="3">{{ event[2] }}</td>
-        <td class="popis-miestoacas">{{ event[1] }} {{ event[0] }}</td>
+        <td class="popis-miestoacas">{{ event[1] }} {{ event[0].strftime("%-H:%M") }}</td>
       </tr>
       {% endfor %}
       {% endfor %}
