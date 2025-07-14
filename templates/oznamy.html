@@ -4,6 +4,63 @@
     <title>Farnosť Rišňovce - Oznamy</title>
     <meta name="description" content="Aktuálne oznamy z poslednej nedele pre farnosť Rišňovce a jej filiálky Sasinkovo a Kľačany. Zistite čas a miesto svätých omší, spomienky na zosnulých a dôležité udalosti vo farnosti. Pravidelné aktualizácie na každý týždeň." />
     <link rel="stylesheet" href="/static/css/oznamy.css">
+
+
+{% for list in oznamy %}
+  {% for day in list %}
+    {% set datum = day[0] %}
+    {% set den = day[1] %}
+    {% set omse = day[2] %}
+    {% for cas, miesto, umysel in omse %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "Svätá omša – {{ miesto }}",
+  "startDate": "{{ datum.isoformat() }}T{{ "%02d"|format(cas.hour) }}:{{ "%02d"|format(cas.minute) }}:00+02:00",
+  "endDate": "{{ datum.isoformat() }}T{{ "%02d"|format((cas.hour + 1) if cas.hour < 23 else 23) }}:{{ "%02d"|format(cas.minute) }}:00+02:00",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "description": "{{ umysel }}",
+  "location": {
+    "@type": "Place",
+    "name": "{% if miesto == 'Rišňovce' %}Farský kostol Najsvätejšej Trojice{% elif miesto == 'Kľačany' %}Kostol sv. Martina{% elif miesto == 'Sasinkovo' %}Kostol sv. Kataríny Alexandrijskej{% else %}Kostol{% endif %}",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "{% if miesto == 'Rišňovce' %}Rišňovce 419{% elif miesto == 'Kľačany' %}Kľačany 1323{% elif miesto == 'Sasinkovo' %}Sasinkovo 306{% else %}Neznáma adresa{% endif %}",
+      "addressLocality": "{{ miesto }}",
+      "postalCode": "{% if miesto == 'Rišňovce' %}95121{% elif miesto == 'Kľačany' %}92064{% elif miesto == 'Sasinkovo' %}92065{% else %}00000{% endif %}",
+      "addressCountry": "SK"
+    }
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "Rímskokatolícka cirkev, farnosť Rišňovce",
+    "url": "https://www.risnovcefara.sk/oznamy"
+  },
+  "image": [
+  {% if miesto == 'Kľačany' %}
+    "https://www.risnovcefara.sk/static/img/kostoly/klacany_kostol_exterier.jpeg"
+  {% elif miesto == 'Rišňovce' %}
+    "https://www.risnovcefara.sk/static/img/kostoly/risnovce_kostol_exterier.jpg",
+    "https://www.risnovcefara.sk/static/img/kostoly/risnovce_kostol_interier_kriz.jpg",
+    "https://www.risnovcefara.sk/static/img/kostoly/risnovce_kostol_interier_lavice.jpg",
+    "https://www.risnovcefara.sk/static/img/kostoly/risnovce_kostol_interier_zpredu.jpg"
+  {% elif miesto == 'Sasinkovo' %}
+    "https://www.risnovcefara.sk/static/img/kostoly/sasinkovo_kostol_exterier.jpeg"
+  {% else %}
+    "https://www.risnovcefara.sk/static/img/kostoly/nieco.jpg"
+  {% endif %}
+]
+}
+</script>
+    {% endfor %}
+  {% endfor %}
+{% endfor %}
+
+
+
+
     {% endblock %}
 {% block main %}
 {% for list in oznamy %}

@@ -1,0 +1,7 @@
+klacany_kostol_exterier.jpeg
+out.txt
+risnovce_kostol_exterier.jpg
+risnovce_kostol_interier_kriz.jpg
+risnovce_kostol_interier_lavice.jpg
+risnovce_kostol_interier_zpredu.jpg
+sasinkovo_kostol_exterier.jpeg
