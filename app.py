@@ -251,7 +251,7 @@ def krizovacesta():
 def kalendar():
     return render_template('kalendar.html')
 
-@app.route('/cal.isc', methods=["GET"])
+@app.route('/cal.ics', methods=["GET"])
 def cal_isc():
     import datetime
     from datetime import timedelta
