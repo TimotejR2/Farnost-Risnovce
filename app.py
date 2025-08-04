@@ -277,8 +277,7 @@ def create_event(oznamy):
 VERSION:2.0
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-PRODID:-//Farnosť Rišňovce//Oznamy//SK
-X-WR-TIMEZONE:Europe/Bratislava"""
+PRODID:-//Farnosť Rišňovce//Oznamy//SK"""
     )
 
     tz = pytz.timezone('Europe/Bratislava')
