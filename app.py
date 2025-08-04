@@ -258,15 +258,16 @@ def cal_isc():
     import uuid
     oznamy_raw = db.execute_file('sql_scripts/select/oznamy.sql')
     oznamy = [interpretate_oznamy(oznamy_raw).values()]
-    print(oznamy)
     def create_event(oznamy):
         icalendar_events = []
-        icalendar_events.append("""BEGIN:VCALENDAR
-        VERSION:2.0
-        CALSCALE:GREGORIAN
-        METHOD:PUBLISH
-        PRODID:-//Farnosť Rišňovce//Oznamy//SK
-        """)
+        icalendar_events.append(
+            """BEGIN:VCALENDAR
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+PRODID:-//Farnosť Rišňovce//Oznamy//SK"""
+        )
+
         for day in oznamy:
             for ozn in day:
                 date = ozn[0]
@@ -278,8 +279,9 @@ def cal_isc():
                     
                     event = f"BEGIN:VEVENT\n" \
                             f"UID:{uid}\n" \
-                            f"DTSTART;TZID=Europe/Bratislava:{start_time}\n" \
-                            f"DTEND;TZID=Europe/Bratislava:{end_time}\n" \
+                            f"DTSTAMP:{(date - timedelta(days=7)).strftime('%Y%m%dT%H%M%SZ')}\n" \
+                            f"DTSTART:{start_time}\n" \
+                            f"DTEND:{end_time}\n" \
                             f"SUMMARY:Sv. omša - {location}\n" \
                             f"LOCATION:{location}\n" \
                             f"DESCRIPTION:{description}\n" \
@@ -288,7 +290,7 @@ def cal_isc():
                     icalendar_events.append(event)
 
             # Spojenie všetkých udalostí do jedného reťazca
-            return "\n\n".join(icalendar_events) + "\nEND:VCALENDAR"
+            return "\n".join(icalendar_events) + "\nEND:VCALENDAR"
 
 
     return Response(
