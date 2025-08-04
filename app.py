@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, make_response, send_file
+from flask import Flask, render_template, request, redirect, make_response, Response
 from datetime import datetime
 import json
 from functions import add_oznamy
@@ -253,4 +253,46 @@ def kalendar():
 
 @app.route('/cal.isc', methods=["GET"])
 def cal_isc():
-    return send_file('static/data/cal.isc', as_attachment=True, mimetype='text/calendar')
+    import datetime
+    from datetime import timedelta
+    import uuid
+    oznamy_raw = db.execute_file('sql_scripts/select/oznamy.sql')
+    oznamy = [interpretate_oznamy(oznamy_raw).values()]
+    print(oznamy)
+    def create_event(oznamy):
+        icalendar_events = []
+        icalendar_events.append("""BEGIN:VCALENDAR
+        VERSION:2.0
+        CALSCALE:GREGORIAN
+        METHOD:PUBLISH
+        PRODID:-//Farnosť Rišňovce//Oznamy//SK
+        """)
+        for day in oznamy:
+            for ozn in day:
+                date = ozn[0]
+                title = ozn[1]
+                for time, location, description in ozn[2]:
+                    start_time = datetime.datetime.combine(date, time).strftime('%Y%m%dT%H%M%S')
+                    end_time = (datetime.datetime.combine(date, time) + datetime.timedelta(hours=1)).strftime('%Y%m%dT%H%M%S')
+                    uid = str(uuid.uuid4())
+                    
+                    event = f"BEGIN:VEVENT\n" \
+                            f"UID:{uid}\n" \
+                            f"DTSTART;TZID=Europe/Bratislava:{start_time}\n" \
+                            f"DTEND;TZID=Europe/Bratislava:{end_time}\n" \
+                            f"SUMMARY:Sv. omša - {location}\n" \
+                            f"LOCATION:{location}\n" \
+                            f"DESCRIPTION:{description}\n" \
+                            f"END:VEVENT"
+                    
+                    icalendar_events.append(event)
+
+            # Spojenie všetkých udalostí do jedného reťazca
+            return "\n\n".join(icalendar_events) + "\nEND:VCALENDAR"
+
+
+    return Response(
+        create_event(oznamy),
+        mimetype="text/calendar",
+        headers={"Content-Disposition": "attachment; filename=cal.ics"}
+    )
