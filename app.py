@@ -299,8 +299,8 @@ END:VTIMEZONE
                     event = f"BEGIN:VEVENT\n" \
                             f"UID:{uid}\n" \
                             f"DTSTAMP:{(date - timedelta(days=7)).strftime('%Y%m%dT%H%M%SZ')}\n" \
-                            f"DTSTART:{start_time}\n" \
-                            f"DTEND:{end_time}\n" \
+                            f"DTSTART;TZID=Europe/Bratislava:{start_time}\n" \
+                            f"DTEND;TZID=Europe/Bratislava:{end_time}\n" \
                             f"SUMMARY:Sv. omša - {location}\n" \
                             f"LOCATION:{location}\n" \
                             f"DESCRIPTION:{description}\n" \
