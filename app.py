@@ -258,58 +258,7 @@ def cal_isc():
     import uuid
     oznamy_raw = db.execute_file('sql_scripts/select/oznamy.sql')
     oznamy = [interpretate_oznamy(oznamy_raw).values()]
-    def create_event(oznamy):
-        icalendar_events = []
-        icalendar_events.append(
-            """BEGIN:VCALENDAR
-VERSION:2.0
-CALSCALE:GREGORIAN
-METHOD:PUBLISH
-PRODID:-//Farnosť Rišňovce//Oznamy//SK
-X-WR-TIMEZONE:Europe/Bratislava
-BEGIN:VTIMEZONE
-TZID:Europe/Bratislava
-X-LIC-LOCATION:Europe/Bratislava
-BEGIN:DAYLIGHT
-TZOFFSETFROM:+0100
-TZOFFSETTO:+0200
-TZNAME:CEST
-DTSTART:19700329T020000
-RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
-END:DAYLIGHT
-BEGIN:STANDARD
-TZOFFSETFROM:+0200
-TZOFFSETTO:+0100
-TZNAME:CET
-DTSTART:19701025T030000
-RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
-END:STANDARD
-END:VTIMEZONE"""
-        )
 
-        for day in oznamy:
-            for ozn in day:
-                date = ozn[0]
-                title = ozn[1]
-                for time, location, description in ozn[2]:
-                    start_time = datetime.datetime.combine(date, time).strftime('%Y%m%dT%H%M%S')
-                    end_time = (datetime.datetime.combine(date, time) + datetime.timedelta(hours=1)).strftime('%Y%m%dT%H%M%S')
-                    uid = str(uuid.uuid4())
-                    
-                    event = f"BEGIN:VEVENT\n" \
-                            f"UID:{uid}\n" \
-                            f"DTSTAMP:{(date - timedelta(days=7)).strftime('%Y%m%dT%H%M%SZ')}\n" \
-                            f"DTSTART;TZID=Europe/Bratislava:{start_time}\n" \
-                            f"DTEND;TZID=Europe/Bratislava:{end_time}\n" \
-                            f"SUMMARY:Sv. omša - {location}\n" \
-                            f"LOCATION:{location}\n" \
-                            f"DESCRIPTION:{description}\n" \
-                            f"END:VEVENT"
-                    
-                    icalendar_events.append(event)
-
-            # Spojenie všetkých udalostí do jedného reťazca
-            return "\n".join(icalendar_events) + "\nEND:VCALENDAR"
 
 
     return Response(
@@ -317,3 +266,45 @@ END:VTIMEZONE"""
         mimetype="text/calendar",
         headers={"Content-Disposition": "attachment; filename=cal.ics"}
     )
+import datetime
+import uuid
+import pytz
+
+def create_event(oznamy):
+    icalendar_events = []
+    icalendar_events.append(
+        """BEGIN:VCALENDAR
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+PRODID:-//Farnosť Rišňovce//Oznamy//SK
+X-WR-TIMEZONE:Europe/Bratislava"""
+    )
+
+    tz = pytz.timezone('Europe/Bratislava')
+
+    for day in oznamy:
+        for ozn in day:
+            date = ozn[0]
+            title = ozn[1]
+            for time, location, description in ozn[2]:
+                local_dt = tz.localize(datetime.datetime.combine(date, time))
+                start_utc = local_dt.astimezone(pytz.utc)
+                end_utc = (local_dt + datetime.timedelta(hours=1)).astimezone(pytz.utc)
+                dtstamp = (local_dt - datetime.timedelta(days=7)).astimezone(pytz.utc)
+
+                uid = str(uuid.uuid4())
+
+                event = f"BEGIN:VEVENT\n" \
+                        f"UID:{uid}\n" \
+                        f"DTSTAMP:{dtstamp.strftime('%Y%m%dT%H%M%SZ')}\n" \
+                        f"DTSTART:{start_utc.strftime('%Y%m%dT%H%M%SZ')}\n" \
+                        f"DTEND:{end_utc.strftime('%Y%m%dT%H%M%SZ')}\n" \
+                        f"SUMMARY:Sv. omša - {location}\n" \
+                        f"LOCATION:{location}\n" \
+                        f"DESCRIPTION:{description}\n" \
+                        f"END:VEVENT"
+
+                icalendar_events.append(event)
+
+    return "\n".join(icalendar_events) + "\nEND:VCALENDAR"
