@@ -1,7 +1,7 @@
 from ..database import Database
-from . import hash_password
-
 db = Database()
+
+from argon2 import PasswordHasher
 
 def login(password: str, user: str) -> bool:
     """
@@ -14,6 +14,18 @@ def login(password: str, user: str) -> bool:
     Returns:
     - bool: True if login is successful, False otherwise.
     """
-    hashed_password = hash_password.hash_password(password)
-    login_successful = db.execute_file('sql_scripts/security/compare_hash.sql', (user, hashed_password))[0][0]
-    return login_successful
+    # 1. Načítaj uložený hash z DB pre daného používateľa
+    result = db.execute_file('sql_scripts/security/get_user_hash.sql', (user,))
+    
+    if not result:
+        return False  # používateľ neexistuje
+    
+    stored_hash = result[0][0]
+
+    # 2. Over heslo proti uloženému hashu
+    ph = PasswordHasher()
+    try:
+        ph.verify(stored_hash, password)
+        return True
+    except:
+        return False
