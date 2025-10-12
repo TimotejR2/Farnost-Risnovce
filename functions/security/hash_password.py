@@ -1,14 +1,15 @@
-from hashlib import sha3_256
+from argon2 import PasswordHasher
 
 def hash_password(password: str) -> str:
     """
-    Hashes the provided password using SHA3-256 encryption.
+    Hashes the provided password using Argon2 (a secure password hashing algorithm).
 
     Args:
     - password (str): Password to be hashed.
 
     Returns:
-    - str: Hashed password using SHA3-256.
+    - str: Hashed password using Argon2.
     """
-    hashed = sha3_256(password.encode()).hexdigest()
+    ph = PasswordHasher()
+    hashed = ph.hash(password)
     return hashed
