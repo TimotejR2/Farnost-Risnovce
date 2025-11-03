@@ -17,7 +17,7 @@ def add_oznamy():
         if datum != "":
             den_nadpis = request.form[('den_nadpis'+str(i))]
 
-            datum_id = add.day(datum, den_nadpis, tyzden_id)
+            add.day(datum, den_nadpis, tyzden_id)
             
 
             for j in range(EVENTS_IN_DAY_LIMIT):
@@ -29,21 +29,35 @@ def add_oznamy():
                     break
                 else:
 
-                    add.udalost(udalost_popis, udalost_miesto, udalost_cas, datum_id)
+                    add.udalost(udalost_popis, udalost_miesto, udalost_cas, add.last_date_id + 1 + i)
 
         else:
             break
+    if add.day_args_list:
+        add.cur.executemany(add.day_sql_query, add.day_args_list)
+    if add.udalost_args_list:
+        add.cur.executemany(add.udalost_sql_query, add.udalost_args_list)
+
     add.con.commit()
     add.cur.close()
     add.con.close()
     return
 
 class Add:
+    sql_comand = None
     def __init__(self):
         from ..database.database import Database
         self.db = Database()
         self.con = self.db.get_conn()
         self.cur = self.con.cursor()
+        val = self.db.execute('SELECT id FROM oznamy_datum ORDER BY id DESC LIMIT 1;')
+        self.last_date_id = int(val[0][0]) if val else None
+
+        self.udalost_sql_query = 'INSERT INTO oznamy_udalost (datum_id, cas, miesto, popis) VALUES (%s, %s, %s, %s);'
+        self.udalost_args_list = []
+
+        self.day_sql_query = 'INSERT INTO oznamy_datum (datum, nazov, tyzden_id) VALUES (%s, %s, %s) RETURNING id;'
+        self.day_args_list = []
 
     def tyzden(self, nadpis, popis, zaciatok):
         val = self.db.execute(
@@ -53,15 +67,8 @@ class Add:
         return int(val[0][0])
 
     def day(self, datum, nazov, tyzden_id):
-        val = self.db.execute(
-            'INSERT INTO oznamy_datum (tyzden_id, datum, nazov) VALUES (%s, %s, %s) RETURNING id;',
-            (tyzden_id, datum, nazov)
-        )
-        return int(val[0][0])
+        self.day_args_list.append((datum, nazov, tyzden_id))
 
     def udalost(self, popis, miesto, cas, datum_id):
-        self.cur.execute(
-            'INSERT INTO oznamy_udalost (datum_id, cas, miesto, popis) VALUES (%s, %s, %s, %s);',
-            (datum_id, cas, miesto, popis)
-        )
+        self.udalost_args_list.append((datum_id, cas, miesto, popis))
 
