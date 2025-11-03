@@ -10,5 +10,12 @@
       "src": "/(.*)",
       "dest": "/app.py"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/static/images/:path*",
+      "destination": "https://cdn.risnovcefara.sk/:path*",
+      "permanent": true
+    }
   ]
 }
