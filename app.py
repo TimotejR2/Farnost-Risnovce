@@ -1,7 +1,9 @@
+import os
 from flask import Flask, render_template, request, redirect, make_response, Response
 from datetime import datetime
 import json
 from functions import add_oznamy
+from functions.utils.upload import save_uploaded_file, upload_folder_to_s3, insert_post_to_db
 
 from functions import *
 from config.config import (
@@ -99,29 +101,33 @@ def post():
     # Render the post template with the retrieved post data
     return render_template('post.html', text=event)
 
-@app.route('/update', methods=['GET', 'POST'])
+@app.route('/update', methods=['GET'])
 @login_required
-def update():
-    if request.method == 'GET':
-        # Render the HTML form for updating
-        return get_html('static/html/update.html')
+def update_form():
+    return get_html('static/html/update.html')
 
-    if request.method == 'POST':
-        if not request.form['oblast']:
-            return error(422)
 
-        # Insert inputed data to database
-        db.execute_file(
-            'sql_scripts/user_insert/insert_posts.sql',
-            (request.form['nazov'],
-            image_formater(request.form['image'], db),
-            request.form['alt'],
-            request.form['date'],
-            request.form['text'],
-            request.form['oblast'])
-        )
+@app.route('/update', methods=['POST'])
+@login_required
+def update_post():
+    if not request.form.get('oblast'):
+        return error(422)
 
-        return "Všetko prebehlo úspešne"
+    # uloženie súboru
+    filename = save_uploaded_file(request.files.get('image'))
+    
+    # optimalizácia obrázkov
+    post_id = db.execute_file('sql_scripts/select/last_post_id.sql')[0][0] + 1
+    rename_and_resize_first(base_number=post_id, folder='static/uploads/')
+
+    # upload na S3/R2
+    upload_folder_to_s3('static/uploads/', 'uploads')
+
+    # vloženie dát do DB
+    insert_post_to_db(request.form, filename)
+
+    return "Všetko prebehlo úspešne"
+
 
 @app.route('/oznamy', methods=["GET"])
 def oznamy():
@@ -307,3 +313,55 @@ PRODID:-//Farnosť Rišňovce//Oznamy//SK"""
                 icalendar_events.append(event)
 
     return "\n".join(icalendar_events) + "\nEND:VCALENDAR"
+
+from PIL import Image
+
+def rename_and_resize_first(base_number: int, folder: str, max_width: int = 300):
+    """
+    Premenuje všetky .jpg obrázky v priečinku na:
+        9.jpg, 9.1.jpg, 9.2.jpg, ...
+    a z prvého obrázka spraví menšiu verziu (max šírka 300)
+    s názvom 9_low.jpg.
+    """
+
+    if not os.path.isdir(folder):
+        raise ValueError(f"'{folder}' nie je priečinok")
+
+    files = [f for f in os.listdir(folder)
+             if f.lower().endswith(".jpg") and os.path.isfile(os.path.join(folder, f))]
+
+    if not files:
+        print("Žiadne .jpg obrázky na premenovanie.")
+        return
+
+    files.sort()  # zoradené podľa názvu
+
+    for i, file in enumerate(files):
+        ext = ".jpg"
+        if i == 0:
+            new_name = f"{base_number}{ext}"
+        else:
+            new_name = f"{base_number}.{i}{ext}"
+
+        old_path = os.path.join(folder, file)
+        new_path = os.path.join(folder, new_name)
+
+        os.rename(old_path, new_path)
+        print(f"{file} → {new_name}")
+
+        # Ak je to prvý súbor → vytvor zmenšenú verziu
+        if i == 0:
+            image = Image.open(new_path)
+            width, height = image.size
+
+            if width > max_width:
+                ratio = max_width / width
+                new_height = int(height * ratio)
+                image = image.resize((max_width, new_height))
+
+            low_name = f"{base_number}_low{ext}"
+            low_path = os.path.join(folder, low_name)
+            image.save(low_path)
+            print(f"Vytvorená menšia verzia: {low_name}")
+
+    print("Hotovo.")

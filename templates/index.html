@@ -27,7 +27,6 @@
     <!-- Imports-->
     <link rel="stylesheet" href="/static/css/index.css?v=1.2">
     <link rel="stylesheet" href="/static/css/next_button.css">
-    <script src="/static/js/image_rightclick.js"></script>
 {% endblock %}
 {% block main %}
 <!-- Hero image -->
@@ -63,7 +62,7 @@
   <div class="blockspace">
     <a href="/post?id={{ row[0] }}" class="block content">
         {% if row[2] and row[2] != '/static/images/' %}
-        <img src="{{ row[2].replace('.', '_low.')}}" alt="{% if row[3] %}{{ row[3] }}{% else %}Fotografia z udalostí vo farnosti{% endif %}" class="img" loading="lazy">
+        <img src="https://cdn.risnovcefara.sk/{{ row[0] }}_low.jpg" alt="{% if row[3] %}{{ row[3] }}{% else %}Fotografia z udalostí vo farnosti{% endif %}" class="img" loading="lazy">
         {% endif %}
         <h2 style="text-align: left;" class="block-title">{{ row[1] }}</h2>
         <p class="datum">{{ row[4] }}</p>
