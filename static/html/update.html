@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html>
+<body>
 
-<form method="post" action="/update">
+<form method="post" action="/update" enctype="multipart/form-data">
     <label for="nazov">Názov:</label>
     <input id="nazov" name="nazov"><br><br>
 
-    <label for="image">Obrázok:</label>
-    <input id="image" name="image"><br><br>
+    <label for="image">Obrázok (len .jpg):</label>
+    <input id="image" name="image" type="file" accept="image/jpeg"><br><br>
 
     <label for="alt">Popis obrázku:</label>
     <textarea id="alt" name="alt"></textarea><br><br>
 
     <label for="date">Dátum:</label>
-    <input id="date" name="date"><br><br>
+    <input id="date" name="date" type="date"><br><br>
 
-    <label for="date">Oblasť:</label>
+    <label for="oblast">Oblasť:</label>
     <input id="oblast" name="oblast" type="number"><br><br>
 
     <label for="text">Text:</label>
@@ -22,4 +23,6 @@
 
     <input type="submit" value="Odoslať">
 </form>
+
+</body>
 </html>
