@@ -3,8 +3,7 @@ from flask import Flask, render_template, request, redirect, make_response, Resp
 from datetime import datetime
 import json
 from functions import add_oznamy
-from werkzeug.utils import secure_filename
-import boto3
+from functions.utils.upload import save_uploaded_file, upload_folder_to_s3, insert_post_to_db
 
 from functions import *
 from config.config import (
@@ -102,71 +101,33 @@ def post():
     # Render the post template with the retrieved post data
     return render_template('post.html', text=event)
 
-@app.route('/update', methods=['GET', 'POST'])
+@app.route('/update', methods=['GET'])
 @login_required
-def update():
-    if request.method == 'GET':
-        # Render the HTML form for updating
-        return get_html('static/html/update.html')
-
-    if request.method == 'POST':
-        if not request.form['oblast']:
-            return error(422)
+def update_form():
+    return get_html('static/html/update.html')
 
 
-        file = request.files['image']
-        UPLOAD_FOLDER = 'static/uploads/'
+@app.route('/update', methods=['POST'])
+@login_required
+def update_post():
+    if not request.form.get('oblast'):
+        return error(422)
 
-        if file:
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(UPLOAD_FOLDER, filename))
-        else:
-            filename = '-'
+    # uloženie súboru
+    filename = save_uploaded_file(request.files.get('image'))
+    
+    # optimalizácia obrázkov
+    post_id = db.execute_file('sql_scripts/select/last_post_id.sql')[0][0] + 1
+    rename_and_resize_first(base_number=post_id, folder='static/uploads/')
 
-        
-        # Optimize uploaded image
-        id = db.execute_file('sql_scripts/select/last_post_id.sql')[0][0] + 1
-        rename_and_resize_first(base_number = id, folder=UPLOAD_FOLDER)
+    # upload na S3/R2
+    upload_folder_to_s3('static/uploads/', 'uploads')
 
+    # vloženie dát do DB
+    insert_post_to_db(request.form, filename)
 
-        # upload to s2
-        endpoint_url = os.getenv("CF_ACCOUNT_ENDPOINT")
-        access_key = os.getenv("CF_ACCESS_KEY")
-        secret_key = os.getenv("CF_SECRET_KEY")
+    return "Všetko prebehlo úspešne"
 
-        s3 = boto3.client(
-            "s3",
-            aws_access_key_id=access_key,
-            aws_secret_access_key=secret_key,
-            endpoint_url=endpoint_url,
-            region_name="auto"  # R2 nevyžaduje region, boto3 parameter je povinný
-        )
-
-        bucket_name = "uploads"
-
-
-        # upload all images in upload folder
-        for f in os.listdir(UPLOAD_FOLDER):
-            if f.endswith('.jpg'):
-                with open(os.path.join(UPLOAD_FOLDER, f), "rb") as file:
-                    s3.upload_fileobj(file, bucket_name, f)
-            os.remove(os.path.join(UPLOAD_FOLDER, f))
-        
-
-        # Insert inputed data to database
-        db.execute_file(
-            'sql_scripts/user_insert/insert_posts.sql',
-            (request.form['nazov'],
-            filename,
-            request.form['alt'],
-            request.form['date'],
-            request.form['text'],
-            request.form['oblast'])
-        )
-
-
-
-        return "Všetko prebehlo úspešne"
 
 @app.route('/oznamy', methods=["GET"])
 def oznamy():
