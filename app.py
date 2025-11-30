@@ -99,7 +99,7 @@ def post():
     event = tuple(event)
 
     # Render the post template with the retrieved post data
-    return render_template('post.html', text=event)
+    return render_template('post.html', text=event, id=post_id)
 
 @app.route('/update', methods=['GET'])
 @login_required
