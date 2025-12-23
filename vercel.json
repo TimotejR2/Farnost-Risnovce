@@ -1,21 +1,8 @@
 {
-  "builds": [
+  "routes": [
     {
-      "src": "app.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/app.py"
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/static/images/:path*",
-      "destination": "https://cdn.risnovcefara.sk/:path*",
-      "permanent": true
+      "src": "/(.*)",
+      "dest": "/maintenance.html"
     }
   ]
 }
