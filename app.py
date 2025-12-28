@@ -253,70 +253,10 @@ def robots():
 def krizovacesta():
     return render_template('krizovacesta.html')
 
-@app.route('/kalendar', methods=["GET"])
-def kalendar():
-    return render_template('kalendar.html')
 
-@app.route('/cal.ics', methods=["GET"])
-def cal_isc():
-    import datetime
-    from datetime import timedelta
-    import uuid
-    oznamy_raw = db.execute_file('sql_scripts/select/oznamy.sql')
-    oznamy = [interpretate_oznamy(oznamy_raw).values()]
-
-
-
-    return Response(
-        create_event(oznamy),
-        mimetype="text/calendar",
-        headers={"Content-Disposition": "attachment; filename=cal.ics"}
-    )
-import datetime
-import uuid
-import pytz
-
-def create_event(oznamy):
-    icalendar_events = []
-    icalendar_events.append(
-        """BEGIN:VCALENDAR
-VERSION:2.0
-CALSCALE:GREGORIAN
-METHOD:PUBLISH
-PRODID:-//Farnosť Rišňovce//Oznamy//SK"""
-    )
-
-    tz = pytz.timezone('Europe/Bratislava')
-
-    for day in oznamy:
-        for ozn in day:
-            date = ozn[0]
-            title = ozn[1]
-            for time, location, description in ozn[2]:
-                local_dt = tz.localize(datetime.datetime.combine(date, time))
-                start_utc = local_dt.astimezone(pytz.utc)
-                end_utc = (local_dt + datetime.timedelta(hours=1)).astimezone(pytz.utc)
-                dtstamp = (local_dt - datetime.timedelta(days=7)).astimezone(pytz.utc)
-
-                uid = str(uuid.uuid4())
-
-                event = f"BEGIN:VEVENT\n" \
-                        f"UID:{uid}\n" \
-                        f"DTSTAMP:{dtstamp.strftime('%Y%m%dT%H%M%SZ')}\n" \
-                        f"DTSTART:{start_utc.strftime('%Y%m%dT%H%M%SZ')}\n" \
-                        f"DTEND:{end_utc.strftime('%Y%m%dT%H%M%SZ')}\n" \
-                        f"SUMMARY:Sv. omša - {location}\n" \
-                        f"LOCATION:{location}\n" \
-                        f"DESCRIPTION:{description}\n" \
-                        f"END:VEVENT"
-
-                icalendar_events.append(event)
-
-    return "\n".join(icalendar_events) + "\nEND:VCALENDAR"
-
-from PIL import Image
 
 def rename_and_resize_first(base_number: int, folder: str, max_width: int = 300):
+    from PIL import Image
     """
     Premenuje všetky .jpg obrázky v priečinku na:
         9.jpg, 9.1.jpg, 9.2.jpg, ...
@@ -331,7 +271,6 @@ def rename_and_resize_first(base_number: int, folder: str, max_width: int = 300)
              if f.lower().endswith(".jpg") and os.path.isfile(os.path.join(folder, f))]
 
     if not files:
-        print("Žiadne .jpg obrázky na premenovanie.")
         return
 
     files.sort()  # zoradené podľa názvu
@@ -347,7 +286,6 @@ def rename_and_resize_first(base_number: int, folder: str, max_width: int = 300)
         new_path = os.path.join(folder, new_name)
 
         os.rename(old_path, new_path)
-        print(f"{file} → {new_name}")
 
         # Ak je to prvý súbor → vytvor zmenšenú verziu
         if i == 0:
@@ -362,6 +300,3 @@ def rename_and_resize_first(base_number: int, folder: str, max_width: int = 300)
             low_name = f"{base_number}_low{ext}"
             low_path = os.path.join(folder, low_name)
             image.save(low_path)
-            print(f"Vytvorená menšia verzia: {low_name}")
-
-    print("Hotovo.")
