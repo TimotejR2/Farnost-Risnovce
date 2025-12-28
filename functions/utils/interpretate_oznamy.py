@@ -2,6 +2,8 @@
 #data = db.execute_file('sql_scripts/select/oznamy.sql')
 
 def interpretate_oznamy(data):
+    if not data:
+        return {}
     tyzden = {}
     for row in data:
         date_id = row[0]
