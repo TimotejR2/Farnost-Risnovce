@@ -71,18 +71,39 @@ class Database:
         return self.execute(sql_query, args)
 
     def execute(self, sql_query, args=None, fetchone=False):
+        """
+        Execute a SQL query with optional parameters.
+
+        Parameters:
+        - sql_query (str): SQL query to execute.
+        - args (tuple): Optional parameters for the query.
+
+        Returns:
+        Any: Results of the query.
+        """
+        conn = psycopg2.connect(POSTGRES)
+        cur = conn.cursor()
+        
+        if args is not None:
+            cur.execute(sql_query, args)
+        else:
+            cur.execute(sql_query)
         try:
-            with psycopg2.connect(POSTGRES) as conn:
-                with conn.cursor() as cur:
-                    cur.execute(sql_query, args)
+            if fetchone:
+                output = cur.fetchone()
+            else:
+                output = cur.fetchall()
+        except psycopg2.ProgrammingError:
+            conn.commit()
+            cur.close()
+            conn.close()
+            return 
 
-                    if fetchone:
-                        return cur.fetchone()
-                    return cur.fetchall()
+        conn.commit()
+        cur.close()
+        conn.close()
+        return output
 
-        except psycopg2.Error as e:
-            print(f"DB error: {e}")
-            return None
 
 
     def get_conn(self):
