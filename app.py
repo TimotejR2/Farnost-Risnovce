@@ -169,7 +169,7 @@ def index():
     oblast, miesto = get_oblast_and_miesto()
     posts_list = db.execute_file("sql_scripts/select/posts.sql", (oblast, oblast, POSTS_LIMIT, 0))
     if not posts_list:
-        posts_list = []
+        return error(404)
     miesto = None
     if oblast != None:
         miesto = ['Rišňoviec', 'obce Kľačany', 'Sasinkova', 'Cirkvy'][oblast - 1]
@@ -179,6 +179,8 @@ def index():
 def page(page):
     oblast, miesto = get_oblast_and_miesto()
     posts_list = db.execute_file("sql_scripts/select/posts.sql", (oblast, oblast, POSTS_LIMIT, (int(page) - 1) * POSTS_LIMIT))
+    if not posts_list:
+        return error(404)
     miesto = None
     if oblast != None:
         miesto = ['Rišňoviec', 'obce Kľačany', 'Sasinkova', 'Cirkvy'][oblast - 1]
