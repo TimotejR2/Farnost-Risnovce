@@ -4,4 +4,4 @@ Werkzeug==3.1.6
 psycopg2-binary==2.9.9
 pytz==2025.2
 boto3==1.28.45
-PILLOW==12.1.1
+PILLOW==12.2.0
