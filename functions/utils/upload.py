@@ -4,7 +4,7 @@ from ..database.database import Database
 db = Database()
 
 def save_uploaded_file(file):
-    UPLOAD_FOLDER = 'static/uploads/'
+    UPLOAD_FOLDER = 'tmp/uploads/'
     if not file:
         return '-'
         
