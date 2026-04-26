@@ -8,7 +8,7 @@ from PIL import Image
 import os
 import boto3
 
-def upload_image_with_thumbnail(file, filename, path):
+def upload_image_with_thumbnail(file, filename):
     s3 = boto3.client(
         "s3",
         aws_access_key_id=os.getenv("CF_ACCESS_KEY"),
@@ -22,7 +22,7 @@ def upload_image_with_thumbnail(file, filename, path):
     file_bytes = file.read()
 
     # --- originál ---
-    original_key = f"{path}/{filename}"
+    original_key = secure_filename(filename)
 
     s3.upload_fileobj(
         Fileobj=BytesIO(file_bytes),
@@ -46,7 +46,7 @@ def upload_image_with_thumbnail(file, filename, path):
     else:
         name, ext = filename, "jpg"
 
-    low_key = f"{path}/{name}_low.{ext}"
+    low_key = f"{name}_low.{ext}"
 
     buffer = BytesIO()
     img.save(buffer, format="JPEG", quality=85)

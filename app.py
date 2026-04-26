@@ -118,7 +118,7 @@ def update_post():
     post_id = db.execute_file('sql_scripts/select/last_post_id.sql')[0][0] + 1
 
     # upload na S3/R2
-    file_name = upload_image_with_thumbnail(file, str(post_id) + ".jpg", "")
+    file_name = upload_image_with_thumbnail(file, str(post_id) + ".jpg")
 
     # vloženie dát do DB
     insert_post_to_db(request.form, file_name)
