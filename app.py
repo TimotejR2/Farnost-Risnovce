@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, make_response, Resp
 from datetime import datetime
 import json
 from functions import add_oznamy
-from functions.utils.upload import save_uploaded_file, upload_folder_to_s3, insert_post_to_db
+from functions.utils.upload import insert_post_to_db, upload_image_with_thumbnail
 
 from functions import *
 from config.config import (
@@ -113,18 +113,16 @@ def update_post():
     if not request.form.get('oblast'):
         return error(422)
 
-    # uloženie súboru
-    filename = save_uploaded_file(request.files.get('image'))
+    file = request.files.get('image')
     
-    # optimalizácia obrázkov
     post_id = db.execute_file('sql_scripts/select/last_post_id.sql')[0][0] + 1
-    rename_and_resize_first(base_number=post_id, folder='static/uploads/')
 
     # upload na S3/R2
-    upload_folder_to_s3('static/uploads/', 'uploads')
+    file_name = upload_image_with_thumbnail(file, str(post_id) + ".jpg", "static/images")
 
     # vloženie dát do DB
-    insert_post_to_db(request.form, filename)
+    return "asdf"
+    insert_post_to_db(request.form, file_name)
 
     return "Všetko prebehlo úspešne"
 
