@@ -10,7 +10,7 @@
     <div class="block content">
         <h1>{{ text[1] }}</h1>
         <p class="datum">{{ text[4] }}</p>
-        <pre>{{ text[5] | e }}</pre>
+        <pre>{{ text[5] | safe }}</pre>
         {% for image in text[2] %}
             <img src="https://cdn.risnovcefara.sk/{{ id }}.jpg" alt="{{ text[3] }}" class="photo">
         {% endfor %}
