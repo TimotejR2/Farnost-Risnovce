@@ -3,9 +3,10 @@ import os
 from ..database.database import Database
 db = Database()
 
-import boto3
 from io import BytesIO
 from PIL import Image
+import os
+import boto3
 
 def upload_image_with_thumbnail(file, filename, path):
     s3 = boto3.client(
@@ -17,61 +18,51 @@ def upload_image_with_thumbnail(file, filename, path):
     )
 
     bucket_name = 'uploads'
-    filename = secure_filename(filename)
+    # 🔴 načítaj celý súbor do pamäte
+    file_bytes = file.read()
 
-    # rozdelenie mena a prípony
-    if "." in filename:
-        name, ext = filename.rsplit(".", 1)
-        ext = ext.lower()
-    else:
-        name, ext = filename, "jpg"
+    # --- originál ---
+    original_key = f"{path}/{filename}"
 
-    original_key = f"{path}/{name}.{ext}"
-    low_key = f"{path}/{name}_low.{ext}"
-
-    # --- 1. upload originálu ---
-    file.stream.seek(0)
     s3.upload_fileobj(
-        Fileobj=file.stream,
+        Fileobj=BytesIO(file_bytes),
         Bucket=bucket_name,
         Key=original_key,
         ExtraArgs={"ContentType": file.content_type}
     )
 
-    # --- 2. vytvorenie zmenšeného obrázka ---
-    file.stream.seek(0)
-    img = Image.open(file.stream)
+    # --- resize ---
+    img = Image.open(BytesIO(file_bytes))
 
-    # zachovanie pomeru strán, max šírka 300
     max_width = 300
     if img.width > max_width:
-        ratio = max_width / float(img.width)
+        ratio = max_width / img.width
         new_height = int(img.height * ratio)
         img = img.resize((max_width, new_height), Image.LANCZOS)
 
-    # uloženie do pamäte
+    # názov _low
+    if "." in filename:
+        name, ext = filename.rsplit(".", 1)
+    else:
+        name, ext = filename, "jpg"
+
+    low_key = f"{path}/{name}_low.{ext}"
+
     buffer = BytesIO()
-
-    format_map = {
-        "jpg": "JPEG",
-        "jpeg": "JPEG",
-        "png": "PNG",
-        "webp": "WEBP"
-    }
-    img_format = format_map.get(ext, "JPEG")
-
-    img.save(buffer, format=img_format)
+    img.save(buffer, format="JPEG", quality=85)
     buffer.seek(0)
 
-    # --- 3. upload zmenšeného ---
     s3.upload_fileobj(
         Fileobj=buffer,
         Bucket=bucket_name,
         Key=low_key,
-        ExtraArgs={"ContentType": file.content_type}
+        ExtraArgs={"ContentType": "image/jpeg"}
     )
 
-    return original_key
+    return {
+        "original": original_key,
+        "thumbnail": low_key
+    }
 
 
 def insert_post_to_db(form, filename):
