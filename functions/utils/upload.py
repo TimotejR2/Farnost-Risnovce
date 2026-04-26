@@ -7,6 +7,9 @@ def save_uploaded_file(file):
     UPLOAD_FOLDER = 'static/uploads/'
     if not file:
         return '-'
+        
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+    
     filename = secure_filename(file.filename)
     file.save(os.path.join(UPLOAD_FOLDER, filename))
     return filename
