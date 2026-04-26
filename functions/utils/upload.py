@@ -59,10 +59,7 @@ def upload_image_with_thumbnail(file, filename, path):
         ExtraArgs={"ContentType": "image/jpeg"}
     )
 
-    return {
-        "original": original_key,
-        "thumbnail": low_key
-    }
+    return original_key
 
 
 def insert_post_to_db(form, filename):
